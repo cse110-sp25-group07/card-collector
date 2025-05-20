@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function clearForm() {
     deckNameInput.value = '';
     deckTypeSelect.value = 'pokemon';
-    backPreviewImg.src = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/deckplaceholder-XzM6F9KO23r3BUfwUPwutCtfAGv0hC.png';
+    backPreviewImg.src = 'assets/images/deckplaceholder.png';
     deckBackImageData = null;
     
     // Clear card previews
