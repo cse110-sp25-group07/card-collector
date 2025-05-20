@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/styling/deckui.css">
+  <title>DeckUI</title>
+</head>
+
+<body>
+  <h1>Create Deck</h1>
+  <div id="input_and_preview" class="fancy-box">
+    <div id="deckDisplay" >
+      <h2>Back Display:</h2><br>
+      <img src="assets/images/deckplaceholder.png" alt="Current Back display" id="back_img_display">
+    </div>
+    <form id="deckInputParams">
+      <h2>Configure:</h2>
+      <label for="deck_name">Deck Name:</label>
+      <input id="deck_name" type="text"><br>
+      <label for="deck_type">Deck Type:</label>
+      <select id="deck_type">
+        <option>pokemon</option>
+      </select><br>
+      <label for="deck_img_upload">Deck Image:</label><br>
+      <input type="file" accept="image/png" id="deck_img_upload"><br>
+      <button type="submit">Preview</submit>
+    </form>
+  </div>
+    <button>Save and exit</button>
+</body>
+
+</html>

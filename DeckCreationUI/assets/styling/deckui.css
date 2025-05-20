@@ -1,0 +1,82 @@
+body {
+  --page-background: #1b3b2f;
+  --accent-color: #d9a441;
+  --accent-light: color-mix(in srgb, var(--accent-color,white) 60%, white);
+  --text-color: #fffaf5;
+  background-color:var(--page-background);
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color,white);
+}
+button  {
+  display: block;
+  margin: auto;
+  margin-top: 1vh;
+  color: var(--accent-color,white);
+  border: 3px solid var(--accent-color,white) ;
+  background-color: var(--page-background,white);
+}
+button:hover {
+  color: var(--accent-light,white);
+  border-color: var(--accent-light,white);
+
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  color: var(--accent-color,white);
+  text-align: center;
+}
+
+h1 {
+  color: var(--text-color,white);
+}
+
+h2 {
+  margin-top: 1vh;
+  margin-bottom: 0vh;
+}
+
+select,input[type="text"] {
+  color:black
+
+}
+
+.fancy-box {
+  border-radius: 0.5rem;
+  border: 3px solid var(--accent-color,white) ;
+  background-color: #0f241c;
+}
+
+
+#deckInputParams *{
+
+  text-align: center;
+  margin-bottom: 2vh;
+
+}
+
+@media (max-aspect-ratio: 1) {
+  #input_and_preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (min-aspect-ratio: 1) {
+  #input_and_preview {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20vw;
+
+    width: 900px;
+    margin: auto;
+
+  }
+}
