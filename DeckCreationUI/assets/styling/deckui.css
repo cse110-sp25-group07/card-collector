@@ -1,39 +1,38 @@
 body {
   --page-background: #1b3b2f;
   --accent-color: #d9a441;
-  --accent-light: color-mix(in srgb, var(--accent-color,white) 60%, white);
+  --accent-light: color-mix(in srgb, var(--accent-color, white) 60%, white);
   --text-color: #fffaf5;
-  background-color:var(--page-background);
+  background-color: var(--page-background);
 }
 
 * {
-  font-family: "Inter", sans-serif;
-  color: var(--text-color,white);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color, white);
 }
-button  {
+button {
   display: block;
   margin: auto;
   margin-top: 1vh;
-  color: var(--accent-color,white);
-  border: 3px solid var(--accent-color,white) ;
-  background-color: var(--page-background,white);
+  color: var(--accent-color, white);
+  border: 3px solid var(--accent-color, white);
+  background-color: var(--page-background, white);
 }
 button:hover {
-  color: var(--accent-light,white);
-  border-color: var(--accent-light,white);
-
+  color: var(--accent-light, white);
+  border-color: var(--accent-light, white);
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Playfair Display", serif;
-  color: var(--accent-color,white);
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-color, white);
   text-align: center;
 }
 
 h1 {
-  color: var(--text-color,white);
+  color: var(--text-color, white);
 }
 
 h2 {
@@ -41,23 +40,20 @@ h2 {
   margin-bottom: 0vh;
 }
 
-select,input[type="text"] {
-  color:black
-
+select,
+input[type='text'] {
+  color: black;
 }
 
 .fancy-box {
   border-radius: 0.5rem;
-  border: 3px solid var(--accent-color,white) ;
+  border: 3px solid var(--accent-color, white);
   background-color: #0f241c;
 }
 
-
-#deckInputParams *{
-
+#deckInputParams * {
   text-align: center;
   margin-bottom: 2vh;
-
 }
 
 @media (max-aspect-ratio: 1) {
@@ -77,6 +73,5 @@ select,input[type="text"] {
 
     width: 900px;
     margin: auto;
-
   }
 }
