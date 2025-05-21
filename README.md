@@ -4,7 +4,7 @@ Card Collector is a web app designed to bring physical card collecting to a digi
 
 ## Sprint 1 Status Video
 
-[Video Link](https://youtu.be/0ktHvEmgv90)
+[Video Link](https://youtu.be/6OmUEN1WJqk)
 
 ## Installation
 
