@@ -7,115 +7,91 @@
     <title>DeckUI</title>
   </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="assets/styling/deckui.css">
-  <title>DeckUI</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/styling/deckui.css" />
+    <title>DeckUI</title>
+  </head>
 
-<body>
-  <h1>Create New Deck</h1>
-
-  <div class="container">
-    <!-- Input Box -->
-    <div class="deck-config fancy-box">
-      <h2>Deck Config</h2>
-      <form id="deckForm">
-        <!-- Deck Name -->
-        <div class="form-group">
-          <label for="deckName">Deck Name:</label>
-          <input type="text" id="deckName" required>
-        </div>
-
-        <!-- Deck Type -->
-        <div class="form-group">
-          <label for="deckType">Deck Type:</label>
-          <select id="deckType">
-            <option value="pokemon">Pokemon</option>
-            <option value="magic">Magic: The Gathering</option>
-            <option value="custom">Custom</option>
-          </select>
-        </div>
-        
-        <!-- Deck Back Preview & Upload -->
-        <div class="form-group">
-          <label for="deckBackImage">Deck Back Image (Optional):</label>
-          <input type="file" id="deckBackImage" accept="image/*">
-          <div class="back-preview">
-            <img src="assets/images/deckplaceholder.png" alt="Current Back display" id="backPreview">
-          </div>
-        </div>
-        
-        <!-- Deck Front Upload -->
-        <div class="form-group">
-          <label for="cardImages">Upload Card Images:</label>
-          <div class="upload fancy-box">
-            <input type="file" id="cardImages" accept="image/*" multiple>
-          </div>
-          
-          <div class="upload-info">
-            <p>Drag and drop a folder or multiple images</p>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <!-- Preview Box -->
-    <div class="card-selection fancy-box">
-      <!-- Deck Selection Control -->
-      <h2>Card Selection</h2>
-      <div class="selection-controls">
-        <button id="selectAll">Select All</button>
-        <button id="deselectAll">Deselect All</button>
-        <span id="selectedCount">0 cards selected</span>
-      </div>
-      <!-- Deck Selection Preview -->
-      <div id="cardPreviewContainer" class="card-preview-container">
-        <p class="no-cards">No cards uploaded yet. Upload images to see previews.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Deck Saving Control -->
-  <div class="actions">
-    <button id="saveDeck" class="primary-btn">Save Deck</button>
-    <button id="clearForm">Clear Form</button>
-  </div>
-  
-  
-  <!-- Notification -->
-  <div id="notification" class="notification"></div>
-
-  <script src="script.js"></script>
-</body>
-
-</html>
   <body>
-    <h1>Create Deck</h1>
-    <div id="input_and_preview" class="fancy-box">
-      <div id="deckDisplay">
-        <h2>Back Display:</h2>
-        <br />
-        <img
-          src="assets/images/deckplaceholder.png"
-          alt="Current Back display"
-          id="back_img_display"
-        />
+    <h1>Create New Deck</h1>
+
+    <div class="container">
+      <!-- Input Box -->
+      <div class="deck-config fancy-box">
+        <h2>Deck Config</h2>
+        <form id="deckForm">
+          <!-- Deck Name -->
+          <div class="form-group">
+            <label for="deckName">Deck Name:</label>
+            <input type="text" id="deckName" required />
+          </div>
+
+          <!-- Deck Type -->
+          <div class="form-group">
+            <label for="deckType">Deck Type:</label>
+            <select id="deckType">
+              <option value="pokemon">Pokemon</option>
+              <option value="magic">Magic: The Gathering</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+
+          <!-- Deck Back Preview & Upload -->
+          <div class="form-group">
+            <label for="deckBackImage">Deck Back Image (Optional):</label>
+            <input type="file" id="deckBackImage" accept="image/*" />
+            <div class="back-preview">
+              <img
+                src="assets/images/deckplaceholder.png"
+                alt="Current Back display"
+                id="backPreview"
+              />
+            </div>
+          </div>
+
+          <!-- Deck Front Upload -->
+          <div class="form-group">
+            <label for="cardImages">Upload Card Images:</label>
+            <div class="upload fancy-box">
+              <input type="file" id="cardImages" accept="image/*" multiple />
+            </div>
+
+            <div class="upload-info">
+              <p>Drag and drop a folder or multiple images</p>
+            </div>
+          </div>
+        </form>
       </div>
-      <form id="deckInputParams">
-        <h2>Configure:</h2>
-        <label for="deck_name">Deck Name:</label>
-        <input id="deck_name" type="text" /><br />
-        <label for="deck_type">Deck Type:</label>
-        <select id="deck_type">
-          <option>pokemon</option></select
-        ><br />
-        <label for="deck_img_upload">Deck Image:</label><br />
-        <input type="file" accept="image/png" id="deck_img_upload" /><br />
-        <button type="submit">Preview</button>
-      </form>
+
+      <!-- Preview Box -->
+      <div class="card-selection fancy-box">
+        <!-- Deck Selection Control -->
+        <h2>Card Selection</h2>
+        <div class="selection-controls">
+          <button id="selectAll">Select All</button>
+          <button id="deselectAll">Deselect All</button>
+          <span id="selectedCount">0 cards selected</span>
+        </div>
+        <!-- Deck Selection Preview -->
+        <div id="cardPreviewContainer" class="card-preview-container">
+          <p class="no-cards">
+            No cards uploaded yet. Upload images to see previews.
+          </p>
+        </div>
+      </div>
     </div>
-    <button>Save and exit</button>
+
+    <!-- Deck Saving Control -->
+    <div class="actions">
+      <button id="saveDeck" class="primary-btn">Save Deck</button>
+      <button id="clearForm">Clear Form</button>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
   </body>
 </html>

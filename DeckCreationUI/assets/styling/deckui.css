@@ -6,11 +6,11 @@ body {
   background-color: var(--page-background);
   margin: 0;
   padding: 20px;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 * {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--text-color, white);
   box-sizing: border-box;
 }
@@ -22,7 +22,8 @@ body {
   margin-bottom: 20px;
 }
 
-.deck-config, .card-selection {
+.deck-config,
+.card-selection {
   flex: 1;
   min-width: 300px;
   padding: 20px;
@@ -35,8 +36,10 @@ body {
   padding: 20px;
 }
 
-h1, h2, h3 {
-  font-family: "Playfair Display", serif;
+h1,
+h2,
+h3 {
+  font-family: 'Playfair Display', serif;
 }
 
 * {
@@ -74,7 +77,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-
 .form-group {
   margin-bottom: 15px;
 }
@@ -84,7 +86,8 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"], select {
+input[type='text'],
+select {
   width: 100%;
   padding: 8px;
   border-radius: 4px;
@@ -93,7 +96,7 @@ input[type="text"], select {
   color: #000;
 }
 
-input[type="file"] {
+input[type='file'] {
   width: 100%;
   margin-bottom: 10px;
 }
@@ -163,7 +166,6 @@ button:hover {
   transition: background-color 0.3s;
 }
 
-
 .card-preview-container.drag-over {
   background-color: rgba(217, 164, 65, 0.1); /* subtle hover effect */
 }
@@ -193,7 +195,7 @@ button:hover {
 }
 
 .card-preview.selected::after {
-  content: "✓";
+  content: '✓';
   position: absolute;
   top: 5px;
   right: 5px;
@@ -231,7 +233,8 @@ button:hover {
   text-align: center;
   color: var(--accent-light);
   font-style: italic;
-=======
+}
+
 select,
 input[type='text'] {
   color: black;
@@ -262,7 +265,6 @@ input[type='text'] {
   z-index: 100;
 }
 
-
 .notification.show {
   opacity: 1;
 }
@@ -271,8 +273,9 @@ input[type='text'] {
   .container {
     flex-direction: column;
   }
-  
-  .deck-config, .card-selection {
+
+  .deck-config,
+  .card-selection {
     width: 100%;
 
     width: 900px;
