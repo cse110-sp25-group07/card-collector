@@ -1,7 +1,7 @@
 body {
   --page-background: #1b3b2f;
   --accent-color: #d9a441;
-  --accent-light: color-mix(in srgb, var(--accent-color,white) 60%, white);
+  --accent-light: color-mix(in srgb, var(--accent-color, white) 60%, white);
   --text-color: #fffaf5;
   background-color: var(--page-background);
   margin: 0;
@@ -37,6 +37,29 @@ body {
 
 h1, h2, h3 {
   font-family: "Playfair Display", serif;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color, white);
+}
+button {
+  display: block;
+  margin: auto;
+  margin-top: 1vh;
+  color: var(--accent-color, white);
+  border: 3px solid var(--accent-color, white);
+  background-color: var(--page-background, white);
+}
+button:hover {
+  color: var(--accent-light, white);
+  border-color: var(--accent-light, white);
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Playfair Display', serif;
   color: var(--accent-color, white);
   text-align: center;
 }
@@ -50,6 +73,7 @@ h2 {
   margin-top: 0;
   margin-bottom: 20px;
 }
+
 
 .form-group {
   margin-bottom: 15px;
@@ -207,6 +231,21 @@ button:hover {
   text-align: center;
   color: var(--accent-light);
   font-style: italic;
+=======
+select,
+input[type='text'] {
+  color: black;
+}
+
+.fancy-box {
+  border-radius: 0.5rem;
+  border: 3px solid var(--accent-color, white);
+  background-color: #0f241c;
+}
+
+#deckInputParams * {
+  text-align: center;
+  margin-bottom: 2vh;
 }
 
 .notification {
@@ -223,6 +262,7 @@ button:hover {
   z-index: 100;
 }
 
+
 .notification.show {
   opacity: 1;
 }
@@ -234,5 +274,8 @@ button:hover {
   
   .deck-config, .card-selection {
     width: 100%;
+
+    width: 900px;
+    margin: auto;
   }
 }

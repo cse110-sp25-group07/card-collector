@@ -2,6 +2,10 @@
 
 Card Collector is a web app designed to bring physical card collecting to a digital interface.
 
+## Sprint 1 Status Video
+
+[Video Link](https://youtu.be/6OmUEN1WJqk)
+
 ## Installation
 
 Use npm install to install ESLint, Prettier, and Jest for code formatting, validation, and testing.
