@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
   // DOM Elements
-  const deckForm = document.getElementById('deckForm');
   const deckNameInput = document.getElementById('deckName');
   const deckTypeSelect = document.getElementById('deckType');
   const deckBackImageInput = document.getElementById('deckBackImage');
