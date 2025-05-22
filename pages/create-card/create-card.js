@@ -1,4 +1,4 @@
-import { Card } from '../data/card.js'
+import { Card } from '../../data/card.js'
 
 const form = document.getElementById('card-form')
 const imageUpload = document.getElementById('image-upload')
