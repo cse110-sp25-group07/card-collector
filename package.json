@@ -6,13 +6,15 @@
     "eslint-plugin-jest": "^28.11.0",
     "globals": "^16.1.0",
     "jest": "^29.7.0",
+    "jsdoc": "^4.0.4",
     "prettier": "^3.5.3"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "lint": "eslint . --config config/eslint.config.js",
+    "format": "prettier --config config/prettier.config.js --write .",
+    "format:check": "prettier --config config/prettier.config.js --check .",
+    "jsdoc": "jsdoc -c config/jsdoc.json"
   },
   "type": "module",
   "jest": {

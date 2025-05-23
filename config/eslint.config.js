@@ -1,9 +1,12 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import { defineConfig } from 'eslint/config'
-import eslintPluginJest from 'eslint-plugin-jest'
+import js from '@eslint/js';
+import globals from 'globals';
+import { defineConfig } from 'eslint/config';
+import eslintPluginJest from 'eslint-plugin-jest';
 
 export default defineConfig([
+  {
+    ignores: ['jsdocs/**'],
+  },
   {
     files: ['**/*.{js,mjs,cjs}'],
     plugins: {
@@ -22,4 +25,4 @@ export default defineConfig([
       },
     },
   },
-])
+]);
