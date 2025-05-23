@@ -10,12 +10,12 @@ export class Card {
    * @param {string} evolution - The evolution stage of a pokemon (Basic, Stage 1, Stage 2).
    */
   constructor({ id, name, imageURL, type, hp, evolution }) {
-    this.id = id || crypto.randomUUID()
-    this.name = name
-    this.imageURL = imageURL
-    this.type = type
-    this.hp = hp
-    this.evolution = evolution
+    this.id = id || crypto.randomUUID();
+    this.name = name;
+    this.imageURL = imageURL;
+    this.type = type;
+    this.hp = hp;
+    this.evolution = evolution;
   }
 
   // converts object to JSON to store in localStorage
@@ -27,10 +27,10 @@ export class Card {
       type: this.type,
       hp: this.hp,
       evolution: this.evolution,
-    }
+    };
   }
 
   static fromJSON(json) {
-    return new Card(json)
+    return new Card(json);
   }
 }

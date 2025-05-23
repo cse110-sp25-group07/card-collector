@@ -23,14 +23,14 @@ PR.registerLangHandler(
     ],
   ),
   ['css'],
-)
+);
 PR.registerLangHandler(
   PR.createSimpleLexer(
     [],
     [['kwd', /^-?(?:[_a-z]|\\[\da-f]+ ?)(?:[\w-]|\\\\[\da-f]+ ?)*/i]],
   ),
   ['css-kw'],
-)
+);
 PR.registerLangHandler(PR.createSimpleLexer([], [['str', /^[^"')]+/]]), [
   'css-str',
-])
+]);

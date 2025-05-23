@@ -11,10 +11,10 @@
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "jsdoc": "jsdoc -c jsdoc.json"
+    "lint": "eslint . --config config/eslint.config.js",
+    "format": "prettier --config config/prettier.config.js --write .",
+    "format:check": "prettier --config config/prettier.config.js --check .",
+    "jsdoc": "jsdoc -c config/jsdoc.json"
   },
   "type": "module",
   "jest": {
