@@ -10,6 +10,7 @@ import { openDB } from 'https://cdn.jsdelivr.net/npm/idb@8/+esm';
 const DB_NAME = 'card-vault-db';
 const DB_VERSION = 1;
 const CARD_STORE = 'cards';
+const DECK_STORE = 'decks';
 
 // Open or create the IndexedDB database.
 // If the database doesn't exist or the version number has increased,
@@ -18,6 +19,9 @@ const dbPromise = openDB(DB_NAME, DB_VERSION, {
   upgrade(db) {
     if (!db.objectStoreNames.contains(CARD_STORE)) {
       db.createObjectStore(CARD_STORE, { keyPath: 'id' });
+    }
+    if (!db.objectStoreNames.contains(DECK_STORE)) {
+      db.createObjectStore(DECK_STORE, { keyPath: 'id' });
     }
   },
 });
@@ -67,4 +71,50 @@ export async function getCardById(id) {
 export async function deleteCard(id) {
   const db = await dbPromise;
   return db.delete(CARD_STORE, id);
+}
+
+// DECK HELPERS -----------------------------------------------------
+
+const genDeckId = () =>
+  'd_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+/**
+ * Add or update a deck in IndexedDB.
+ * @param {Object} deck - A deck object (must contain `name`, `cardIds`)
+ * @returns {Promise<string>} The deck id
+ */
+export async function addDeck(deck) {
+  const db = await dbPromise;
+  if (!deck.id) deck.id = genDeckId();
+  await db.put(DECK_STORE, deck);
+  return deck.id;
+}
+
+/**
+ * Fetch all decks.
+ * @returns {Promise<Object[]>} array of deck objects
+ */
+export async function getAllDecks() {
+  const db = await dbPromise;
+  return db.getAll(DECK_STORE);
+}
+
+/**
+ * Fetch a single deck by id.
+ * @param {string} id
+ * @returns {Promise<Object|undefined>}
+ */
+export async function getDeckById(id) {
+  const db = await dbPromise;
+  return db.get(DECK_STORE, id);
+}
+
+/**
+ * Delete a deck.
+ * @param {string} id
+ * @returns {Promise<void>}
+ */
+export async function deleteDeck(id) {
+  const db = await dbPromise;
+  return db.delete(DECK_STORE, id);
 }
