@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Card + Deck Full Test</title>
+  </head>
+  <body>
+    <h1>Check the Console for Full IndexedDB Test</h1>
+
+    <script type="module">
+      import {
+        addCard,
+        getAllCards,
+        getCardById,
+        deleteCard,
+        addDeck,
+        getDeckById,
+        getAllDecks,
+        deleteDeck,
+      } from '../data/indexedDB.js';
+
+      import { Card } from '../data/card.js';
+      import { Deck } from '../data/deck.js';
+
+      (async () => {
+        console.log('Starting full test...');
+
+        // Clean existing data
+        const cards = await getAllCards();
+        for (const card of cards) await deleteCard(card.id);
+
+        const decks = await getAllDecks();
+        for (const deck of decks) await deleteDeck(deck.id);
+
+        // Create 2 cards using the Card class
+        const card1 = new Card({
+          name: 'Charmander',
+          imageURL: null,
+          type: 'Fire',
+          hp: 120,
+          evolution: 'Stage 2',
+        });
+
+        const card2 = new Card({
+          name: 'Squirtle',
+          imageURL: null,
+          type: 'Water',
+          hp: 90,
+          evolution: 'Stage 1',
+        });
+
+        const card1Id = await addCard(card1.toJSON());
+        const card2Id = await addCard(card2.toJSON());
+
+        console.log('Cards added:', card1Id, card2Id);
+
+        // Confirm cards are saved and can be fetched
+        const fetched1 = await getCardById(card1Id);
+        console.log('Card 1:', fetched1);
+
+        const fetched2 = await getCardById(card2Id);
+        console.log('Card 2:', fetched2);
+
+        // Create a deck with both cards
+        const deck = new Deck({ name: 'Fire & Water Duo' });
+        deck.addCard(card1Id);
+        deck.addCard(card2Id);
+        await addDeck(deck.toJSON());
+
+        console.log('Deck created with cards:', deck.cardIds);
+
+        // Fetch deck and verify structure
+        const savedDeck = await getDeckById(deck.id);
+        console.log('Saved deck:', savedDeck);
+
+        // Modify deck: remove card1, add a new card
+        deck.removeCard(card1Id);
+
+        const card3 = new Card({
+          name: 'Thornroot',
+          imageURL: null,
+          type: 'Grass',
+          hp: 80,
+          evolution: 'Basic',
+        });
+
+        const card3Id = await addCard(card3.toJSON());
+        deck.addCard(card3Id);
+        await addDeck(deck.toJSON()); // Overwrites existing
+
+        console.log('Updated deck:', deck.cardIds);
+
+        const finalDeck = await getDeckById(deck.id);
+        console.log('Final deck:', finalDeck);
+
+        // Show full card data from deck.cardIds
+        for (const id of finalDeck.cardIds) {
+          const card = await getCardById(id);
+          console.log(`${card.name} (${card.type}, HP: ${card.hp})`);
+        }
+
+        // Final cleanup
+        await deleteDeck(deck.id);
+        await deleteCard(card1Id);
+        await deleteCard(card2Id);
+        await deleteCard(card3Id);
+
+        console.log('Done. Data removed for clean state.');
+      })();
+    </script>
+  </body>
+</html>

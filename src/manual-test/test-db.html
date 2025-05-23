@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <title>IndexedDB Test</title>
+  </head>
+  <body>
+    <h1>Check Console for IndexedDB Test Output</h1>
+
+    <script type="module">
+      import {
+        addCard,
+        getAllCards,
+        getCardById,
+        deleteCard,
+        addDeck,
+        getDeckById,
+        getAllDecks,
+        deleteDeck,
+      } from '../data/indexedDB.js';
+
+      (async () => {
+        console.log('Starting IndexedDB test...');
+
+        // -- Clear old cards (manual reset for test) --
+        const allOldCards = await getAllCards();
+        for (let card of allOldCards) {
+          await deleteCard(card.id);
+        }
+
+        // -- Add a card --
+        const card1 = {
+          name: 'Pikachu',
+          type: 'Electric',
+          generation: 1,
+          image: null,
+        };
+        const card1Id = await addCard(card1);
+        console.log('Added card1:', card1Id);
+
+        // -- Add another card --
+        const card2 = {
+          name: 'LeafGuy',
+          type: 'Grass',
+          generation: 2,
+          image: null,
+        };
+        const card2Id = await addCard(card2);
+        console.log('Added card2:', card2Id);
+
+        // -- Get all cards --
+        const allCards = await getAllCards();
+        console.log('All cards:', allCards);
+
+        // -- Get card by ID --
+        const fetchedCard = await getCardById(card1Id);
+        console.log('Fetched card1 by ID:', fetchedCard);
+
+        // -- Delete one card --
+        await deleteCard(card1Id);
+        const afterDelete = await getAllCards();
+        console.log('Cards after deleting card1:', afterDelete);
+
+        // -- Add a deck with card2 in it --
+        const deck = {
+          name: 'Grass Squad',
+          cardIds: [card2Id],
+        };
+        const deckId = await addDeck(deck);
+        console.log('Added deck:', deckId);
+
+        // -- Get deck by ID --
+        const fetchedDeck = await getDeckById(deckId);
+        console.log('Fetched deck by ID:', fetchedDeck);
+
+        // -- Get all decks --
+        const allDecks = await getAllDecks();
+        console.log('All decks:', allDecks);
+
+        // -- Delete the deck --
+        await deleteDeck(deckId);
+        const decksAfterDelete = await getAllDecks();
+        console.log('Decks after deleting:', decksAfterDelete);
+
+        console.log('DONE. Check results above.');
+      })();
+    </script>
+  </body>
+</html>

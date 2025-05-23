@@ -1,5 +1,5 @@
 /* /data/indexedDB.js  ----------------------------------------------
-   Reusable data layer for Card Collector App
+   Reusable data layer for our Card Collector
    Stores card objects in browser storage using IndexedDB
    Choosing to use the idb library to simplify IndexedDB calls
 ------------------------------------------------------------------- */
@@ -8,7 +8,7 @@ import { openDB } from 'https://cdn.jsdelivr.net/npm/idb@8/+esm';
 
 // DB CONSTANTS -----------------------------------------------------
 const DB_NAME = 'card-vault-db';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const CARD_STORE = 'cards';
 const DECK_STORE = 'decks';
 
@@ -79,10 +79,19 @@ const genDeckId = () =>
   'd_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
 
 /**
+ * A deck object should look like:
+ * {
+ *   id: 'd_xyz123',
+ *   name: 'Best Electrics',
+ *   cardIds: ['c_1', 'c_2', 'c_3']  // references to card IDs
+ * }
+ */
+/**
  * Add or update a deck in IndexedDB.
  * @param {Object} deck - A deck object (must contain `name`, `cardIds`)
  * @returns {Promise<string>} The deck id
  */
+
 export async function addDeck(deck) {
   const db = await dbPromise;
   if (!deck.id) deck.id = genDeckId();
