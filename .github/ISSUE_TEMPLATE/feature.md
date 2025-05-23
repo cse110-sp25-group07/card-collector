@@ -1,5 +1,5 @@
 ---
-name: Custom Feature Template
+name: Feature
 about: Custom issue template for planning features.
 title: "[FEATURE]"
 labels: feature
