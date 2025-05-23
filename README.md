@@ -36,6 +36,12 @@ Format files with Prettier:
 npm run format
 ```
 
+Generate documentation with JSDoc:
+
+```bash
+npm run jsdoc
+```
+
 ## Contributing
 
 Make sure to create/assign yourself to an issue and open up a feature branch to work on a component. When opening a pull request make sure to pass automated tests, get code reviewed, and document any new/edited components.

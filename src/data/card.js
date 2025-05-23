@@ -1,5 +1,14 @@
 export class Card {
-  // constructor creates card object based on image we created
+  /** 
+   * Each card has the required field of an ID and optional fields of name, imageURL, type, hp, and evolution.
+   * @constructor
+   * @param {int} id - The unique ID for a card.
+   * @param {string} name - The pokemon's name.
+   * @param {string} imageURL - The URL from indexDB of the card image.
+   * @param {string} type - The pokemon's specific type.
+   * @param {int} hp - The amount of health points the pokemon has.'
+   * @param {string} evolution - The evolution stage of a pokemon (Basic, Stage 1, Stage 2).
+   */
   constructor({ id, name, imageURL, type, hp, evolution }) {
     this.id = id || crypto.randomUUID()
     this.name = name

@@ -1,4 +1,4 @@
-import { card } from '../card.js'
+import { card } from './card.js'
 
 describe('card function', () => {
   test('should return true when input is "valid"', () => {
