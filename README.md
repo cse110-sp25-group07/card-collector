@@ -6,9 +6,13 @@ Card Collector is a web app designed to bring physical card collecting to a digi
 
 [Video Link](https://youtu.be/6OmUEN1WJqk)
 
+## JSDoc Documentation
+
+[Github Pages Link](https://cse110-sp25-group07.github.io/card-collector/jsdocs).
+
 ## Installation
 
-Use npm install to install ESLint, Prettier, and Jest for code formatting, validation, and testing.
+Use npm install to install [ESLint](https://eslint.org/), [Prettier](https://prettier.io/), [Jest](https://jestjs.io/), and [JSDoc](https://jsdoc.app/) for code formatting, validation, testing, and documentation.
 
 ```bash
 npm install
@@ -27,8 +31,6 @@ Run ESLint to ensure consistent code and identifying bugs:
 ```bash
 npm run lint
 ```
-
-(replace . with specific file if necessary)
 
 Format files with Prettier:
 
