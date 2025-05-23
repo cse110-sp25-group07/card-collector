@@ -1,5 +1,5 @@
 export class Card {
-  /** 
+  /**
    * Each card has the required field of an ID and optional fields of name, imageURL, type, hp, and evolution.
    * @constructor
    * @param {int} id - The unique ID for a card.
