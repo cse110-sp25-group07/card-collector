@@ -52,26 +52,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          persist-credentials: true
-
+          persist-credentials: false  
+  
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '22'
-
+  
       - name: Install dependencies
         run: npm install
-
+  
       - name: Generate JSDoc
         run: npm run jsdoc
-
-      - name: Format all files with Prettier
-        run: npm run format
-
+  
       - name: Commit and push updated JSDoc (if any)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "JSDoc Bot"
+          git config user.email "jsdoc-bot@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.JSDoc_Bot_Token }}@github.com/${{ github.repository }}.git
           git add jsdocs/
           if git diff --cached --quiet; then
             echo "No changes in docs"
