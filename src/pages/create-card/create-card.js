@@ -1,4 +1,5 @@
-import { Card } from '../../card.js';
+import { Card } from '../../data/card.js';
+import { addCard } from '../../data/indexedDB.js';
 
 const form = document.getElementById('card-form');
 const imageUpload = document.getElementById('image-upload');
@@ -15,8 +16,8 @@ imageUpload.addEventListener('change', (e) => {
   }
 });
 
-// When the form is submitted, create a new card and store it in localStorage
-form.addEventListener('submit', (e) => {
+// When the form is submitted, create a new card and store it in IndexedDB
+form.addEventListener('submit', async (e) => {
   e.preventDefault(); // prevents losing info from page reload
 
   const name = document.getElementById('card-name').value;
@@ -27,17 +28,14 @@ form.addEventListener('submit', (e) => {
   // Create a new Card object using the imported Card class
   const card = new Card({ name, imageURL, type, hp, evolution });
 
-  // Retrieve existing cards array from localStorage, or create a new one.
-  let cards = JSON.parse(localStorage.getItem('cards')) || [];
-
-  // Add the new card to the array
-  cards.push(card.toJSON());
-
-  // Save this array back to localStorage
-  localStorage.setItem('cards', JSON.stringify(cards));
-
-  //Resetting form after card creation
-  alert('TESTING: Card saved');
-  form.reset();
-  imagePreview.style.display = 'none';
+  try {
+    await addCard(card.toJSON());
+    alert('Card just saved succesfully.');
+    form.reset();
+    imagePreview.style.display = 'none';
+    imageURL = '';
+  } catch (error) {
+    console.error('Failed to save card!! ->', error);
+    alert('Error saving the card, check console');
+  }
 });
