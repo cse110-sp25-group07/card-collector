@@ -77,6 +77,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes in docs"
           else
-            git commit -m "Auto-update JSDoc"
+            git commit -m "Auto-update JSDoc [skip ci]"
             git push
           fi
