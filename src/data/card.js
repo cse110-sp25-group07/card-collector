@@ -18,7 +18,7 @@ export class Card {
     this.evolution = evolution;
   }
 
-  // converts object to JSON to store in localStorage
+  // Converts object to plain JSON for storage in IndexedDB
   toJSON() {
     return {
       id: this.id,

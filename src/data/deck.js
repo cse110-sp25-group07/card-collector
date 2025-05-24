@@ -1,50 +1,49 @@
-import { Card } from './card.js';
-
 export class Deck {
-  //creates deck based on id, name, and card array that we will fill with card objects
-  constructor({ id = crypto.randomUUID(), name = '', cards = [] }) {
+  /**
+   * Creates a deck with a unique ID, a name, and a list of card IDs.
+   * @param {string} id - Unique deck ID (auto-generated if not provided).
+   * @param {string} name - Deck name.
+   * @param {string[]} cardIds - Array of card IDs in the deck.
+   */
+  constructor({ id = crypto.randomUUID(), name = '', cardIds = [] }) {
     this.id = id;
     this.name = name;
-    this.cards = cards.map((card) =>
-      card instanceof Card ? card : new Card(card),
-    );
+    this.cardIds = cardIds;
   }
 
-  //adds a card to the deck
-  addCard(card) {
-    this.cards.push(card);
-    this.saveToStorage();
+  /**
+   * Add a card to the deck.
+   * @param {string} cardId
+   */
+  addCard(cardId) {
+    if (!this.cardIds.includes(cardId)) {
+      this.cardIds.push(cardId);
+    }
   }
 
-  //removes card from the deck
-  removeCard(id) {
-    this.cards = this.cards.filter((card) => card.id !== id);
-    this.saveToStorage();
+  /**
+   * Remove a card from the deck.
+   * @param {string} cardId
+   */
+  removeCard(cardId) {
+    this.cardIds = this.cardIds.filter((id) => id !== cardId);
   }
 
-  //returns a specific card
-  getCard(id) {
-    return this.cards.find((card) => card.id === id);
+  /**
+   * Convert to plain object for saving to IndexedDB
+   */
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      cardIds: this.cardIds,
+    };
   }
 
-  //saves the deck to localStorage
-  saveToStorage() {
-    localStorage.setItem(
-      `deck-${this.id}`,
-      JSON.stringify(this.cards.map((card) => card.toJSON())),
-    );
-  }
-
-  //returns the deck from local storage
-  loadFromStorage() {
-    const stored = localStorage.getItem(`deck-${this.id}`);
-    if (!stored) return [];
-    return JSON.parse(stored).map(Card.fromJSON);
-  }
-
-  //removes the whole deck
-  clearDeck() {
-    this.cards = [];
-    localStorage.removeItem(`deck-${this.id}`);
+  /**
+   * Convert a raw object to a Deck instance
+   */
+  static fromJSON(obj) {
+    return new Deck(obj);
   }
 }
