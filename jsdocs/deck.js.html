@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>JSDoc: Source: card.js</title>
+    <title>JSDoc: Source: deck.js</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -19,44 +19,57 @@
 
   <body>
     <div id="main">
-      <h1 class="page-title">Source: card.js</h1>
+      <h1 class="page-title">Source: deck.js</h1>
 
       <section>
         <article>
-          <pre class="prettyprint source linenums"><code>export class Card {
+          <pre class="prettyprint source linenums"><code>export class Deck {
   /**
-   * Each card has the required field of an ID and optional fields of name, imageURL, type, hp, and evolution.
-   * @constructor
-   * @param {int} id - The unique ID for a card.
-   * @param {string} name - The pokemon's name.
-   * @param {string} imageURL - The URL from indexDB of the card image.
-   * @param {string} type - The pokemon's specific type.
-   * @param {int} hp - The amount of health points the pokemon has.'
-   * @param {string} evolution - The evolution stage of a pokemon (Basic, Stage 1, Stage 2).
+   * Creates a deck with a unique ID, a name, and a list of card IDs.
+   * @param {string} id - Unique deck ID (auto-generated if not provided).
+   * @param {string} name - Deck name.
+   * @param {string[]} cardIds - Array of card IDs in the deck.
    */
-  constructor({ id, name, imageURL, type, hp, evolution }) {
-    this.id = id || crypto.randomUUID();
+  constructor({ id = crypto.randomUUID(), name = '', cardIds = [] }) {
+    this.id = id;
     this.name = name;
-    this.imageURL = imageURL;
-    this.type = type;
-    this.hp = hp;
-    this.evolution = evolution;
+    this.cardIds = cardIds;
   }
 
-  // Converts object to plain JSON for storage in IndexedDB
+  /**
+   * Add a card to the deck.
+   * @param {string} cardId
+   */
+  addCard(cardId) {
+    if (!this.cardIds.includes(cardId)) {
+      this.cardIds.push(cardId);
+    }
+  }
+
+  /**
+   * Remove a card from the deck.
+   * @param {string} cardId
+   */
+  removeCard(cardId) {
+    this.cardIds = this.cardIds.filter((id) => id !== cardId);
+  }
+
+  /**
+   * Convert to plain object for saving to IndexedDB
+   */
   toJSON() {
     return {
       id: this.id,
       name: this.name,
-      imageURL: this.imageURL,
-      type: this.type,
-      hp: this.hp,
-      evolution: this.evolution,
+      cardIds: this.cardIds,
     };
   }
 
-  static fromJSON(json) {
-    return new Card(json);
+  /**
+   * Convert a raw object to a Deck instance
+   */
+  static fromJSON(obj) {
+    return new Deck(obj);
   }
 }
 </code></pre>
