@@ -1,290 +1,265 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // DOM Elements
+import { addCard, addDeck } from '../../data/indexedDB.js';
+import { Deck } from '../../data/deck.js';
+import { Card } from '../../data/card.js';
+
+/**
+ * script.js — Connects the Deck Creator UI to IndexedDB via the reusable API.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Deck form elements
   const deckNameInput = document.getElementById('deckName');
-  const deckTypeSelect = document.getElementById('deckType');
-  const deckBackImageInput = document.getElementById('deckBackImage');
-  const backPreviewImg = document.getElementById('backPreview');
+  const thumbnailContainer = document.getElementById('cardBackContainer');
+  const thumbnailUpload = document.getElementById('thumbnailUpload');
+  const thumbnailInput = document.getElementById('thumbnailInput');
+  const cardBackImage = document.getElementById('cardBackImage');
+  const addIconOverlay = document.getElementById('addIconOverlay');
+  const thumbnailImage = document.getElementById('thumbnailImage');
+  const saveDeckBtn = document.getElementById('saveDeckBtn');
+  const addCardsBtn = document.getElementById('addCardsBtn');
+
+  // Selected cards preview
+  const selectedCardsSection = document.getElementById('selectedCardsSection');
+  const selectedCardsCount = document.getElementById('selectedCardsCount');
+  const selectedCardsGrid = document.getElementById('selectedCardsGrid');
+
+  // Card selection modal elements
+  const cardModal = document.getElementById('cardModal');
+  const closeModalBtn = document.getElementById('closeModal');
+  const uploadBtn = document.getElementById('uploadBtn');
   const cardImagesInput = document.getElementById('cardImages');
-  const cardPreviewContainer = document.getElementById('cardPreviewContainer');
-  const selectAllBtn = document.getElementById('selectAll');
-  const deselectAllBtn = document.getElementById('deselectAll');
-  const selectedCountSpan = document.getElementById('selectedCount');
-  const saveDeckBtn = document.getElementById('saveDeck');
-  const clearFormBtn = document.getElementById('clearForm');
+  const selectionControls = document.getElementById('selectionControls');
+  const selectAllBtn = document.getElementById('selectAllBtn');
+  const deselectAllBtn = document.getElementById('deselectAllBtn');
+  const selectionCount = document.getElementById('selectionCount');
+  const cardsGrid = document.getElementById('cardsGrid');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const confirmCount = document.getElementById('confirmCount');
   const notification = document.getElementById('notification');
+  const clearBtn = document.getElementById('clearBtn');
 
-  // State
-  let uploadedCards = [];
-  let selectedCards = new Set();
-  let deckBackImageData = null;
+  // Default deck image (fallback if no custom thumbnail)
+  const defaultDeckImage = document.getElementById('cardBackImage')?.src || '';
 
-  // Initialize from local storage if available
-  initFromLocalStorage();
+  // In-memory state
+  let thumbnail = null;
+  const uploadedCards = [];
+  const selectedCards = new Set();
+  let selectedCardsData = [];
 
-  // Event Listeners
-  deckBackImageInput.addEventListener('change', handleBackImageUpload);
+  // ---- Event Listeners ----
+  thumbnailUpload.addEventListener('click', () => thumbnailInput.click());
+  thumbnailInput.addEventListener('change', handleThumbnailUpload);
+  addCardsBtn.addEventListener('click', openCardModal);
+  saveDeckBtn.addEventListener('click', saveDeck);
+
+  closeModalBtn.addEventListener('click', closeCardModal);
+  cancelBtn.addEventListener('click', closeCardModal);
+  uploadBtn.addEventListener('click', () => cardImagesInput.click());
   cardImagesInput.addEventListener('change', handleCardImagesUpload);
   selectAllBtn.addEventListener('click', selectAllCards);
   deselectAllBtn.addEventListener('click', deselectAllCards);
-  saveDeckBtn.addEventListener('click', saveDeck);
-  clearFormBtn.addEventListener('click', clearForm);
-
-  // Handle drag and drop for card images
-  cardPreviewContainer.addEventListener('dragover', function (e) {
-    e.preventDefault();
-    cardPreviewContainer.classList.add('drag-over');
+  clearBtn.addEventListener('click', clearUploads);
+  confirmBtn.addEventListener('click', confirmCardSelection);
+  cardModal.addEventListener('click', (e) => {
+    if (e.target === cardModal) closeCardModal();
   });
 
-  cardPreviewContainer.addEventListener('dragleave', function () {
-    cardPreviewContainer.classList.remove('drag-over');
-  });
-
-  cardPreviewContainer.addEventListener('drop', function (e) {
-    e.preventDefault();
-    cardPreviewContainer.classList.remove('drag-over');
-
-    if (e.dataTransfer.files.length > 0) {
-      handleCardImagesUpload({ target: { files: e.dataTransfer.files } });
-    }
-  });
-
-  // Functions
-  function handleBackImageUpload(e) {
+  // ---- Handlers ----
+  function handleThumbnailUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function (event) {
-      backPreviewImg.src = event.target.result;
-      deckBackImageData = event.target.result;
+    reader.onload = ({ target }) => {
+      thumbnail = target.result;
+      // 1) set & show the new thumbnail
+      thumbnailImage.src = thumbnail;
+      thumbnailImage.style.display = 'block';
+      // 2) hide only the _old_ default back & the plus-icon
+      cardBackImage.style.display = 'none';
+      addIconOverlay.style.display = 'none';
+      // 3) bump brightness back up via your CSS
+      thumbnailContainer.classList.add('has-custom-image');
+      showNotification('Thumbnail uploaded successfully');
     };
     reader.readAsDataURL(file);
   }
 
-  function handleCardImagesUpload(e) {
-    const files = Array.from(e.target.files).filter((file) =>
-      file.type.startsWith('image/'),
-    );
+  function openCardModal() {
+    cardModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCardModal() {
+    cardModal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+  }
 
-    if (files.length === 0) {
-      showNotification('No valid image files selected');
+  function handleCardImagesUpload(e) {
+    const files = Array.from(e.target.files).filter((f) =>
+      f.type.startsWith('image/'),
+    );
+    if (!files.length) {
+      showNotification('No valid image files selected', 'error');
       return;
     }
-
-    // Remove "no cards" message if it exists
-    const noCardsMsg = cardPreviewContainer.querySelector('.no-cards');
-    if (noCardsMsg) {
-      cardPreviewContainer.removeChild(noCardsMsg);
-    }
-
-    // Process each file
+    const emptyState = cardsGrid.querySelector('.empty-state');
+    if (emptyState) emptyState.remove();
+    selectionControls.style.display = 'flex';
     files.forEach((file) => {
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = ({ target }) => {
         const cardData = {
-          id: Date.now() + Math.random().toString(36).substr(2, 9),
-          name: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
-          imageData: event.target.result,
+          id: crypto.randomUUID(),
+          name: file.name.replace(/\.[^/.]+$/, ''),
+          imageData: target.result,
         };
-
         uploadedCards.push(cardData);
-        addCardPreview(cardData);
-        updateSelectedCount();
+        addCardToGrid(cardData);
+        updateSelectionCount();
       };
       reader.readAsDataURL(file);
     });
-
-    // Clear the input to allow uploading the same files again
     cardImagesInput.value = '';
   }
 
-  function addCardPreview(cardData) {
-    const cardPreviewDiv = document.createElement('div');
-    cardPreviewDiv.className = 'card-preview';
-    cardPreviewDiv.dataset.cardId = cardData.id;
-
-    const cardImg = document.createElement('img');
-    cardImg.src = cardData.imageData;
-    cardImg.alt = cardData.name;
-
-    cardPreviewDiv.appendChild(cardImg);
-    cardPreviewContainer.appendChild(cardPreviewDiv);
-
-    // Add click event to toggle selection
-    cardPreviewDiv.addEventListener('click', function () {
-      toggleCardSelection(cardData.id, cardPreviewDiv);
-    });
+  function addCardToGrid(cardData) {
+    const el = document.createElement('div');
+    el.className = 'card-item';
+    el.dataset.cardId = cardData.id;
+    el.innerHTML = `
+      <div class="card-image-container">
+        <img src="${cardData.imageData}" alt="${cardData.name}" class="card-image" />
+      </div>
+      <div class="card-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20,6 9,17 4,12"></polyline>
+        </svg>
+      </div>
+      <p class="card-name">${cardData.name}</p>
+    `;
+    el.addEventListener('click', () => toggleCardSelection(cardData.id, el));
+    cardsGrid.appendChild(el);
   }
 
-  function toggleCardSelection(cardId, cardElement) {
-    if (selectedCards.has(cardId)) {
-      selectedCards.delete(cardId);
-      cardElement.classList.remove('selected');
+  function toggleCardSelection(id, el) {
+    if (selectedCards.has(id)) {
+      selectedCards.delete(id);
+      el.classList.remove('selected');
     } else {
-      selectedCards.add(cardId);
-      cardElement.classList.add('selected');
+      selectedCards.add(id);
+      el.classList.add('selected');
     }
-    updateSelectedCount();
+    updateSelectionCount();
+  }
+
+  function clearUploads() {
+    uploadedCards.length = 0;
+    selectedCards.clear();
+    selectedCardsData = [];
+    cardsGrid.innerHTML = `<div class="empty-state">
+      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7,10 12,15 17,10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      <p>No cards uploaded yet. Upload images to see previews.</p>
+    </div>`;
+    selectionControls.style.display = 'none';
+    updateSelectedCardsPreview();
+    showNotification('All uploads cleared', 'success');
   }
 
   function selectAllCards() {
-    uploadedCards.forEach((card) => {
-      selectedCards.add(card.id);
-      const cardElement = document.querySelector(
-        `.card-preview[data-card-id="${card.id}"]`,
-      );
-      if (cardElement) {
-        cardElement.classList.add('selected');
-      }
+    uploadedCards.forEach((c) => {
+      selectedCards.add(c.id);
+      const el = cardsGrid.querySelector(`[data-card-id="${c.id}"]`);
+      if (el) el.classList.add('selected');
     });
-    updateSelectedCount();
+    updateSelectionCount();
   }
-
   function deselectAllCards() {
     selectedCards.clear();
-    document.querySelectorAll('.card-preview').forEach((card) => {
-      card.classList.remove('selected');
+    cardsGrid
+      .querySelectorAll('.card-item')
+      .forEach((el) => el.classList.remove('selected'));
+    updateSelectionCount();
+  }
+
+  function updateSelectionCount() {
+    const count = selectedCards.size;
+    selectionCount.textContent = `${count} cards selected`;
+    confirmCount.textContent = count;
+    confirmBtn.disabled = count === 0;
+  }
+
+  function confirmCardSelection() {
+    selectedCardsData = uploadedCards.filter((c) => selectedCards.has(c.id));
+    closeCardModal();
+    updateSelectedCardsPreview();
+    showNotification(`${selectedCardsData.length} cards selected for deck`);
+  }
+
+  function updateSelectedCardsPreview() {
+    if (!selectedCardsSection) return;
+    if (!selectedCardsData.length) {
+      selectedCardsSection.style.display = 'none';
+      return;
+    }
+    selectedCardsSection.style.display = 'block';
+    selectedCardsCount.textContent = selectedCardsData.length;
+    selectedCardsGrid.innerHTML = '';
+    selectedCardsData.slice(0, 20).forEach((card) => {
+      const el = document.createElement('div');
+      el.className = 'selected-card-item';
+      el.innerHTML = `<img src="${card.imageData}" alt="${card.name}" />`;
+      selectedCardsGrid.appendChild(el);
     });
-    updateSelectedCount();
+    if (selectedCardsData.length > 20) {
+      const moreEl = document.createElement('div');
+      moreEl.className = 'selected-card-more';
+      moreEl.innerHTML = `<span>+${selectedCardsData.length - 20}</span>`;
+      selectedCardsGrid.appendChild(moreEl);
+    }
   }
 
-  function updateSelectedCount() {
-    selectedCountSpan.textContent = `${selectedCards.size} cards selected`;
-  }
-
-  function saveDeck() {
-    const deckName = deckNameInput.value.trim();
-
-    if (!deckName) {
-      showNotification('Please enter a deck name');
+  async function saveDeck() {
+    const name = deckNameInput.value.trim();
+    if (!name) {
+      showNotification('Please enter a deck name', 'error');
       return;
     }
-
-    if (selectedCards.size === 0) {
-      showNotification('Please select at least one card');
-      return;
-    }
-
-    // Create deck object
-    const deck = {
-      id: Date.now().toString(),
-      name: deckName,
-      type: deckTypeSelect.value,
-      backImage: deckBackImageData,
-      cards: uploadedCards.filter((card) => selectedCards.has(card.id)),
-      createdAt: new Date().toISOString(),
-    };
-
-    // Save to local storage
-    saveToLocalStorage(deck);
-
-    showNotification(`Deck "${deckName}" saved successfully!`);
-
-    // Optional: Clear form after saving
-    // clearForm();
-  }
-
-  function saveToLocalStorage(deck) {
-    // Get existing decks or initialize empty array
-    const existingDecks = JSON.parse(localStorage.getItem('cardDecks') || '[]');
-
-    // Add new deck
-    existingDecks.push(deck);
-
-    // Save back to local storage
-    localStorage.setItem('cardDecks', JSON.stringify(existingDecks));
-
-    // Save current form state for resuming later
-    saveFormState();
-  }
-
-  function saveFormState() {
-    const formState = {
-      deckName: deckNameInput.value,
-      deckType: deckTypeSelect.value,
-      backImage: deckBackImageData,
-      uploadedCards: uploadedCards,
-      selectedCards: Array.from(selectedCards),
-    };
-
-    localStorage.setItem('deckFormState', JSON.stringify(formState));
-  }
-
-  function initFromLocalStorage() {
-    const formState = JSON.parse(localStorage.getItem('deckFormState'));
-
-    if (!formState) return;
-
-    // Restore form values
-    deckNameInput.value = formState.deckName || '';
-    deckTypeSelect.value = formState.deckType || 'pokemon';
-
-    if (formState.backImage) {
-      backPreviewImg.src = formState.backImage;
-      deckBackImageData = formState.backImage;
-    }
-
-    // Restore uploaded cards
-    if (formState.uploadedCards && formState.uploadedCards.length > 0) {
-      uploadedCards = formState.uploadedCards;
-
-      // Remove "no cards" message
-      const noCardsMsg = cardPreviewContainer.querySelector('.no-cards');
-      if (noCardsMsg) {
-        cardPreviewContainer.removeChild(noCardsMsg);
+    try {
+      const deck = new Deck({
+        name,
+        imageURL: thumbnail || defaultDeckImage,
+        cardIds: [],
+      });
+      for (const data of selectedCardsData) {
+        const card = new Card({ name: data.name, imageURL: data.imageData });
+        const id = await addCard(card.toJSON());
+        deck.addCard(id);
       }
-
-      // Add card previews
-      uploadedCards.forEach((card) => {
-        addCardPreview(card);
-      });
-    }
-
-    // Restore selected cards
-    if (formState.selectedCards && formState.selectedCards.length > 0) {
-      selectedCards = new Set(formState.selectedCards);
-
-      // Update UI to show selected cards
-      selectedCards.forEach((cardId) => {
-        const cardElement = document.querySelector(
-          `.card-preview[data-card-id="${cardId}"]`,
-        );
-        if (cardElement) {
-          cardElement.classList.add('selected');
-        }
-      });
-
-      updateSelectedCount();
+      await addDeck(deck.toJSON());
+      showNotification(`Deck "${name}" saved successfully!`);
+      resetForm();
+    } catch (err) {
+      console.error(err);
+      showNotification('Error saving deck. Please try again.', 'error');
     }
   }
 
-  function clearForm() {
+  function resetForm() {
     deckNameInput.value = '';
-    deckTypeSelect.value = 'pokemon';
-    backPreviewImg.src = 'assets/images/deckplaceholder.png';
-    deckBackImageData = null;
-
-    // Clear card previews
-    cardPreviewContainer.innerHTML =
-      '<p class="no-cards">No cards uploaded yet. Upload images to see previews.</p>';
-
-    // Reset state
-    uploadedCards = [];
-    selectedCards.clear();
-    updateSelectedCount();
-
-    // Clear local storage form state
-    localStorage.removeItem('deckFormState');
-
-    showNotification('Form cleared');
+    // keep uploaded thumbnail intact; do not revert preview
+    selectedCardsData = [];
+    updateSelectedCardsPreview();
   }
 
-  function showNotification(message) {
-    notification.textContent = message;
+  function showNotification(msg, type = 'success') {
+    notification.textContent = msg;
+    notification.className = `notification ${type}`;
     notification.classList.add('show');
-
-    setTimeout(() => {
-      notification.classList.remove('show');
-    }, 3000);
+    setTimeout(() => notification.classList.remove('show'), 3000);
   }
 });
