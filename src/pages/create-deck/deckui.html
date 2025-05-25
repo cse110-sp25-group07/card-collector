@@ -4,94 +4,138 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/styling/deckui.css" />
-    <title>DeckUI</title>
+    <title>Create Deck</title>
   </head>
-
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/styling/deckui.css" />
-    <title>DeckUI</title>
-  </head>
-
   <body>
-    <h1>Create New Deck</h1>
+    <div class="main-container">
+      <h1>CREATE DECK</h1>
+      
+      <div class="deck-creation-container">
+        <!-- Deck Creation Section -->
+        <div class="deck-creation-section">
 
-    <div class="container">
-      <!-- Input Box -->
-      <div class="deck-config fancy-box">
-        <h2>Deck Config</h2>
-        <form id="deckForm">
-          <!-- Deck Name -->
-          <div class="form-group">
-            <label for="deckName">Deck Name:</label>
-            <input type="text" id="deckName" required />
-          </div>
-
-          <!-- Deck Type -->
-          <div class="form-group">
-            <label for="deckType">Deck Type:</label>
-            <select id="deckType">
-              <option value="pokemon">Pokemon</option>
-              <option value="magic">Magic: The Gathering</option>
-              <option value="custom">Custom</option>
-            </select>
-          </div>
-
-          <!-- Deck Back Preview & Upload -->
-          <div class="form-group">
-            <label for="deckBackImage">Deck Back Image (Optional):</label>
-            <input type="file" id="deckBackImage" accept="image/*" />
-            <div class="back-preview">
-              <img
-                src="assets/images/deckplaceholder.png"
-                alt="Current Back display"
-                id="backPreview"
-              />
+          <!-- Deck thumbnail with upload functionality -->
+          <div class="thumbnail-display">
+            <div class="thumbnail-container" id="cardBackContainer">
+              <div class="thumbnail-upload" id="thumbnailUpload">
+                <div class="thumbnail-preview" id="thumbnailPreview">
+                  <div class="upload-placeholder" id="uploadPlaceholder">
+                    <img src="assets/images/card-back.webp" alt="Card back" id="cardBackImage" />
+                      <div class="add-icon-overlay" id="addIconOverlay">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="16"></line>
+                          <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                      </div>
+                    <img id="thumbnailImage" class="thumbnail-image" style="display: none;" alt="Deck thumbnail" />
+                  </div>
+                  <input type="file" id="thumbnailInput" accept="image/*" style="display: none;" />
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- Deck Front Upload -->
-          <div class="form-group">
-            <label for="cardImages">Upload Card Images:</label>
-            <div class="upload fancy-box">
-              <input type="file" id="cardImages" accept="image/*" multiple />
+          
+          <!-- Deck info form -->
+          <div class="deck-info">
+            <div class="form-group">
+              <label for="deckName">Deck Name:</label>
+              <input type="text" id="deckName" placeholder="Enter deck name" />
             </div>
-
-            <div class="upload-info">
-              <p>Drag and drop a folder or multiple images</p>
+            
+            <div class="form-group">
+              <label for="deckType">Deck type:</label>
+              <select id="deckType">
+                <option value="pokemon">Pokemon</option>
+                <option value="magic">Magic: The Gathering</option>
+                <option value="custom">Custom</option>
+              </select>
             </div>
           </div>
-        </form>
-      </div>
-
-      <!-- Preview Box -->
-      <div class="card-selection fancy-box">
-        <!-- Deck Selection Control -->
-        <h2>Card Selection</h2>
-        <div class="selection-controls">
-          <button id="selectAll">Select All</button>
-          <button id="deselectAll">Deselect All</button>
-          <span id="selectedCount">0 cards selected</span>
-        </div>
-        <!-- Deck Selection Preview -->
-        <div id="cardPreviewContainer" class="card-preview-container">
-          <p class="no-cards">
-            No cards uploaded yet. Upload images to see previews.
-          </p>
         </div>
       </div>
+      
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="saveDeckBtn" class="btn-primary">Save Deck</button>
+        <button id="addCardsBtn" class="btn-secondary">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Cards Now
+        </button>
+      </div>
+
+    
     </div>
 
-    <!-- Deck Saving Control -->
-    <div class="actions">
-      <button id="saveDeck" class="primary-btn">Save Deck</button>
-      <button id="clearForm">Clear Form</button>
+    <!-- Card Selection Modal -->
+    <div id="cardModal" class="modal">
+      <div class="modal-card">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Card Selection</h2>
+          <button id="closeModal" class="close-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+          <!-- Upload Section -->
+          <div class="upload-section">
+            <input type="file" id="cardImages" accept="image/*" multiple style="display: none;" />
+            <button id="uploadBtn" class="upload-btn">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7,10 12,15 17,10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Upload Card Images
+            </button>
+          </div>
+
+          <!-- Cards Grid -->
+          <div id="cardsContainer" class="cards-container">
+            <!-- Selection Controls -->
+            <div id="selectionControls" class="selection-controls" style="display: none;">
+              <button id="selectAllBtn" class="control-btn">Select All</button>
+              <button id="deselectAllBtn" class="control-btn">Deselect All</button>
+              <span id="selectionCount" class="selection-count">0 cards selected</span>
+            </div>
+
+            <!-- Cards Grid -->
+            <div id="cardsGrid" class="cards-grid">
+              <div class="empty-state">
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7,10 12,15 17,10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <p>No cards uploaded yet. Upload images to see previews.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button id="clearBtn" class="clear-btn">Clear Uploads</button>
+          <button id="cancelBtn" class="btn-outline">Cancel</button>
+          <button id="confirmBtn" class="btn-primary" disabled>
+            Add <span id="confirmCount">0</span> Cards
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Notification -->
     <div id="notification" class="notification"></div>
 
-    <script src="script.js"></script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>
