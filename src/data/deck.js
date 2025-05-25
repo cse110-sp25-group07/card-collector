@@ -5,9 +5,10 @@ export class Deck {
    * @param {string} name - Deck name.
    * @param {string[]} cardIds - Array of card IDs in the deck.
    */
-  constructor({ id = crypto.randomUUID(), name = '', cardIds = [] }) {
+  constructor({ id = crypto.randomUUID(), imageURL, name = '', cardIds = [] }) {
     this.id = id;
     this.name = name;
+    this.imageURL = imageURL;
     this.cardIds = cardIds;
   }
 
@@ -36,6 +37,7 @@ export class Deck {
     return {
       id: this.id,
       name: this.name,
+      imageURL: this.imageURL,
       cardIds: this.cardIds,
     };
   }
