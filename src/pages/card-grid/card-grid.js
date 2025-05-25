@@ -27,20 +27,43 @@ function renderCardGrid(cards) {
     container.classList.add('card-grid');
   
     cards.forEach(card => {
-      const tile = document.createElement('div');
-      tile.classList.add('card-tile');
-  
-      tile.innerHTML = `
-        <img src="${card.imageURL}" alt="${card.name}" />
-        <p>${card.name}</p>
-      `;
-  
-      tile.addEventListener('click', () => {
-        alert(`You clicked ${card.name}`);
+        const tile = document.createElement('div');
+        tile.classList.add('card-tile');
+    
+        // clickable image + name div
+        const cardLink = document.createElement('div');
+        cardLink.classList.add('card-content');
+        cardLink.innerHTML = `
+          <img src="${card.imageURL}" alt="${card.name}" />
+          <p>${card.name}</p>
+        `;
+        cardLink.addEventListener('click', () => {
+          window.location.href = `../single-card-view/display.html?id=${card.id}`;
+        });
+    
+        // Edit button
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.classList.add('card-btn');
+        editBtn.addEventListener('click', (e) => {
+          e.stopPropagation(); // prevent triggering cardLink click
+          alert(`Edit ${card.name} (not implemented yet)`);
+        });
+    
+        // Delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('card-btn');
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation(); // prevent triggering cardLink click
+          alert(`Delete ${card.name} (not implemented yet)`);
+        });
+    
+        tile.appendChild(cardLink);
+        tile.appendChild(editBtn);
+        tile.appendChild(deleteBtn);
+        container.appendChild(tile);
       });
-  
-      container.appendChild(tile);
-    });
   
     return container;
   }
