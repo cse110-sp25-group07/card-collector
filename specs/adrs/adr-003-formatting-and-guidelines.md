@@ -1,6 +1,6 @@
 # ADR 3: Coding Formatting and Guidelines
 
-**Status:** [Accepted / **Proposed** / Deprecated]
+**Status:** Accepted
 
 **Date:** 2025-05-07
 

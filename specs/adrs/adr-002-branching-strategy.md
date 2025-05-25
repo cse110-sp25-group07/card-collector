@@ -1,6 +1,6 @@
 # ADR 2: BRANCHING STRATEGY
 
-**Status:** [Accepted / **Proposed** / Deprecated]  
+**Status:** Accepted
 **Date:** 2025-05-11  
 **Deciders:** All members
 

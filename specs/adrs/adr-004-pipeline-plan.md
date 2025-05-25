@@ -1,6 +1,6 @@
 # ADR 4: PIPELINE PLAN
 
-**Status:** [Accepted / **Proposed** / Deprecated]  
+**Status:** Accepted
 **Date:** 2025-05-11  
 **Deciders:** All members
 
