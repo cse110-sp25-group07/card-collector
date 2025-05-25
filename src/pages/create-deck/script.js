@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const thumbnailImage = document.getElementById('thumbnailImage');
   const saveDeckBtn = document.getElementById('saveDeckBtn');
   const addCardsBtn = document.getElementById('addCardsBtn');
-  
+
   // Selected cards preview
   const selectedCardsSection = document.getElementById('selectedCardsSection');
   const selectedCardsCount = document.getElementById('selectedCardsCount');
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmCount = document.getElementById('confirmCount');
   const notification = document.getElementById('notification');
   const clearBtn = document.getElementById('clearBtn');
-  
+
   // In-memory state
   let thumbnail = null;
   const uploadedCards = [];
@@ -55,9 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
   selectAllBtn.addEventListener('click', selectAllCards);
   deselectAllBtn.addEventListener('click', deselectAllCards);
   confirmBtn.addEventListener('click', confirmCardSelection);
-  cardModal.addEventListener('click', e => { if (e.target === cardModal) closeCardModal(); });
+  cardModal.addEventListener('click', (e) => {
+    if (e.target === cardModal) closeCardModal();
+  });
   clearBtn.addEventListener('click', clearUploads);
-    
+
   // ---- Handlers ----
   // Upload and preview deck thumbnail
   function handleThumbnailUpload(e) {
@@ -86,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle multiple card image uploads into the modal
   function handleCardImagesUpload(e) {
-    const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+    const files = Array.from(e.target.files).filter((f) =>
+      f.type.startsWith('image/'),
+    );
     if (!files.length) {
       showNotification('No valid image files selected', 'error');
       return;
@@ -96,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (emptyState) emptyState.remove();
     selectionControls.style.display = 'flex';
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = ({ target }) => {
         const cardData = {
@@ -167,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Select or deselect all cards in the modal
   function selectAllCards() {
-    uploadedCards.forEach(c => {
+    uploadedCards.forEach((c) => {
       selectedCards.add(c.id);
       const el = cardsGrid.querySelector(`[data-card-id="${c.id}"]`);
       if (el) el.classList.add('selected');
@@ -176,7 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function deselectAllCards() {
     selectedCards.clear();
-    cardsGrid.querySelectorAll('.card-item').forEach(el => el.classList.remove('selected'));
+    cardsGrid
+      .querySelectorAll('.card-item')
+      .forEach((el) => el.classList.remove('selected'));
     updateSelectionCount();
   }
 
@@ -190,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Confirm choices, update preview, and notify
   function confirmCardSelection() {
-    selectedCardsData = uploadedCards.filter(c => selectedCards.has(c.id));
+    selectedCardsData = uploadedCards.filter((c) => selectedCards.has(c.id));
     closeCardModal();
     updateSelectedCardsPreview();
     showNotification(`${selectedCardsData.length} cards selected for deck`);
@@ -206,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedCardsSection.style.display = 'block';
     selectedCardsCount.textContent = selectedCardsData.length;
     selectedCardsGrid.innerHTML = '';
-    selectedCardsData.slice(0, 20).forEach(card => {
+    selectedCardsData.slice(0, 20).forEach((card) => {
       const el = document.createElement('div');
       el.className = 'selected-card-item';
       el.innerHTML = `<img src="${card.imageData}" alt="${card.name}" />`;

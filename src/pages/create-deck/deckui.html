@@ -9,40 +9,60 @@
   <body>
     <div class="main-container">
       <h1>CREATE DECK</h1>
-      
+
       <div class="deck-creation-container">
         <!-- Deck Creation Section -->
         <div class="deck-creation-section">
-
           <!-- Deck thumbnail with upload functionality -->
           <div class="thumbnail-display">
             <div class="thumbnail-container" id="cardBackContainer">
               <div class="thumbnail-upload" id="thumbnailUpload">
                 <div class="thumbnail-preview" id="thumbnailPreview">
                   <div class="upload-placeholder" id="uploadPlaceholder">
-                    <img src="assets/images/card-back.webp" alt="Card back" id="cardBackImage" />
-                      <div class="add-icon-overlay" id="addIconOverlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <line x1="12" y1="8" x2="12" y2="16"></line>
-                          <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                      </div>
-                    <img id="thumbnailImage" class="thumbnail-image" style="display: none;" alt="Deck thumbnail" />
+                    <img
+                      src="assets/images/card-back.webp"
+                      alt="Card back"
+                      id="cardBackImage"
+                    />
+                    <div class="add-icon-overlay" id="addIconOverlay">
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                      </svg>
+                    </div>
+                    <img
+                      id="thumbnailImage"
+                      class="thumbnail-image"
+                      style="display: none"
+                      alt="Deck thumbnail"
+                    />
                   </div>
-                  <input type="file" id="thumbnailInput" accept="image/*" style="display: none;" />
+                  <input
+                    type="file"
+                    id="thumbnailInput"
+                    accept="image/*"
+                    style="display: none"
+                  />
                 </div>
               </div>
             </div>
           </div>
-          
+
           <!-- Deck info form -->
           <div class="deck-info">
             <div class="form-group">
               <label for="deckName">Deck Name:</label>
               <input type="text" id="deckName" placeholder="Enter deck name" />
             </div>
-            
+
             <div class="form-group">
               <label for="deckType">Deck type:</label>
               <select id="deckType">
@@ -54,20 +74,24 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Action Buttons -->
       <div class="action-buttons">
         <button id="saveDeckBtn" class="btn-primary">Save Deck</button>
         <button id="addCardsBtn" class="btn-secondary">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            class="btn-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
           Add Cards Now
         </button>
       </div>
-
-    
     </div>
 
     <!-- Card Selection Modal -->
@@ -77,7 +101,12 @@
         <div class="modal-header">
           <h2 class="modal-title">Card Selection</h2>
           <button id="closeModal" class="close-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
@@ -88,9 +117,21 @@
         <div class="modal-content">
           <!-- Upload Section -->
           <div class="upload-section">
-            <input type="file" id="cardImages" accept="image/*" multiple style="display: none;" />
+            <input
+              type="file"
+              id="cardImages"
+              accept="image/*"
+              multiple
+              style="display: none"
+            />
             <button id="uploadBtn" class="upload-btn">
-              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg
+                class="btn-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7,10 12,15 17,10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -102,16 +143,30 @@
           <!-- Cards Grid -->
           <div id="cardsContainer" class="cards-container">
             <!-- Selection Controls -->
-            <div id="selectionControls" class="selection-controls" style="display: none;">
+            <div
+              id="selectionControls"
+              class="selection-controls"
+              style="display: none"
+            >
               <button id="selectAllBtn" class="control-btn">Select All</button>
-              <button id="deselectAllBtn" class="control-btn">Deselect All</button>
-              <span id="selectionCount" class="selection-count">0 cards selected</span>
+              <button id="deselectAllBtn" class="control-btn">
+                Deselect All
+              </button>
+              <span id="selectionCount" class="selection-count"
+                >0 cards selected</span
+              >
             </div>
 
             <!-- Cards Grid -->
             <div id="cardsGrid" class="cards-grid">
               <div class="empty-state">
-                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  class="empty-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7,10 12,15 17,10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
