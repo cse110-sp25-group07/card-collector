@@ -17,11 +17,12 @@ In the second phase of our pipeline we wanted to add onto the existing formattin
 2. Code Review: Other team members will review the code for quality and provide comments to improve it.
 
 3. Testing:
+
    - Jest Tests: Unit tests for ensuring that individual functions work as expected.
    - ESLint Check: To ensure the code is free of common issues and follows style guidelines.
    - Prettier Check: To maintain consistent file formatting.
-  
-3. Docs:
+
+4. Docs:
    - Upon any pushes to main (including merges) JSDoc documentation is automatically generated and pushed to the codebase
 
 **Pipeline Phase 3:**
