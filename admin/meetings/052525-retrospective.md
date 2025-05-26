@@ -22,24 +22,26 @@ We created a Miro Diagram summing up the highlights of what we wanted to get don
 
 ![4L's for Sprint 2 Retrospective](./screenshots/Sprint%202%20Retro.jpg)
 
-
 ### Notes:
 
 We also documented our thoughts into the following notes prior to making the diagram:
 
 Liked Items
+
 - Automated pipeline and documentation implementation
 - Subteam leaders helped divide the work from the team leads and allow teams to drill in and focus on their features and components
 - Focus on cleanliness and organization within the refactoring
 
 Lacked Items
+
 - Lacking communication from team members whether they weren’t participating or wouldn’t be able to contribute for this sprint due to external reasons
 - Hard to accomplish work without members present at critical meetings or talking in the slack channel and also without committing any code/work on their tasks
 
 Learned Items
+
 - Being vocal about what you’re working on lets others know what you’ve accomplished and what they should work on as well
 
 Longed For Items
+
 - It’s crunch time and we all need to make sure to do our best to get as much done in the last sprint
 - Managing external factors such as other classes and obligations can be tough but we need to prioritize the project as you would with a midterm for a class
-
