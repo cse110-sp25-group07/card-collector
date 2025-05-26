@@ -16,7 +16,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .card-container {
@@ -25,50 +25,73 @@
       background-color: #fffaf0;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 16px;
+      padding: 60px 16px 24px 16px;
       position: relative;
+      overflow: visible; 
     }
 
-    .back-button {
+    .back-button, .prev-button, .next-button {
       background: none;
       border: none;
       font-size: 24px;
       cursor: pointer;
       position: absolute;
       top: 16px;
-      left: 16px;
+      z-index: 2;
     }
+
+    .back-button { left: 16px; }
+    .prev-button { left: 60px; }
+    .next-button { right: 16px; }
 
     .deck-name, .card-name {
       text-align: center;
       margin: 8px 0;
     }
 
-    .card-images {
+    .carousel-wrapper {
+      overflow: visible; 
+      width: 100%;
+      margin: 20px 0;
+      min-height: 380px; 
+    }
+
+    .carousel {
       display: flex;
-      justify-content: center;
+      transition: transform 0.5s ease;
+      align-items: flex-start; 
+    }
+
+    .card {
+      min-width: 33.33%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 16px;
-      margin: 16px 0;
+      padding: 12px;
+      transition: transform 0.5s ease;
+      min-height: 320px;
     }
 
     .card-image {
-      width: 100px;
-      height: 150px;
+      width: 140px;
+      height: 210px;
       border: 3px solid black;
       border-radius: 12px;
       background-color: #eee;
+      margin-bottom: 12px;
     }
 
-    .main-card-image {
-      width: 160px;
-      height: 240px;
+    .main {
+      transform: scale(1.2); 
+      z-index: 1;
     }
 
     .card-info {
       text-align: center;
-      margin-top: 16px;
-      line-height: 1.5;
+      line-height: 1.4;
+      font-size: 14px;
+      min-height: 80px;
     }
 
     .manage-button {
@@ -83,17 +106,9 @@
     }
 
     @media (max-width: 600px) {
-      .card-images {
-        flex-direction: row;
-        gap: 8px;
-      }
-      .main-card-image {
-        width: 120px;
-        height: 180px;
-      }
       .card-image {
-        width: 70px;
-        height: 100px;
+        width: 90px;
+        height: 140px;
       }
     }
   </style>
@@ -101,31 +116,85 @@
 <body>
   <div class="card-container">
     <button class="back-button" onclick="goBack()">←</button>
-    <h2 class="deck-name">&lt;Deck Name&gt;</h2>
-    <h3 class="card-name">&lt;Card Name&gt;</h3>
-    <div class="card-images">
-      <div class="card-image"></div>
-      <div class="card-image main-card-image"></div>
-      <div class="card-image"></div>
+    <button class="prev-button" onclick="prevCard()">◀</button>
+    <button class="next-button" onclick="nextCard()">▶</button>
+
+    <h2 class="deck-name" id="deckName">Deck: Pikachu's Team</h2>
+
+    <div class="carousel-wrapper">
+      <div class="carousel" id="carousel">
+      </div>
     </div>
-    <div class="card-info">
-      <div>&lt;Type(s)&gt;</div>
-      <div>&lt;Rarity&gt;</div>
-      <div>&lt;Generation?&gt;</div>
-    </div>
+
     <button class="manage-button" onclick="manageCard()">Manage</button>
   </div>
 
   <script>
+    const cards = [
+      { name: "Pikachu", type: "Electric", rarity: "Rare", generation: "Gen 1" },
+      { name: "Eevee", type: "Normal", rarity: "Common", generation: "Gen 1" },
+      { name: "Charmander", type: "Fire", rarity: "Rare", generation: "Gen 1" },
+      { name: "Bulbasaur", type: "Grass", rarity: "Uncommon", generation: "Gen 1" },
+      { name: "Squirtle", type: "Water", rarity: "Rare", generation: "Gen 1" }
+    ];
+
+    let currentIndex = 0;
+    const carousel = document.getElementById("carousel");
+
+    function renderCards() {
+      carousel.innerHTML = "";
+
+      for (let i = -1; i <= 1; i++) {
+        let index = (currentIndex + i + cards.length) % cards.length;
+        const card = cards[index];
+
+        const cardDiv = document.createElement("div");
+        cardDiv.className = "card";
+        if (i === 0) cardDiv.classList.add("main");
+
+        cardDiv.innerHTML = `
+          <div class="card-image"></div>
+          <div class="card-info">
+            <div>${card.name}</div>
+            <div>${card.type}</div>
+            <div>${card.rarity}</div>
+            <div>${card.generation}</div>
+          </div>
+        `;
+
+        carousel.appendChild(cardDiv);
+      }
+    }
+
+    function prevCard() {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      animateCarousel();
+    }
+
+    function nextCard() {
+      currentIndex = (currentIndex + 1) % cards.length;
+      animateCarousel();
+    }
+
+    function animateCarousel() {
+      carousel.style.transition = "transform 0.5s ease";
+      carousel.style.transform = "translateX(-33.33%)";
+      setTimeout(() => {
+        carousel.style.transition = "none";
+        carousel.style.transform = "translateX(0)";
+        renderCards();
+      }, 500);
+    }
+
     function goBack() {
-      // Redirect or logic to return to Card View
       alert("Going back to Card View...");
     }
 
     function manageCard() {
-      // Redirect or logic to edit/manage the card
       alert("Manage card features not implemented yet.");
     }
+
+    renderCards();
   </script>
 </body>
 </html>
