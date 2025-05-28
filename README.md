@@ -6,9 +6,13 @@ Card Collector is a web app designed to bring physical card collecting to a digi
 
 [Video Link](https://youtu.be/6OmUEN1WJqk)
 
-## JSDoc Documentation
+## Documentation
 
-[Github Pages Link](https://cse110-sp25-group07.github.io/card-collector/jsdocs).
+All information should be kept within this repository and its wiki to maintain a single source of truth.
+
+[Repository Wiki](https://github.com/cse110-sp25-group07/card-collector/wiki)
+
+[JSDocs Github Page](https://cse110-sp25-group07.github.io/card-collector/jsdocs)
 
 ## Installation
 
