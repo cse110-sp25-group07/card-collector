@@ -67,6 +67,30 @@ function renderCardGrid(cards) {
   
     return container;
   }
+
+  //sets up the search, filter and manage buttons
+  function eventListenerSetup(){
+    const back = document.getElementById('go-back');
+    back.addEventListener('click', ()=>{
+      console.log('Implement go back to deck view logic');
+    });
+
+    const manage = document.getElementById('manage-toggle');
+    manage.addEventListener('click', ()=>{
+      console.log('Implement toggling of create and delete');
+      console.log('Make it so delete pops up on each card');
+    });
+
+    const create = document.getElementById('create-card');
+    create.addEventListener('click', ()=>{
+      console.log('Implement creation of cards');
+    })
+
+    const sort = document.getElementById('sort-cards');
+    sort.addEventListener('change', (e)=>{
+      console.log(`Implement sorting by ${e.target.value}`);
+    })
+  }
   
   // entry point
   async function init() {
@@ -84,6 +108,8 @@ function renderCardGrid(cards) {
     //     root.innerHTML = `<p style="color: red;">Error loading cards. Check the console.</p>`;
     //     console.error('Failed to load cards:', err);
     //   }
+
+    eventListenerSetup();
   }
   
   init();
