@@ -2,68 +2,44 @@
 
 ## Sprint 1 Standup Notes:
 
-**Members:** Ashton, Karim
 ### Data Management of Cards & Local Storage (pt.1) – Backend
 
 - Card Object
 - Deck Object
 
+**Members:**
 
+- Ashton: Created the card and deck objects, created types and fields based on pokemon type, name, ID, and more, updated Miro with documentation
+- Karim
 
 ### Card Component Page (Single Card Page) – Frontend
 
 - Display a card and its fields
 
-**Members:** Luis, Eric, Jonathan
+**Members:**
+
+- Luis: Created rough draft of frontend UI, includes text, fields, and image placeholders, displays Deck Name, Card Name, Card Placeholder Image, and card attributes
+- Eric
+- Jonathan: added arrow button to return to Deck Page, included button to manage fields
 
 ### Image Upload Page – Frontend & Backend
 
 - UI to upload image
 - Save image into `localStorage`
 
-**Members:** Preity, Tanner, Graydon
+**Members:**
+
+- Preity: Created separate implementation of UI that can be merged with Tanner's page
+- Tanner: Created basic card creation page with the ability to upload an image and enter the fields of the card
+- Graydon
 
 ### Create Deck Feature (Page) – Frontend & Backend
 
 - Visualize card deck
 - Save deck into `localStorage`
 
-**Members:** Vishruth, Guthry, Max
+**Members:**
 
----
-
-## Backlog
-
-- Data management of cards (pt.2)
-- Camera upload (use other libraries?)
-- View multiple decks
-- View specific deck
-- View single card
-- Figure out mass uploading pictures on deck creation page
-
----
-
-## Status Updates
-
-### Data Management of Cards & Local Storage (pt.1)
-
-- Created basic class to utilize the labels
-- Updated Miro with documentation
-
-### Card Component Page
-
-- Created rough draft of frontend UI
-- Includes text, fields, and image placeholders
-- Displays Deck Name, Card Name, Card Placeholder Image, and card attributes
-- Implemented:
-
-  - Arrow button to return to Deck Page
-  - Button to manage fields
-
-### Create Deck Feature
-
-- Max worked on deck config, image upload, and card selection
-
-### Image Upload Page / Card Creation Page
-
-- Created basic card creation page with the ability to upload an image and enter the fields of the card
+- Vishruth
+- Guthry: made basic UI design for the deck featuer
+- Max: worked on deck config, image upload, and card selection, included a feature to allow mass uploading of images
