@@ -1,33 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pokémon Card Grid</title>
-  <link rel="stylesheet" href="./style.css" />
-</head>
-<body>
-  <h1>All Pokémon Cards</h1>
-  <div id="card-grid-root"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Card Grid</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>All Pokémon Cards</h1>
+    <div id="card-grid-root"></div>
 
-  <script type="module" src="./card-grid.js"></script>
-  <!-- Still need to do CSS for the all these classes -->
-  <div class = "back-controls">
-    <button id="go-back" class="back-button">Back</button>
-  </div>
-  <div class= "manage-controls">
-    <button id="manage-toggle">Manage</button>
-    <button id="create-card">Create</button>
-    <button id="delete-card">Delete</button>
-  </div>
-  <div class = "sort-controls">
+    <script type="module" src="./card-grid.js"></script>
+    <!-- Still need to do CSS for the all these classes -->
+    <div class="back-controls">
+      <button id="go-back" class="back-button">Back</button>
+    </div>
+    <div class="manage-controls">
+      <button id="manage-toggle">Manage</button>
+      <button id="create-card">Create</button>
+      <button id="delete-card">Delete</button>
+    </div>
+    <div class="sort-controls">
       <!-- TODO add the Search bar and functionality -->
-    <select id="sort-cards">
-      <option value="names-alpha">Name A→Z</option>
-      <option value="names-rev-alpha">Name Z→A</option>
-      <option value="evolution">Evolution</option>
-      <option value="type">Type</option>
-    </select>
-  </div>
-</body>
+      <select id="sort-cards">
+        <option value="names-alpha">Name A→Z</option>
+        <option value="names-rev-alpha">Name Z→A</option>
+        <option value="evolution">Evolution</option>
+        <option value="type">Type</option>
+      </select>
+    </div>
+  </body>
 </html>
