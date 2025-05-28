@@ -19,7 +19,7 @@
 
 - Luis: Implement rough arrow functionality to switch between each single card. Added placeholder data fields to simulate how a card would be displayed with its fields.
 - Eric
-- Jonathan:
+- Jonathan: Added issue templates to Card Collector project, Created Sprint 3 feature issues for the Single Card View
 
 ### View All Cards (Frontend & Backend)
 
