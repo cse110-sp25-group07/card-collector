@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (existingDeck) {
         // Update title
         document.querySelector('h1').textContent = 'EDIT DECK';
-        
+
         // Fill in form data
         deckNameInput.value = existingDeck.name;
         if (existingDeck.imageURL) {
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           id: editDeckId,
           name,
           imageURL: thumbnail || defaultDeckImage,
-          cardIds: existingDeck.cardIds // Preserve existing cards
+          cardIds: existingDeck.cardIds, // Preserve existing cards
         });
 
         await updateDeck(updatedDeck.toJSON());
@@ -282,13 +282,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           imageURL: thumbnail || defaultDeckImage,
           cardIds: [],
         });
-        
+
         for (const data of selectedCardsData) {
           const card = new Card({ name: data.name, imageURL: data.imageData });
           const id = await addCard(card.toJSON());
           deck.addCard(id);
         }
-        
+
         await addDeck(deck.toJSON());
         showNotification(`Deck "${name}" saved successfully!`);
         resetForm();
