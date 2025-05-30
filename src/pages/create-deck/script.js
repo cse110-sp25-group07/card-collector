@@ -1,4 +1,4 @@
-import { addCard, addDeck, getDeck, updateDeck } from '../../data/indexedDB.js';
+import { addCard, addDeck, getDeckById } from '../../data/indexedDB.js';
 import { Deck } from '../../data/deck.js';
 import { Card } from '../../data/card.js';
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initialize form for editing if needed
   if (editDeckId) {
     try {
-      existingDeck = await getDeck(editDeckId);
+      existingDeck = await getDeckById(editDeckId);
       if (existingDeck) {
         // Update title
         document.querySelector('h1').textContent = 'EDIT DECK';
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           cardIds: existingDeck.cardIds, // Preserve existing cards
         });
 
-        await updateDeck(updatedDeck.toJSON());
+        await addDeck(updatedDeck.toJSON());
         showNotification(`Deck "${name}" updated successfully!`);
       } else {
         // Create new deck
