@@ -37,7 +37,7 @@
 
 **Members:**
 
-- Vishruth
+- Vishruth: Helped with initial testing and refinement for deck related features
 - Guthry: Worked on deck view, ran into couple of blockers listed below
 - Max: Replace back image with thumbnail and add to deck data; connect create deck to indexedDB; capsulate bulk upload feature into a new modal
 

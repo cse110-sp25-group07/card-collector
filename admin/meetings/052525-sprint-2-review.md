@@ -46,6 +46,9 @@ Tanner, Ashton, Guthry, Karim, Luis, Max
 - **Guthry:**
   Worked on deck view, ran into couple of blockers listed below
 
+- **Vishruth:**
+  Helped with initial testing and refinement for deck related features
+
 ---
 
 ## Sprint 2 Blockers
