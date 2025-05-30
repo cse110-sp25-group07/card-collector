@@ -291,6 +291,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         await addDeck(deck.toJSON());
         showNotification(`Deck "${name}" saved successfully!`);
+        resetForm();
       }
 
       // Return to deck management page
