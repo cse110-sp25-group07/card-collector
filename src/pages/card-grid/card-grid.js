@@ -1,4 +1,9 @@
-import { getCardsFromDeck, getDeckById } from '../../data/indexedDB.js';
+import {
+  getCardsFromDeck,
+  getDeckById,
+  deleteCard,
+  addDeck,
+} from '../../data/indexedDB.js';
 
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
@@ -12,6 +17,8 @@ async function updateTitleWithDeckName(deckId) {
 function renderCardGrid(cards) {
   const container = document.createElement('div');
   container.classList.add('card-grid');
+  const params = new URLSearchParams(window.location.search);
+  const deckId = params.get('deckId');
 
   cards.forEach((card) => {
     const tile = document.createElement('div');
@@ -41,9 +48,31 @@ function renderCardGrid(cards) {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
     deleteBtn.classList.add('card-btn', 'manage-hidden');
-    deleteBtn.addEventListener('click', (e) => {
+    deleteBtn.addEventListener('click', async (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
-      alert(`Delete ${card.name} (not implemented yet)`);
+      try {
+        // Delete the card from IndexedDB
+        await deleteCard(card.id);
+
+        // Remove card ID from the deck
+        const deck = await getDeckById(deckId);
+        if (!deck) throw new Error('Deck not found');
+
+        // Remove the card ID from the deck's cardIds
+        const updatedDeck = {
+          ...deck,
+          cardIds: deck.cardIds.filter((id) => id !== card.id),
+        };
+
+        // Save the updated deck
+        await addDeck(updatedDeck);
+
+        // Refresh the page to show changes
+        window.location.reload();
+      } catch (err) {
+        console.error('Failed to delete card:', err);
+        alert('Failed to delete card. See console for details.');
+      }
     });
 
     tile.appendChild(cardLink);
