@@ -1,11 +1,16 @@
-import { addCard, addDeck } from '../../data/indexedDB.js';
+import { addCard, addDeck, getDeckById } from '../../data/indexedDB.js';
 import { Deck } from '../../data/deck.js';
 import { Card } from '../../data/card.js';
 
 /**
  * script.js — Connects the Deck Creator UI to IndexedDB via the reusable API.
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Check if we're editing an existing deck
+  const urlParams = new URLSearchParams(window.location.search);
+  const editDeckId = urlParams.get('edit');
+  let existingDeck = null;
+
   // Deck form elements
   const deckNameInput = document.getElementById('deckName');
   const thumbnailContainer = document.getElementById('cardBackContainer');
@@ -46,6 +51,34 @@ document.addEventListener('DOMContentLoaded', () => {
   const uploadedCards = [];
   const selectedCards = new Set();
   let selectedCardsData = [];
+
+  // Initialize form for editing if needed
+  if (editDeckId) {
+    try {
+      existingDeck = await getDeckById(editDeckId);
+      if (existingDeck) {
+        // Update title
+        document.querySelector('h1').textContent = 'EDIT DECK';
+
+        // Fill in form data
+        deckNameInput.value = existingDeck.name;
+        if (existingDeck.imageURL) {
+          thumbnail = existingDeck.imageURL;
+          thumbnailImage.src = thumbnail;
+          thumbnailImage.style.display = 'block';
+          cardBackImage.style.display = 'none';
+          addIconOverlay.style.display = 'none';
+          thumbnailContainer.classList.add('has-custom-image');
+        }
+
+        // Update button text
+        saveDeckBtn.textContent = 'Save Changes';
+      }
+    } catch (error) {
+      console.error('Error loading deck for editing:', error);
+      showNotification('Error loading deck data', 'error');
+    }
+  }
 
   // ---- Event Listeners ----
   thumbnailUpload.addEventListener('click', () => thumbnailInput.click());
@@ -229,20 +262,40 @@ document.addEventListener('DOMContentLoaded', () => {
       showNotification('Please enter a deck name', 'error');
       return;
     }
+
     try {
-      const deck = new Deck({
-        name,
-        imageURL: thumbnail || defaultDeckImage,
-        cardIds: [],
-      });
-      for (const data of selectedCardsData) {
-        const card = new Card({ name: data.name, imageURL: data.imageData });
-        const id = await addCard(card.toJSON());
-        deck.addCard(id);
+      if (editDeckId) {
+        // Update existing deck
+        const updatedDeck = new Deck({
+          id: editDeckId,
+          name,
+          imageURL: thumbnail || defaultDeckImage,
+          cardIds: existingDeck.cardIds, // Preserve existing cards
+        });
+
+        await addDeck(updatedDeck.toJSON());
+        showNotification(`Deck "${name}" updated successfully!`);
+      } else {
+        // Create new deck
+        const deck = new Deck({
+          name,
+          imageURL: thumbnail || defaultDeckImage,
+          cardIds: [],
+        });
+
+        for (const data of selectedCardsData) {
+          const card = new Card({ name: data.name, imageURL: data.imageData });
+          const id = await addCard(card.toJSON());
+          deck.addCard(id);
+        }
+
+        await addDeck(deck.toJSON());
+        showNotification(`Deck "${name}" saved successfully!`);
+        resetForm();
       }
-      await addDeck(deck.toJSON());
-      showNotification(`Deck "${name}" saved successfully!`);
-      resetForm();
+
+      // Return to deck management page
+      window.location.href = '../deck-management/deck-management.html';
     } catch (err) {
       console.error(err);
       showNotification('Error saving deck. Please try again.', 'error');
