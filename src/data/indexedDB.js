@@ -45,12 +45,20 @@ export async function addCard(card) {
 }
 
 /**
- * Fetch all cards.
+ * Fetch all cards from specific deck by deckId
+ * @param {string} deckId
  * @returns {Promise<Object[]>} array of card objects
  */
-export async function getAllCards() {
+export async function getCardsFromDeck(deckId) {
+  const deck = await getDeckById(deckId);
+  if (!deck || !deck.cardIds) return [];
+
   const db = await dbPromise;
-  return db.getAll(CARD_STORE);
+  const tx = db.transaction(CARD_STORE, 'readonly');
+  const store = tx.objectStore(CARD_STORE);
+
+  const cards = await Promise.all(deck.cardIds.map((id) => store.get(id)));
+  return cards.filter(Boolean); // remove any undefined if id lookup fails
 }
 
 /**
