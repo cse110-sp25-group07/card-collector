@@ -9,11 +9,22 @@
   </head>
 
   <body>
-    <h1>Deck View</h1>
+    <div class="page-container">
+      <h1>Deck View</h1>
       <div id="deck-box" class="fancy-box">
         <h2>Decks</h2>
-          <div id="deck-viewer">
+        <div id="deck-viewer">
+          <!-- Decks will be populated here -->
+        </div>
+        <div id="empty-state" class="empty-state" style="display: none">
+          <div class="empty-content">
+            <div class="empty-icon">📦</div>
+            <h3>No Decks Yet</h3>
+            <p>Create your first deck to get started!</p>
+            <button class="create-deck-btn">Create New Deck</button>
           </div>
+        </div>
       </div>
+    </div>
   </body>
 </html>

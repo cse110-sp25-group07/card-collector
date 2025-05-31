@@ -1,516 +1,1540 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="utf-8">
     <title>JSDoc: Global</title>
 
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="styles/prettify-tomorrow.css"
-    />
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
-  </head>
-
-  <body>
-    <div id="main">
-      <h1 class="page-title">Global</h1>
-
-      <section>
-        <header>
-          <h2></h2>
-        </header>
-
-        <article>
-          <div class="container-overview">
-            <dl class="details"></dl>
-          </div>
-
-          <h3 class="subsection-title">Methods</h3>
-
-          <h4 class="name" id="addCard">
-            <span class="type-signature"></span>addCard<span class="signature"
-              >(card)</span
-            ><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
-          </h4>
-
-          <div class="description">
-            <p>Add or update a card in IndexedDB.</p>
-          </div>
-
-          <h5>Parameters:</h5>
-
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Type</th>
-
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td class="name"><code>card</code></td>
-
-                <td class="type">
-                  <span class="param-type">Object</span>
-                </td>
-
-                <td class="description last">
-                  <p>
-                    card object. If there's no <code>id</code>, one is
-                    generated.
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line40">line 40</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <div class="param-desc">
-            <p>id of stored card</p>
-          </div>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;string></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="addDeck">
-            <span class="type-signature"></span>addDeck<span class="signature"
-              >(deck)</span
-            ><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
-          </h4>
-
-          <div class="description">
-            <p>Add or update a deck in IndexedDB.</p>
-          </div>
-
-          <h5>Parameters:</h5>
-
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Type</th>
-
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td class="name"><code>deck</code></td>
-
-                <td class="type">
-                  <span class="param-type">Object</span>
-                </td>
-
-                <td class="description last">
-                  <p>
-                    A deck object (must contain <code>name</code>,
-                    <code>cardIds</code>)
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line95">line 95</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <div class="param-desc">
-            <p>The deck id</p>
-          </div>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;string></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="deleteCard">
-            <span class="type-signature"></span>deleteCard<span
-              class="signature"
-              >(id)</span
-            ><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
-          </h4>
-
-          <div class="description">
-            <p>Delete a card.</p>
-          </div>
-
-          <h5>Parameters:</h5>
-
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Type</th>
-
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td class="name"><code>id</code></td>
-
-                <td class="type">
-                  <span class="param-type">string</span>
-                </td>
-
-                <td class="description last"></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line71">line 71</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;void></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="deleteDeck">
-            <span class="type-signature"></span>deleteDeck<span
-              class="signature"
-              >(id)</span
-            ><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
-          </h4>
-
-          <div class="description">
-            <p>Delete a deck.</p>
-          </div>
-
-          <h5>Parameters:</h5>
-
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Type</th>
-
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td class="name"><code>id</code></td>
-
-                <td class="type">
-                  <span class="param-type">string</span>
-                </td>
-
-                <td class="description last"></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line126">line 126</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;void></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="getAllCards">
-            <span class="type-signature"></span>getAllCards<span
-              class="signature"
-              >()</span
-            ><span class="type-signature">
-              &rarr; {Promise.&lt;Array.&lt;Object>>}</span
-            >
-          </h4>
-
-          <div class="description">
-            <p>Fetch all cards.</p>
-          </div>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line51">line 51</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <div class="param-desc">
-            <p>array of card objects</p>
-          </div>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="getAllDecks">
-            <span class="type-signature"></span>getAllDecks<span
-              class="signature"
-              >()</span
-            ><span class="type-signature">
-              &rarr; {Promise.&lt;Array.&lt;Object>>}</span
-            >
-          </h4>
-
-          <div class="description">
-            <p>Fetch all decks.</p>
-          </div>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line106">line 106</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <div class="param-desc">
-            <p>array of deck objects</p>
-          </div>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;Array.&lt;Object>></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="getCardById">
-            <span class="type-signature"></span>getCardById<span
-              class="signature"
-              >(id)</span
-            ><span class="type-signature">
-              &rarr; {Promise.&lt;(Object|undefined)>}</span
-            >
-          </h4>
-
-          <div class="description">
-            <p>Fetch a single card by its id.</p>
-          </div>
-
-          <h5>Parameters:</h5>
-
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Type</th>
-
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td class="name"><code>id</code></td>
-
-                <td class="type">
-                  <span class="param-type">string</span>
-                </td>
-
-                <td class="description last"></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line61">line 61</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;(Object|undefined)></span>
-            </dd>
-          </dl>
-
-          <h4 class="name" id="getDeckById">
-            <span class="type-signature"></span>getDeckById<span
-              class="signature"
-              >(id)</span
-            ><span class="type-signature">
-              &rarr; {Promise.&lt;(Object|undefined)>}</span
-            >
-          </h4>
-
-          <div class="description">
-            <p>Fetch a single deck by id.</p>
-          </div>
-
-          <h5>Parameters:</h5>
-
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Type</th>
-
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td class="name"><code>id</code></td>
-
-                <td class="type">
-                  <span class="param-type">string</span>
-                </td>
-
-                <td class="description last"></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <dl class="details">
-            <dt class="tag-source">Source:</dt>
-            <dd class="tag-source">
-              <ul class="dummy">
-                <li>
-                  <a href="indexedDB.js.html">indexedDB.js</a>,
-                  <a href="indexedDB.js.html#line116">line 116</a>
-                </li>
-              </ul>
-            </dd>
-          </dl>
-
-          <h5>Returns:</h5>
-
-          <dl>
-            <dt>Type</dt>
-            <dd>
-              <span class="param-type">Promise.&lt;(Object|undefined)></span>
-            </dd>
-          </dl>
-        </article>
-      </section>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
     </div>
 
-    <nav>
-      <h2><a href="index.html">Home</a></h2>
-      <h3>Classes</h3>
-      <ul>
-        <li><a href="Card_Card.html">Card</a></li>
-        <li><a href="Deck_Deck.html">Deck</a></li>
-      </ul>
-      <h3>Global</h3>
-      <ul>
-        <li><a href="global.html#addCard">addCard</a></li>
-        <li><a href="global.html#addDeck">addDeck</a></li>
-        <li><a href="global.html#deleteCard">deleteCard</a></li>
-        <li><a href="global.html#deleteDeck">deleteDeck</a></li>
-        <li><a href="global.html#getAllCards">getAllCards</a></li>
-        <li><a href="global.html#getAllDecks">getAllDecks</a></li>
-        <li><a href="global.html#getCardById">getCardById</a></li>
-        <li><a href="global.html#getDeckById">getDeckById</a></li>
-      </ul>
-    </nav>
+    
 
-    <br class="clear" />
+    
 
-    <footer>
-      Documentation generated by
-      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri May 30
-      2025 05:25:34 GMT+0000 (Coordinated Universal Time)
-    </footer>
+    
 
-    <script>
-      prettyPrint();
-    </script>
-    <script src="scripts/linenumber.js"></script>
-  </body>
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addCard"><span class="type-signature"></span>addCard<span class="signature">(card)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Add or update a card in IndexedDB.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>card</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>card object. If there's no <code>id</code>, one is generated.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line40">line 40</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>id of stored card</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addDeck"><span class="type-signature"></span>addDeck<span class="signature">(deck)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Add or update a deck in IndexedDB.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>deck</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A deck object (must contain <code>name</code>, <code>cardIds</code>)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The deck id</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addDeckstoDocument"><span class="type-signature"></span>addDeckstoDocument<span class="signature">(decks)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Takes in an array of decks and for each deck creates a
+new <deck-display> element, adds the deck data to that deck-view
+using element.data = {...}, and then appends that new deck
+to <deck></p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>decks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An array of decks</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line92">line 92</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteCard"><span class="type-signature"></span>deleteCard<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Delete a card.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line71">line 71</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteDeck"><span class="type-signature"></span>deleteDeck<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Delete a deck.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line126">line 126</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getAllCards"><span class="type-signature"></span>getAllCards<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch all cards.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>array of card objects</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getAllDecks"><span class="type-signature"></span>getAllDecks<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch all decks.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line106">line 106</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>array of deck objects</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getCardById"><span class="type-signature"></span>getCardById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;(Object|undefined)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch a single card by its id.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line61">line 61</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Object|undefined)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDeckById"><span class="type-signature"></span>getDeckById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Promise.&lt;(Object|undefined)>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Fetch a single deck by id.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="data_indexedDB.js.html">data/indexedDB.js</a>, <a href="data_indexedDB.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(Object|undefined)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getDecksFromStorage"><span class="type-signature">(async) </span>getDecksFromStorage<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Reads 'decks' from localStorage and returns an array of
+all of the decks found (parsed, not in string form). If
+nothing is found in localStorage for 'decks', an empty array
+is returned.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line79">line 79</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of decks found in index</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card_Card.html">Card</a></li><li><a href="Deck_Deck.html">Deck</a></li><li><a href="DeckDisplay.html">DeckDisplay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addCard">addCard</a></li><li><a href="global.html#addDeck">addDeck</a></li><li><a href="global.html#addDeckstoDocument">addDeckstoDocument</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteDeck">deleteDeck</a></li><li><a href="global.html#getAllCards">getAllCards</a></li><li><a href="global.html#getAllDecks">getAllDecks</a></li><li><a href="global.html#getCardById">getCardById</a></li><li><a href="global.html#getDeckById">getDeckById</a></li><li><a href="global.html#getDecksFromStorage">getDecksFromStorage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat May 31 2025 10:40:51 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
 </html>
