@@ -1,5 +1,5 @@
 /*  ---------------------------------------------------------------
-    Unit-test (or integration?) for getCardsFromDeck(deckId) in data/indexedDB.js.
+    Unit-test (or integration test?) for getCardsFromDeck(deckId) in data/indexedDB.js.
     - Uses fake-indexeddb so no real browser DB is required.
 ---------------------------------------------------------------- */
 
