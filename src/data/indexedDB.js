@@ -4,7 +4,7 @@
    Choosing to use the idb library to simplify IndexedDB calls
 ------------------------------------------------------------------- */
 
-import { openDB } from 'https://cdn.jsdelivr.net/npm/idb@8/+esm';
+import { openDB } from 'idb';
 
 // DB CONSTANTS -----------------------------------------------------
 const DB_NAME = 'card-vault-db';
