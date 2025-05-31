@@ -31,7 +31,7 @@ function renderCardGrid(cards) {
     // Edit button
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
-    editBtn.classList.add('card-btn');
+    editBtn.classList.add('card-btn', 'manage-hidden');
     editBtn.addEventListener('click', (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
       alert(`Edit ${card.name} (not implemented yet)`);
@@ -40,7 +40,7 @@ function renderCardGrid(cards) {
     // Delete button
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
-    deleteBtn.classList.add('card-btn');
+    deleteBtn.classList.add('card-btn', 'manage-hidden');
     deleteBtn.addEventListener('click', (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
       alert(`Delete ${card.name} (not implemented yet)`);
@@ -64,8 +64,7 @@ function eventListenerSetup() {
 
   const manage = document.getElementById('manage-toggle');
   manage.addEventListener('click', () => {
-    console.log('Implement toggling of create and delete');
-    console.log('Make it so delete pops up on each card');
+    document.body.classList.toggle('manage-visible');
   });
 
   const create = document.getElementById('create-card');
