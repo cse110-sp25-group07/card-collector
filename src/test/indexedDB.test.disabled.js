@@ -9,23 +9,39 @@ import { Card } from '../data/card.js';
 import { Deck } from '../data/deck.js';
 
 describe('indexedDB data layer – getCardsFromDeck', () => {
-  let deckIdA, deckIdB, deckIdC;   // Electric/Fire, Water, Grass
+  let deckIdA, deckIdB, deckIdC; // Electric/Fire, Water, Grass
 
   beforeAll(async () => {
-    //Create + store four cards 
-    const pikachu    = new Card({ name: 'Pikachu',    imageURL: 'pikachu.png',    type: 'Electric' });
-    const charmander = new Card({ name: 'Charmander', imageURL: 'charmander.png', type: 'Fire'     });
-    const squirtle   = new Card({ name: 'Squirtle',   imageURL: 'squirtle.png',   type: 'Water'    });
-    const bulbasaur  = new Card({ name: 'Bulbasaur',  imageURL: 'bulbasaur.png',  type: 'Grass'    });
+    //Create + store four cards
+    const pikachu = new Card({
+      name: 'Pikachu',
+      imageURL: 'pikachu.png',
+      type: 'Electric',
+    });
+    const charmander = new Card({
+      name: 'Charmander',
+      imageURL: 'charmander.png',
+      type: 'Fire',
+    });
+    const squirtle = new Card({
+      name: 'Squirtle',
+      imageURL: 'squirtle.png',
+      type: 'Water',
+    });
+    const bulbasaur = new Card({
+      name: 'Bulbasaur',
+      imageURL: 'bulbasaur.png',
+      type: 'Grass',
+    });
 
-    const pikachuId    = await addCard(pikachu.toJSON());
+    const pikachuId = await addCard(pikachu.toJSON());
     const charmanderId = await addCard(charmander.toJSON());
-    const squirtleId   = await addCard(squirtle.toJSON());
-    const bulbasaurId  = await addCard(bulbasaur.toJSON());
+    const squirtleId = await addCard(squirtle.toJSON());
+    const bulbasaurId = await addCard(bulbasaur.toJSON());
 
     // Deck A: cardIds pushed directly
     const deckA = new Deck({
-      name:    'Electric/Fire Deck',
+      name: 'Electric/Fire Deck',
       cardIds: [pikachuId, charmanderId],
     });
     deckIdA = await addDeck(deckA.toJSON());
@@ -34,16 +50,15 @@ describe('indexedDB data layer – getCardsFromDeck', () => {
     const deckB = new Deck({ name: 'Water Deck', cardIds: [squirtleId] });
     deckIdB = await addDeck(deckB.toJSON());
 
-    // Deck C: demonstrate Deck.addCard() 
-    const deckC = new Deck({ name: 'Grass Deck' });   // starts empty
-    deckC.addCard(bulbasaurId);                       // use model method (/data/deck.js)
-    deckIdC = await addDeck(deckC.toJSON());          // save updated deck
+    // Deck C: demonstrate Deck.addCard()
+    const deckC = new Deck({ name: 'Grass Deck' }); // starts empty
+    deckC.addCard(bulbasaurId); // use model method (/data/deck.js)
+    deckIdC = await addDeck(deckC.toJSON()); // save updated deck
   });
 
   test('returns only cards from Electric/Fire deck', async () => {
     const cards = await getCardsFromDeck(deckIdA);
-    expect(cards.map(c => c.name).sort())
-      .toEqual(['Charmander', 'Pikachu']);
+    expect(cards.map((c) => c.name).sort()).toEqual(['Charmander', 'Pikachu']);
   });
 
   test('returns only cards from Water deck', async () => {
@@ -59,7 +74,9 @@ describe('indexedDB data layer – getCardsFromDeck', () => {
   });
 
   test('returns empty array for deck with no cards', async () => {
-    const emptyDeckId = await addDeck(new Deck({ name: 'Empty Deck' }).toJSON());
+    const emptyDeckId = await addDeck(
+      new Deck({ name: 'Empty Deck' }).toJSON(),
+    );
     const cards = await getCardsFromDeck(emptyDeckId);
     expect(cards).toEqual([]);
   });

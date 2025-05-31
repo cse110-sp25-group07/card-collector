@@ -1,4 +1,4 @@
-import { getCardsFromDeck, getDeckById } from "../../data/indexedDB.js";
+import { getCardsFromDeck, getDeckById } from '../../data/indexedDB.js';
 
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
@@ -86,7 +86,7 @@ async function init() {
   const params = new URLSearchParams(window.location.search);
   const deckId = params.get('deckId');
   if (!deckId) {
-    console.error("No deckId found in URL.");
+    console.error('No deckId found in URL.');
     return;
   }
   updateTitleWithDeckName(deckId);
