@@ -1,4 +1,9 @@
-import { addCard, addDeck, getDeckById } from '../../data/indexedDB.js';
+import {
+  addCard,
+  addDeck,
+  getDeckById,
+  updateDeck,
+} from '../../data/indexedDB.js';
 import { Deck } from '../../data/deck.js';
 import { Card } from '../../data/card.js';
 
@@ -273,7 +278,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           cardIds: existingDeck.cardIds, // Preserve existing cards
         });
 
-        await addDeck(updatedDeck.toJSON());
+        await updateDeck(updatedDeck.toJSON());
         showNotification(`Deck "${name}" updated successfully!`);
       } else {
         // Create new deck
