@@ -1,4 +1,9 @@
-import { addCard, addDeck, getDeckById, updateDeck } from '../../data/indexedDB.js';
+import {
+  addCard,
+  addDeck,
+  getDeckById,
+  updateDeck,
+} from '../../data/indexedDB.js';
 import { Deck } from '../../data/deck.js';
 import { Card } from '../../data/card.js';
 
