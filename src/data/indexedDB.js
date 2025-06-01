@@ -100,6 +100,25 @@ export async function addDeck(deck) {
 }
 
 /**
+ * Update an existing deck in IndexedDB.
+ * @param {Object} deck - A deck object (must contain `id`, `name`, `cardIds`)
+ * @returns {Promise<string>} The deck id
+ * @throws {Error} If deck with given id doesn't exist
+ */
+export async function updateDeck(deck) {
+  const db = await dbPromise;
+  if (!deck.id) {
+    throw new Error('Cannot update deck: no id provided');
+  }
+  const existingDeck = await db.get(DECK_STORE, deck.id);
+  if (!existingDeck) {
+    throw new Error(`Cannot update deck: no deck found with id ${deck.id}`);
+  }
+  await db.put(DECK_STORE, deck);
+  return deck.id;
+}
+
+/**
  * Fetch all decks.
  * @returns {Promise<Object[]>} array of deck objects
  */
