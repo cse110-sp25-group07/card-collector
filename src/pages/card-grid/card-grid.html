@@ -8,19 +8,9 @@
   </head>
   <body>
     <h1>All Pokémon Cards</h1>
-    <div id="card-grid-root"></div>
 
-    <script type="module" src="./card-grid.js"></script>
-    <!-- Still need to do CSS for the all these classes -->
-    <div class="back-controls">
-      <button id="go-back" class="back-button">Back</button>
-    </div>
-    <div class="manage-controls">
-      <button id="manage-toggle">Manage</button>
-      <button id="create-card" class="manage-hidden">Create</button>
-    </div>
     <div class="sort-controls">
-      <input type="text" id="search-cards" placeholder="Search cards by name" />
+      <label for="sort-cards" class="sort-label">Sort By:</label>
       <select id="sort-cards">
         <option value="default">Default</option>
         <option value="names-alpha">Name A→Z</option>
@@ -29,6 +19,19 @@
         <option value="type">Type</option>
         <option value="hp">HP (Hit Points)</option>
       </select>
+    </div>
+
+    <input type="text" id="search-cards" placeholder="Search cards by name" />
+
+    <div id="card-grid-root"></div>
+
+    <script type="module" src="./card-grid.js"></script>
+    <div class="back-controls">
+      <button id="go-back" class="back-button" aria-label="Go Back"></button>
+    </div>
+    <div class="manage-controls">
+      <button id="manage-toggle">Manage</button>
+      <button id="create-card" class="manage-hidden">Create</button>
     </div>
   </body>
 </html>

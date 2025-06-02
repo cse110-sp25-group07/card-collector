@@ -186,10 +186,10 @@ function backSearchSortManageBtnsSetup(allCards) {
 
 //looks through all the cards in the deck and tries to find the one with a name matching searchTerm
 //updates display to have all cards found with a substring containing searchTerm
-function searchCards(allCards, searchTerm){
-  if(searchTerm == null || searchTerm.trim() === ''){
+function searchCards(allCards, searchTerm) {
+  if (searchTerm == null || searchTerm.trim() === '') {
     const root = document.getElementById('card-grid-root');
-    root.innerHTML = ''; 
+    root.innerHTML = '';
     root.appendChild(renderCardGrid(allCards));
     return;
   }
@@ -199,11 +199,11 @@ function searchCards(allCards, searchTerm){
   const term = searchTerm.toLowerCase();
   const filteredCards = [];
 
-  for(let i = 0; i < allCards.length; i++){
+  for (let i = 0; i < allCards.length; i++) {
     const card = allCards[i];
     const cardName = card.name.toLowerCase();
     //can change -1 to 0 to make it match the start of the card name instead
-    if(cardName.indexOf(term) > -1){
+    if (cardName.indexOf(term) > -1) {
       filteredCards.push(card);
       //console.log('Name ', cardName);
       //console.log('Id ', card.id);
@@ -214,10 +214,10 @@ function searchCards(allCards, searchTerm){
 }
 
 //sorts the cards by the given sortOption
-function sortCards(allCards, sortOption){
+function sortCards(allCards, sortOption) {
   const root = document.getElementById('card-grid-root');
   root.innerHTML = ''; // Clear current view
-  
+
   if (allCards == null || allCards.length <= 1) {
     root.appendChild(renderCardGrid(allCards));
     return;
@@ -225,7 +225,7 @@ function sortCards(allCards, sortOption){
 
   //makes a copy of all the Cards
   let sortedCards = [...allCards];
-  switch(sortOption){
+  switch (sortOption) {
     case 'names-alpha':
       sortedCards = sortAlpha(allCards);
       break;
@@ -239,7 +239,7 @@ function sortCards(allCards, sortOption){
     //when sorting by type we sort by alpha first then type
     case 'type':
       sortedCards = sortAlpha(allCards);
-      sortedCards.sort((firstCard, secondCard) =>{
+      sortedCards.sort((firstCard, secondCard) => {
         //use locale Compare so we can sort pokemon types that arent completely english chars
         //just sorts types alphabetically
         return firstCard.type.localeCompare(secondCard.type);
@@ -248,7 +248,7 @@ function sortCards(allCards, sortOption){
     //when sorting by hp we sort by alpha first then hp
     case 'hp':
       sortedCards = sortAlpha(allCards);
-      sortedCards.sort((firstCard, secondCard) =>{
+      sortedCards.sort((firstCard, secondCard) => {
         //only works if hp is an int not a string
         //sorts hp in increasing order
         return firstCard.hp - secondCard.hp;
@@ -264,9 +264,9 @@ function sortCards(allCards, sortOption){
 }
 
 //takes in allCards and returns an array of them sorted alphabetically
-function sortAlpha(allCards){
+function sortAlpha(allCards) {
   const sortedCards = [...allCards];
-  sortedCards.sort((firstCard, secondCard) =>{
+  sortedCards.sort((firstCard, secondCard) => {
     //use locale Compare so we can sort pokemon names that arent completely english chars
     return firstCard.name.localeCompare(secondCard.name);
   });
@@ -275,23 +275,22 @@ function sortAlpha(allCards){
 
 //returns an array of cards with their evolutions (in alphabetically order)
 //is a slow function if big O of n^2 so maybe there is a better way to do this
-function sortEvolutions(allCards){
+function sortEvolutions(allCards) {
   const sortedAlpha = sortAlpha(allCards);
   const seen = [];
   const sorted = [];
 
   //Loop through the alphabetically sorted list of cards
-  for(let i = 0; i < sortedAlpha.length; i++){
+  for (let i = 0; i < sortedAlpha.length; i++) {
     const card = sortedAlpha[i];
     //skip the card if we have seen it already
-    if(seen.includes(card))
-      continue;
+    if (seen.includes(card)) continue;
     let curr = card;
-    while(curr != null){
+    while (curr != null) {
       sorted.push(curr);
       seen.push(curr);
       //finds the nextCard that has the same name as the current cards evolution
-      const nextCard = sortedAlpha.find(c => c.name === curr.evolution)
+      const nextCard = sortedAlpha.find((c) => c.name === curr.evolution);
       curr = nextCard;
     }
   }
@@ -321,7 +320,7 @@ async function init() {
   const grid = renderCardGrid(cards);
   root.appendChild(grid);
   backSearchSortManageBtnsSetup(cards);
-/*
+  /*
   //This is just for the dummyCards testing
   //TODO Delete this once I implement some unit tests
   
