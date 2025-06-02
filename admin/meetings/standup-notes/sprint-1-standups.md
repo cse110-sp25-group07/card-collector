@@ -41,5 +41,5 @@
 **Members:**
 
 - Vishruth
-- Guthry: made basic UI design for the deck featuer
+- Guthry: made basic UI design for the deck feature
 - Max: worked on deck config, image upload, and card selection, included a feature to allow mass uploading of images
