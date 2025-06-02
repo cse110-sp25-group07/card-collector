@@ -17,16 +17,17 @@
     </div>
     <div class="manage-controls">
       <button id="manage-toggle">Manage</button>
-      <button id="create-card">Create</button>
-      <button id="delete-card">Delete</button>
+      <button id="create-card" class="manage-hidden">Create</button>
     </div>
     <div class="sort-controls">
-      <!-- TODO add the Search bar and functionality -->
+      <input type="text" id="search-cards" placeholder="Search cards by name" />
       <select id="sort-cards">
+        <option value="default">Default</option>
         <option value="names-alpha">Name A→Z</option>
         <option value="names-rev-alpha">Name Z→A</option>
         <option value="evolution">Evolution</option>
         <option value="type">Type</option>
+        <option value="hp">HP (Hit Points)</option>
       </select>
     </div>
   </body>
