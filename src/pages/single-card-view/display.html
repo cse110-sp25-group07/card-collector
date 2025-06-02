@@ -97,36 +97,64 @@
           height: 100px;
         }
       }
+
+      #card-information {
+        display: block;
+      }
+
+      #manage-card-information {
+        display: none;
+      }
+
+      #image-upload {
+        display: block;
+        margin: auto;
+      }
+
+      .card-name-input,
+      .card-types-input,
+      .card-rarity-input,
+      .card-generation-input {
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
+    <script type="module" src="./single-card.js"></script>
     <div class="card-container">
-      <button class="back-button" onclick="goBack()">←</button>
+      <button class="back-button">←</button>
       <h2 class="deck-name">&lt;Deck Name&gt;</h2>
-      <h3 class="card-name">&lt;Card Name&gt;</h3>
-      <div class="card-images">
-        <div class="card-image"></div>
-        <div class="card-image main-card-image"></div>
-        <div class="card-image"></div>
+
+      <div id="card-information">
+        <h3 class="card-name">&lt;Card Name&gt;</h3>
+        <div class="card-images">
+          <div class="card-image"></div>
+          <div class="card-image main-card-image"></div>
+          <div class="card-image"></div>
+        </div>
+        <div class="card-info">
+          <div>&lt;Type(s)&gt;</div>
+          <div>&lt;Rarity&gt;</div>
+          <div>&lt;Generation?&gt;</div>
+        </div>
       </div>
-      <div class="card-info">
-        <div>&lt;Type(s)&gt;</div>
-        <div>&lt;Rarity&gt;</div>
-        <div>&lt;Generation?&gt;</div>
-      </div>
-      <button class="manage-button" onclick="manageCard()">Manage</button>
+
+      <form id="manage-card-information">
+        <input type="text" class="card-name-input" required />
+        <div class="card-images">
+          <div class="card-image main-card-image"></div>
+        </div>
+        <input type="file" id="image-upload" accept="image/*" required />
+        <div class="card-info">
+          <input type="text" class="card-types-input" required />
+          <input type="text" class="card-rarity-input" required />
+          <input type="text" class="card-generation-input" required />
+        </div>
+      </form>
+
+      <button class="manage-button">Manage</button>
     </div>
-
-    <script>
-      function goBack() {
-        // Redirect or logic to return to Card View
-        alert('Going back to Card View...');
-      }
-
-      function manageCard() {
-        // Redirect or logic to edit/manage the card
-        alert('Manage card features not implemented yet.');
-      }
-    </script>
   </body>
 </html>
