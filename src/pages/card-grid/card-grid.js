@@ -1,32 +1,24 @@
-// import { getAllCards } from '../../data/indexedDB.js';
-// import { Card } from '../../data/card.js';
+import {
+  getCardsFromDeck,
+  getDeckById,
+  deleteCard,
+  addDeck,
+} from '../../data/indexedDB.js';
 
-// Dummy card data — replace with real getAllCards() later
-const dummyCards = [
-  {
-    id: '1',
-    name: 'Pikachu',
-    imageURL:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-  },
-  {
-    id: '2',
-    name: 'Charmander',
-    imageURL:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
-  },
-  {
-    id: '3',
-    name: 'Bulbasaur',
-    imageURL:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-  },
-];
+async function updateTitleWithDeckName(deckId) {
+  const deck = await getDeckById(deckId);
+  const heading = document.querySelector('h1');
+  if (deck && deck.name) {
+    heading.textContent = `${deck.name} Deck`;
+  }
+}
 
 // build and render the card grid
 function renderCardGrid(cards) {
   const container = document.createElement('div');
   container.classList.add('card-grid');
+  const params = new URLSearchParams(window.location.search);
+  const deckId = params.get('deckId');
 
   cards.forEach((card) => {
     const tile = document.createElement('div');
@@ -46,7 +38,7 @@ function renderCardGrid(cards) {
     // Edit button
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
-    editBtn.classList.add('card-btn');
+    editBtn.classList.add('card-btn', 'manage-hidden');
     editBtn.addEventListener('click', (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
       alert(`Edit ${card.name} (not implemented yet)`);
@@ -55,10 +47,32 @@ function renderCardGrid(cards) {
     // Delete button
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
-    deleteBtn.classList.add('card-btn');
-    deleteBtn.addEventListener('click', (e) => {
+    deleteBtn.classList.add('card-btn', 'manage-hidden');
+    deleteBtn.addEventListener('click', async (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
-      alert(`Delete ${card.name} (not implemented yet)`);
+      try {
+        // Delete the card from IndexedDB
+        await deleteCard(card.id);
+
+        // Remove card ID from the deck
+        const deck = await getDeckById(deckId);
+        if (!deck) throw new Error('Deck not found');
+
+        // Remove the card ID from the deck's cardIds
+        const updatedDeck = {
+          ...deck,
+          cardIds: deck.cardIds.filter((id) => id !== card.id),
+        };
+
+        // Save the updated deck
+        await addDeck(updatedDeck);
+
+        // Refresh the page to show changes
+        window.location.reload();
+      } catch (err) {
+        console.error('Failed to delete card:', err);
+        alert('Failed to delete card. See console for details.');
+      }
     });
 
     tile.appendChild(cardLink);
@@ -79,8 +93,7 @@ function eventListenerSetup() {
 
   const manage = document.getElementById('manage-toggle');
   manage.addEventListener('click', () => {
-    console.log('Implement toggling of create and delete');
-    console.log('Make it so delete pops up on each card');
+    document.body.classList.toggle('manage-visible');
   });
 
   const create = document.getElementById('create-card');
@@ -97,19 +110,25 @@ function eventListenerSetup() {
 // entry point
 async function init() {
   const root = document.getElementById('card-grid-root');
-  const grid = renderCardGrid(dummyCards);
-  root.appendChild(grid);
 
-  //to be implemented next sprint
-  // try {
-  //     const rawCards = await getAllCards();       // fetch from IndexedDB
-  //     const cards = rawCards.map(Card.fromJSON);  // turn plain objects into Card instances
-  //     const grid = renderCardGrid(cards);
-  //     root.appendChild(grid);
-  //   } catch (err) {
-  //     root.innerHTML = `<p style="color: red;">Error loading cards. Check the console.</p>`;
-  //     console.error('Failed to load cards:', err);
-  //   }
+  const params = new URLSearchParams(window.location.search);
+  const deckId = params.get('deckId');
+  if (!deckId) {
+    console.error('No deckId found in URL.');
+    return;
+  }
+  updateTitleWithDeckName(deckId);
+
+  const deck = await getDeckById(deckId);
+  if (!deck) {
+    console.error(`Deck with id ${deckId} not found.`);
+    return;
+  }
+
+  const cards = await getCardsFromDeck(deckId);
+
+  const grid = renderCardGrid(cards);
+  root.appendChild(grid);
 
   eventListenerSetup();
 }
