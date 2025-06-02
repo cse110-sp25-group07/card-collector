@@ -3,10 +3,111 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Card Collection</title>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: #f2fbfa;
+        margin: 0;
+        padding: 1rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 2rem;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: transform 0.2s;
+        cursor: pointer;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+      }
+
+      .card img {
+        width: 100%;
+        display: block;
+      }
+
+      .card-info {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .card-name {
+        color: #333;
+      }
+
+      .card-hp {
+        color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Pokémon Cards</h1>
+
+    <div class="card-grid">
+      <div class="card">
+        <img src="https://images.pokemontcg.io/base1/44.png" alt="Bulbasaur" />
+        <div class="card-info">
+          <span class="card-name">Bulbasaur</span>
+          <span class="card-hp">HP 70</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.pokemontcg.io/base1/69.png" alt="Weedle" />
+        <div class="card-info">
+          <span class="card-name">Weedle</span>
+          <span class="card-hp">HP 50</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.pokemontcg.io/base1/63.png" alt="Venonat" />
+        <div class="card-info">
+          <span class="card-name">Venonat</span>
+          <span class="card-hp">HP 60</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deck View</title>
     <link rel="stylesheet" href="./src/assets/css/global.css">
   </head>
   <body>
     <h1>View All Decks Test</h1>
   </body>
-</html>
+</html> -->
