@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JSDoc: Source: data/indexedDB.js</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="styles/prettify-tomorrow.css"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="page-title">Source: data/indexedDB.js</h1>
+
+      <section>
+        <article>
+          <pre
+            class="prettyprint source linenums"
+          ><code>/* /data/indexedDB.js  ----------------------------------------------
+   Reusable data layer for our Card Collector
+   Stores card objects in browser storage using IndexedDB
+   Choosing to use the idb library to simplify IndexedDB calls
+------------------------------------------------------------------- */
+
+import { openDB } from 'https://cdn.jsdelivr.net/npm/idb@8/+esm';
+
+// DB CONSTANTS -----------------------------------------------------
+const DB_NAME = 'card-vault-db';
+const DB_VERSION = 2;
+const CARD_STORE = 'cards';
+const DECK_STORE = 'decks';
+
+// Open or create the IndexedDB database.
+// If the database doesn't exist or the version number has increased,
+// `upgrade` function runs to create or update object stores.
+const dbPromise = openDB(DB_NAME, DB_VERSION, {
+  upgrade(db) {
+    if (!db.objectStoreNames.contains(CARD_STORE)) {
+      db.createObjectStore(CARD_STORE, { keyPath: 'id' });
+    }
+    if (!db.objectStoreNames.contains(DECK_STORE)) {
+      db.createObjectStore(DECK_STORE, { keyPath: 'id' });
+    }
+  },
+});
+
+// ID HELPER --------------------------------------------------------
+const genId = () =>
+  'c_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+// API FUNCTIONS ----------------------------------------------------
+
+/**
+ * Add or update a card in IndexedDB.
+ * @param {Object} card  - card object. If there's no `id`, one is generated.
+ * @returns {Promise&lt;string>} id of stored card
+ */
+export async function addCard(card) {
+  const db = await dbPromise;
+  if (!card.id) card.id = genId();
+  await db.put(CARD_STORE, card); // put is add or overwrite
+  return card.id;
+}
+
+/**
+ * Fetch all cards.
+ * @returns {Promise&lt;Object[]>} array of card objects
+ */
+export async function getAllCards() {
+  const db = await dbPromise;
+  return db.getAll(CARD_STORE);
+}
+
+/**
+ * Fetch a single card by its id.
+ * @param {string} id
+ * @returns {Promise&lt;Object|undefined>}
+ */
+export async function getCardById(id) {
+  const db = await dbPromise;
+  return db.get(CARD_STORE, id);
+}
+
+/**
+ * Delete a card.
+ * @param {string} id
+ * @returns {Promise&lt;void>}
+ */
+export async function deleteCard(id) {
+  const db = await dbPromise;
+  return db.delete(CARD_STORE, id);
+}
+
+// DECK HELPERS -----------------------------------------------------
+
+const genDeckId = () =>
+  'd_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+/**
+ * A deck object should look like:
+ * {
+ *   id: 'd_xyz123',
+ *   name: 'Best Electrics',
+ *   cardIds: ['c_1', 'c_2', 'c_3']  // references to card IDs
+ * }
+ */
+/**
+ * Add or update a deck in IndexedDB.
+ * @param {Object} deck - A deck object (must contain `name`, `cardIds`)
+ * @returns {Promise&lt;string>} The deck id
+ */
+
+export async function addDeck(deck) {
+  const db = await dbPromise;
+  if (!deck.id) deck.id = genDeckId();
+  await db.put(DECK_STORE, deck);
+  return deck.id;
+}
+
+/**
+ * Fetch all decks.
+ * @returns {Promise&lt;Object[]>} array of deck objects
+ */
+export async function getAllDecks() {
+  const db = await dbPromise;
+  return db.getAll(DECK_STORE);
+}
+
+/**
+ * Fetch a single deck by id.
+ * @param {string} id
+ * @returns {Promise&lt;Object|undefined>}
+ */
+export async function getDeckById(id) {
+  const db = await dbPromise;
+  return db.get(DECK_STORE, id);
+}
+
+/**
+ * Delete a deck.
+ * @param {string} id
+ * @returns {Promise&lt;void>}
+ */
+export async function deleteDeck(id) {
+  const db = await dbPromise;
+  return db.delete(DECK_STORE, id);
+}
+</code></pre>
+        </article>
+      </section>
+    </div>
+
+    <nav>
+      <h2><a href="index.html">Home</a></h2>
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="Card_Card.html">Card</a></li>
+        <li><a href="Deck_Deck.html">Deck</a></li>
+        <li><a href="DeckDisplay.html">DeckDisplay</a></li>
+      </ul>
+      <h3>Global</h3>
+      <ul>
+        <li><a href="global.html#addCard">addCard</a></li>
+        <li><a href="global.html#addDeck">addDeck</a></li>
+        <li><a href="global.html#addDeckstoDocument">addDeckstoDocument</a></li>
+        <li><a href="global.html#deleteCard">deleteCard</a></li>
+        <li><a href="global.html#deleteDeck">deleteDeck</a></li>
+        <li><a href="global.html#getAllCards">getAllCards</a></li>
+        <li><a href="global.html#getAllDecks">getAllDecks</a></li>
+        <li><a href="global.html#getCardById">getCardById</a></li>
+        <li><a href="global.html#getDeckById">getDeckById</a></li>
+        <li>
+          <a href="global.html#getDecksFromStorage">getDecksFromStorage</a>
+        </li>
+      </ul>
+    </nav>
+
+    <br class="clear" />
+
+    <footer>
+      Documentation generated by
+      <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Jun 01
+      2025 15:12:10 GMT-0700 (Pacific Daylight Time)
+    </footer>
+
+    <script>
+      prettyPrint();
+    </script>
+    <script src="scripts/linenumber.js"></script>
+  </body>
+</html>
