@@ -1,6 +1,6 @@
 ---
 name: Feature
-about: Custom issue template for planning features.
+about: Planning new features.
 title: "[FEATURE]"
 labels: feature
 assignees: ''
