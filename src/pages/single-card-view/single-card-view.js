@@ -1,3 +1,6 @@
+import { Card } from '../../data/card.js';
+import { addCard, getCardsFromDeck } from '../../data/indexedDB.js
+
 const cards = [
   {
     name: 'Pikachu',
@@ -56,9 +59,9 @@ function renderCards() {
     cardDiv.innerHTML = `
       <div class="card-image"></div>
       <div class="card-info">
-      <div>${card.type}</div>
-      <div>${card.rarity}</div>
-      <div>${card.generation}</div>
+        <div class="card-type">${card.name}</div>
+        <div class="card-hp">${card.type}</div>
+        <div class="card-evolution>${card.evolution}</div>
       </div>
     `;
 
@@ -156,6 +159,9 @@ document.addEventListener('keydown', function (event) {
   }
 });
 
+document.getElementsByClassName('prev-button')[0].addEventListener('click', prevCard);
+document.getElementsByClassName('next-button')[0].addEventListener('click', nextCard);
+
 // Touch/swipe support
 let startX = 0;
 let startY = 0;
@@ -184,6 +190,40 @@ carousel.addEventListener('touchend', function (e) {
     }
   }
 });
+
+const cardElements = [document.getElementsByClassName('card')];
+let editMode = false;
+
+manageButton.addEventListener('click', async () => {
+  if (editMode) {
+    try {
+      cards[currentIndex].name = mainCardName.textContent;
+      cards[currentIndex].type = cardElements[currentIndex].querySelector('card-type').textContent;
+      cards[currentIndex].hp = cardElements[currentIndex].querySelector('card-hp').textContent;
+      cards[currentIndex].evolution = cardElements[currentIndex].querySelector('card-evolution').textContent;
+
+      await addCard(selectedCard.toJSON());
+    } catch (error) {
+      console.error('Failed to save card! ->', error);
+      alert('Error saving the card, check console');
+    }
+  }
+
+  ToggleEditMode();
+});
+
+function ToggleEditMode() {
+  editMode = !editMode;
+
+  manageButton.innerHTML = editMode ? 'Confirm' : 'Manage';
+  cardInformation.style.display = editMode ? 'none' : 'block';
+  manageCardInformation.style.display = editMode ? 'block' : 'none';
+
+  mainCardName.textContent = cards[currentIndex].name;
+  cardElements[currentIndex].querySelector('card-type').textContent = cards[currentIndex].type;
+  cardElements[currentIndex].querySelector('card-hp').textContent = cards[currentIndex].hp;
+  cardElements[currentIndex].querySelector('card-evolution').textContent = cards[currentIndex].evolution;
+}
 
 // Initialize
 renderCards();
