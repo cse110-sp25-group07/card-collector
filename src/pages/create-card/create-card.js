@@ -1,16 +1,30 @@
 import { Card } from '../../data/card.js';
-import { addCard } from '../../data/indexedDB.js';
+import { addCard, getDeckById, updateDeck } from '../../data/indexedDB.js';
 
 const form = document.getElementById('card-form');
 const imageUpload = document.getElementById('image-upload');
 const imagePreview = document.getElementById('image-preview');
 let imageURL = '';
 
+//Grab deckId from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const deckId = urlParams.get('deckId');
+
+//Helper function for base64 image encoding
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file); // this gives base64 encoded string
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
+
 //When an image is uploaded... change the image preview to that image
-imageUpload.addEventListener('change', (e) => {
+imageUpload.addEventListener('change', async (e) => {
   const file = e.target.files[0];
   if (file) {
-    imageURL = URL.createObjectURL(file); //generates temp URL
+    imageURL = await toBase64(file);
     imagePreview.src = imageURL;
     imagePreview.style.display = 'block';
   }
@@ -29,7 +43,16 @@ form.addEventListener('submit', async (e) => {
   const card = new Card({ name, imageURL, type, hp, evolution });
 
   try {
-    await addCard(card.toJSON());
+    const id = await addCard(card.toJSON()); //Adding card to general store
+
+    if (deckId) {
+      const deck = await getDeckById(deckId);
+      if (deck) {
+        deck.cardIds.push(id);
+        await updateDeck(deck);
+      }
+    }
+
     alert('Card just saved succesfully.');
     form.reset();
     imagePreview.style.display = 'none';
