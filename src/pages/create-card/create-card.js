@@ -4,6 +4,7 @@ import { addCard, getDeckById, updateDeck } from '../../data/indexedDB.js';
 const form = document.getElementById('card-form');
 const imageUpload = document.getElementById('image-upload');
 const imagePreview = document.getElementById('image-preview');
+const backButton = document.getElementById('back-button');
 let imageURL = '';
 
 //Grab deckId from the URL
@@ -28,6 +29,10 @@ imageUpload.addEventListener('change', async (e) => {
     imagePreview.src = imageURL;
     imagePreview.style.display = 'block';
   }
+});
+
+backButton.addEventListener('click', () =>  {
+  window.location.href = `../card-grid/card-grid.html?deckId=${deckId}`;
 });
 
 // When the form is submitted, create a new card and store it in IndexedDB
