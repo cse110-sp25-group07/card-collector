@@ -25,6 +25,7 @@ Ashton, Tanner, Jonathan, Guthry, Max, Karim, Graydon, and Luis
 
 - Tanner: The card grid now loads and displays only the cards associated with the selected deck. Additionally, I implemented delete functionality for individual cards.
 - Graydon: Implemented the functionality for searching and sorting in a deck-view
+- Preity: Implemented the create-card workflow to make it deck-aware. The form pulls the deckId from the URL and, when submitted, creates a new card, saves it to the global card store, and updates the deck with the new card ID. I also added a "Back to Deck View" button.
 
 ### _Vish, Guthry, Max_
 
