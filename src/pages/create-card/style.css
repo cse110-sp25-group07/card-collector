@@ -43,3 +43,24 @@ img#image-preview {
   height: auto;
   display: block;
 }
+
+
+.feedback-message {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  border-radius: 5px;
+  display: none;
+}
+
+.feedback-success {
+  color: green;
+  background-color: #e6ffe6;
+  border: 1px solid green;
+}
+
+.feedback-error {
+  color: red;
+  background-color: #ffe6e6;
+  border: 1px solid red;
+}

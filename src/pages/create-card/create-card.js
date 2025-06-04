@@ -21,6 +21,19 @@ function toBase64(file) {
   });
 }
 
+//Function for user feedback
+function showFeedbackMessage(message, isError = false) {
+  const messageEl = document.getElementById('feedback-message');
+  messageEl.textContent = message;
+  messageEl.className = 'feedback-message'; 
+  messageEl.classList.add(isError ? 'feedback-error' : 'feedback-success');
+  messageEl.style.display = 'block';
+
+  setTimeout(() => {
+    messageEl.style.display = 'none';
+  }, 5000);
+}
+
 //When an image is uploaded... change the image preview to that image
 imageUpload.addEventListener('change', async (e) => {
   const file = e.target.files[0];
@@ -38,6 +51,17 @@ backButton.addEventListener('click', () =>  {
 // When the form is submitted, create a new card and store it in IndexedDB
 form.addEventListener('submit', async (e) => {
   e.preventDefault(); // prevents losing info from page reload
+
+  if (!deckId) {
+    showFeedbackMessage('You currently have no deck selected, access your decks from the deck view.', true);
+    return;
+  }
+
+  const deck = await getDeckById(deckId);
+  if (!deck) {
+    showFeedbackMessage('Deck not found. Please use valid deck link.', true);
+    return;
+  }
 
   const name = document.getElementById('card-name').value;
   const type = document.getElementById('card-type').value;
@@ -58,12 +82,13 @@ form.addEventListener('submit', async (e) => {
       }
     }
 
-    alert('Card just saved succesfully.');
+    console.log('Card saved successfully');
+    showFeedbackMessage('Card saved successfully!');
     form.reset();
     imagePreview.style.display = 'none';
     imageURL = '';
   } catch (error) {
     console.error('Failed to save card!! ->', error);
-    alert('Error saving the card, check console');
+    showFeedbackMessage('Failed to save card, check console.', true);
   }
 });

@@ -148,11 +148,13 @@ function renderCardGrid(cards) {
 }
 
 //sets up the search, filter and manage buttons
-function backSearchSortManageBtnsSetup(allCards) {
+function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
   back.addEventListener('click', () => {
     window.location.href = '../deck-grid/deckviewui.html';
   });
+
+  if (!allCards.length) return;
 
   //Manage Button
   const manage = document.getElementById('manage-toggle');
@@ -331,3 +333,5 @@ async function init() {
 }
 
 init();
+
+backSearchSortManageBtnsSetup();
