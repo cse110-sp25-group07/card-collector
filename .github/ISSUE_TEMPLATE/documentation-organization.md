@@ -1,6 +1,6 @@
 ---
 name: Documentation/Organization
-about: Custom issue template for tasks not directly related to code.
+about: Tasks outside the codebase.
 title: "[DOCUMENTATION]"
 labels: documentation
 assignees: ''

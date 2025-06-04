@@ -11,21 +11,34 @@
 
       body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #fefaf3;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial,
+          sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
+        padding: 20px;
       }
 
       .card-container {
-        width: 90%;
-        max-width: 600px;
-        background-color: #fffaf0;
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 16px;
+        width: 100%;
+        max-width: 480px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
         position: relative;
       }
 
@@ -34,127 +47,496 @@
         border: none;
         font-size: 24px;
         cursor: pointer;
+        padding: 8px;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        color: #333;
+      }
+
+      .back-button:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: translateX(-2px);
+      }
+
+      .deck-name {
         position: absolute;
-        top: 16px;
-        left: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: 600;
+        font-size: 18px;
+        color: #333;
+        margin: 0;
       }
 
-      .deck-name,
-      .card-name {
+      .main-card-name {
         text-align: center;
-        margin: 8px 0;
+        font-weight: 700;
+        margin: 16px 0 24px 0;
+        font-size: 24px;
+        color: #2c3e50;
       }
 
-      .card-images {
+      .carousel-wrapper {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        margin: 20px 0;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+
+      .carousel {
         display: flex;
-        justify-content: center;
+        height: 100%;
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+      }
+
+      .card {
+        min-width: 100%;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 16px;
-        margin: 16px 0;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
       }
 
       .card-image {
-        width: 100px;
-        height: 150px;
-        border: 3px solid black;
-        border-radius: 12px;
-        background-color: #eee;
+        width: 180px;
+        height: 260px;
+        border: 3px solid #34495e;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
       }
 
-      .main-card-image {
-        width: 160px;
-        height: 240px;
+      .card-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .card:hover .card-image::before {
+        transform: translateX(100%);
       }
 
       .card-info {
         text-align: center;
-        margin-top: 16px;
-        line-height: 1.5;
+        line-height: 1.6;
+        font-size: 16px;
+        color: #34495e;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 16px 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .card-info div {
+        margin: 4px 0;
+      }
+
+      .card-info div:first-child {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 18px;
+      }
+
+      .navigation {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .navigation:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .prev-button {
+        left: -60px;
+      }
+
+      .next-button {
+        right: -60px;
       }
 
       .manage-button {
         display: block;
-        margin: 24px auto 0 auto;
-        padding: 8px 16px;
+        margin: 32px auto 0 auto;
+        padding: 14px 28px;
         font-size: 16px;
-        border-radius: 8px;
-        border: 1px solid #333;
-        background-color: #fff;
+        font-weight: 600;
+        border-radius: 12px;
+        border: 2px solid #3498db;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      }
+
+      .manage-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        background: linear-gradient(135deg, #2980b9, #3498db);
+      }
+
+      .manage-button:active {
+        transform: translateY(0);
+      }
+
+      .card-indicator {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba(52, 152, 219, 0.3);
+        transition: all 0.3s ease;
         cursor: pointer;
       }
 
-      @media (max-width: 600px) {
-        .card-images {
-          flex-direction: row;
-          gap: 8px;
+      .indicator-dot.active {
+        background-color: #3498db;
+        transform: scale(1.2);
+      }
+
+      @media (max-width: 768px) {
+        .card-container {
+          margin: 10px;
+          padding: 20px;
         }
-        .main-card-image {
-          width: 120px;
-          height: 180px;
-        }
+
         .card-image {
-          width: 70px;
-          height: 100px;
+          width: 140px;
+          height: 200px;
+        }
+
+        .carousel-wrapper {
+          height: 350px;
+        }
+
+        .prev-button {
+          left: -50px;
+        }
+
+        .next-button {
+          right: -50px;
+        }
+
+        .navigation {
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
         }
       }
 
-      #card-information {
-        display: block;
+      @media (max-width: 480px) {
+        .prev-button {
+          left: 10px;
+        }
+
+        .next-button {
+          right: 10px;
+        }
+
+        .navigation {
+          background: rgba(255, 255, 255, 0.95);
+        }
       }
 
-      #manage-card-information {
-        display: none;
+      /* Animation classes */
+      .card-entering {
+        opacity: 0;
+        transform: translateX(50px);
       }
 
-      #image-upload {
-        display: block;
-        margin: auto;
+      .card-entering-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
       }
 
-      .card-name-input,
-      .card-types-input,
-      .card-rarity-input,
-      .card-generation-input {
-        display: block;
-        margin: auto;
-        text-align: center;
+      .card-exiting {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .card-exiting-active {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
       }
     </style>
   </head>
   <body>
-    <script type="module" src="./single-card.js"></script>
     <div class="card-container">
-      <button class="back-button">←</button>
-      <h2 class="deck-name">&lt;Deck Name&gt;</h2>
-
-      <div id="card-information">
-        <h3 class="card-name">&lt;Card Name&gt;</h3>
-        <div class="card-images">
-          <div class="card-image"></div>
-          <div class="card-image main-card-image"></div>
-          <div class="card-image"></div>
-        </div>
-        <div class="card-info">
-          <div>&lt;Type(s)&gt;</div>
-          <div>&lt;Rarity&gt;</div>
-          <div>&lt;Generation?&gt;</div>
-        </div>
+      <div class="header">
+        <button class="back-button" onclick="goBack()" title="Go back">
+          ←
+        </button>
+        <h2 class="deck-name" id="deckName">Deck: Pikachu's Team</h2>
       </div>
 
-      <form id="manage-card-information">
-        <input type="text" class="card-name-input" required />
-        <div class="card-images">
-          <div class="card-image main-card-image"></div>
-        </div>
-        <input type="file" id="image-upload" accept="image/*" required />
-        <div class="card-info">
-          <input type="text" class="card-types-input" required />
-          <input type="text" class="card-rarity-input" required />
-          <input type="text" class="card-generation-input" required />
-        </div>
-      </form>
+      <h3 class="main-card-name" id="mainCardName"></h3>
 
-      <button class="manage-button">Manage</button>
+      <div class="carousel-wrapper">
+        <button
+          class="navigation prev-button"
+          onclick="prevCard()"
+          title="Previous card"
+        >
+          ‹
+        </button>
+        <button
+          class="navigation next-button"
+          onclick="nextCard()"
+          title="Next card"
+        >
+          ›
+        </button>
+
+        <div class="carousel" id="carousel"></div>
+      </div>
+
+      <div class="card-indicator" id="cardIndicator"></div>
+
+      <button class="manage-button" onclick="manageCard()">Manage Card</button>
     </div>
+
+    <script>
+      const cards = [
+        {
+          name: 'Pikachu',
+          type: 'Electric',
+          rarity: 'Rare',
+          generation: 'Gen 1',
+        },
+        {
+          name: 'Eevee',
+          type: 'Normal',
+          rarity: 'Common',
+          generation: 'Gen 1',
+        },
+        {
+          name: 'Charmander',
+          type: 'Fire',
+          rarity: 'Rare',
+          generation: 'Gen 1',
+        },
+        {
+          name: 'Bulbasaur',
+          type: 'Grass',
+          rarity: 'Uncommon',
+          generation: 'Gen 1',
+        },
+        {
+          name: 'Squirtle',
+          type: 'Water',
+          rarity: 'Rare',
+          generation: 'Gen 1',
+        },
+      ];
+
+      let currentIndex = 0;
+      let isAnimating = false;
+      const carousel = document.getElementById('carousel');
+      const mainCardName = document.getElementById('mainCardName');
+      const cardIndicator = document.getElementById('cardIndicator');
+
+      function renderCards() {
+        carousel.innerHTML = '';
+        cardIndicator.innerHTML = '';
+
+        // Create all cards
+        cards.forEach((card, index) => {
+          const cardDiv = document.createElement('div');
+          cardDiv.className = 'card';
+
+          cardDiv.innerHTML = `
+          <div class="card-image"></div>
+          <div class="card-info">
+            <div>${card.type}</div>
+            <div>${card.rarity}</div>
+            <div>${card.generation}</div>
+          </div>
+        `;
+
+          carousel.appendChild(cardDiv);
+
+          // Create indicator dots
+          const dot = document.createElement('div');
+          dot.className = `indicator-dot ${index === currentIndex ? 'active' : ''}`;
+          dot.onclick = () => goToCard(index);
+          cardIndicator.appendChild(dot);
+        });
+
+        // Update main card name
+        mainCardName.textContent = cards[currentIndex].name;
+
+        // Position carousel
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update indicators
+        updateIndicators();
+      }
+
+      function updateIndicators() {
+        const dots = cardIndicator.querySelectorAll('.indicator-dot');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+      }
+
+      function prevCard() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        animateToCard();
+      }
+
+      function nextCard() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        currentIndex = (currentIndex + 1) % cards.length;
+        animateToCard();
+      }
+
+      function goToCard(index) {
+        if (isAnimating || index === currentIndex) return;
+        isAnimating = true;
+
+        currentIndex = index;
+        animateToCard();
+      }
+
+      function animateToCard() {
+        // Update main card name immediately for responsiveness
+        mainCardName.textContent = cards[currentIndex].name;
+
+        // Animate carousel
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update indicators
+        updateIndicators();
+
+        // Reset animation flag
+        setTimeout(() => {
+          isAnimating = false;
+        }, 400);
+      }
+
+      function goBack() {
+        // Add a subtle animation before the alert
+        const container = document.querySelector('.card-container');
+        container.style.transform = 'scale(0.98)';
+        container.style.opacity = '0.8';
+
+        setTimeout(() => {
+          container.style.transform = 'scale(1)';
+          container.style.opacity = '1';
+          alert('Going back to Card View...');
+        }, 150);
+      }
+
+      function manageCard() {
+        const currentCard = cards[currentIndex];
+        alert(
+          `Managing ${currentCard.name}...\n\nCard Details:\n• Type: ${currentCard.type}\n• Rarity: ${currentCard.rarity}\n• Generation: ${currentCard.generation}`,
+        );
+      }
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function (event) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            prevCard();
+            break;
+          case 'ArrowRight':
+            nextCard();
+            break;
+          case 'Escape':
+            goBack();
+            break;
+        }
+      });
+
+      // Touch/swipe support
+      let startX = 0;
+      let startY = 0;
+      let distX = 0;
+      let distY = 0;
+
+      carousel.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      });
+
+      carousel.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+      });
+
+      carousel.addEventListener('touchend', function (e) {
+        distX = e.changedTouches[0].clientX - startX;
+        distY = e.changedTouches[0].clientY - startY;
+
+        // Check if horizontal swipe is dominant
+        if (Math.abs(distX) > Math.abs(distY) && Math.abs(distX) > 50) {
+          if (distX > 0) {
+            prevCard();
+          } else {
+            nextCard();
+          }
+        }
+      });
+
+      // Initialize
+      renderCards();
+    </script>
   </body>
 </html>

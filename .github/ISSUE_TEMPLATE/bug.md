@@ -1,6 +1,6 @@
 ---
 name: Bug
-about: An implemented feature requires changes.
+about: Fixing broken features.
 title: "[BUG] "
 labels: bug
 assignees: ''

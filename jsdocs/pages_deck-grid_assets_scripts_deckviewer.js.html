@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/deck-grid/assets/scripts/deckviewer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/deck-grid/assets/scripts/deckviewer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Card } from '../../../../data/card.js';
+import { Deck } from '../../../../data/deck.js';
+import { DeckDisplay } from '../../../../data/deckdisplay.js';
+import { getAllDecks, addDeck, addCard } from '../../../../data/indexedDB.js';
+
+customElements.define('deck-display', DeckDisplay);
+
+// Run the init() function when the page has loaded
+window.addEventListener('DOMContentLoaded', init);
+
+// Starts the program, all function calls trace back here
+function init() {
+  //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
+  const storageExampleDeck = new Deck({
+    id: 4,
+    imageUrl: '',
+    name: 'servkjqhferk fhwerkjvhwdkjh',
+    cardIds: [],
+  });
+  const storageExampleDeck2 = new Deck({
+    id: 5,
+    imageUrl: '',
+    name: 'n',
+    cardIds: [],
+  });
+
+  const cardImgExample = new Card({
+    id: 1,
+    name: 'gyatt',
+    imageURL: '../create-deck/assets/images/card-back-evil.jpg',
+    type: 'water',
+    hp: 5,
+    evolution: 'vaporeon idk man',
+  });
+  const cardImgExample2 = new Card({
+    id: 2,
+    name: 'gyatt',
+    imageURL: '../create-deck/assets/images/card-back-evil.jpg',
+    type: 'water',
+    hp: 5,
+    evolution: 'vaporeon idk man',
+  });
+  addCard(cardImgExample);
+  addCard(cardImgExample2);
+  storageExampleDeck.addCard(cardImgExample.id);
+  storageExampleDeck.addCard(cardImgExample2.id);
+
+  addDeck(storageExampleDeck);
+  addDeck(storageExampleDeck2);
+  //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: MANUALLY DELETE INDEXDB STORAGE IN DEV TOOLS TO RESET /////////////////////////////////////////////////////////////
+
+  customElements.whenDefined('deck-display').then(async () => {
+    // Get the decks from localStorage
+    let decks = await getDecksFromStorage();
+    //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
+    const exampleDeck = { id: 1, name: 'exampleDeck', cards: [] };
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    decks.push(exampleDeck);
+    //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
+    addDeckstoDocument(decks);
+  });
+}
+
+/**
+ * Reads 'decks' from localStorage and returns an array of
+ * all of the decks found (parsed, not in string form). If
+ * nothing is found in localStorage for 'decks', an empty array
+ * is returned.
+ * @returns {Promise&lt;Object[]>} An array of decks found in index
+ */
+async function getDecksFromStorage() {
+  let decks = await getAllDecks();
+  console.log(decks.length);
+  return decks;
+}
+
+/**
+ * Takes in an array of decks and for each deck creates a
+ * new &lt;deck-display> element, adds the deck data to that deck-view
+ * using element.data = {...}, and then appends that new deck
+ * to &lt;deck>
+ * @param {Array&lt;Object>} decks An array of decks
+ */
+function addDeckstoDocument(decks) {
+  const deckviewer = document.querySelector('#deck-viewer');
+  deckviewer.innerHTML = '';
+  //  					Loop through each of the decks in the passed in array,
+  //            create a &lt;deck-display> element for each one, and populate
+  //            each &lt;deck-display> with that deck data using element.data = ...
+  //            Append each element to the deck-viewer div
+  for (let i = 0; i &lt; decks.length; i++) {
+    let deck = document.createElement('deck-display');
+    deck.data = decks[i];
+    deckviewer.append(deck);
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card_Card.html">Card</a></li><li><a href="Deck_Deck.html">Deck</a></li><li><a href="DeckDisplay.html">DeckDisplay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addCard">addCard</a></li><li><a href="global.html#addDeck">addDeck</a></li><li><a href="global.html#addDeckstoDocument">addDeckstoDocument</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteDeck">deleteDeck</a></li><li><a href="global.html#getAllDecks">getAllDecks</a></li><li><a href="global.html#getCardById">getCardById</a></li><li><a href="global.html#getCardsFromDeck">getCardsFromDeck</a></li><li><a href="global.html#getDeckById">getDeckById</a></li><li><a href="global.html#getDecksFromStorage">getDecksFromStorage</a></li><li><a href="global.html#updateDeck">updateDeck</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Jun 02 2025 20:53:26 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
