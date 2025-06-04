@@ -25,7 +25,7 @@ function toBase64(file) {
 function showFeedbackMessage(message, isError = false) {
   const messageEl = document.getElementById('feedback-message');
   messageEl.textContent = message;
-  messageEl.className = 'feedback-message'; 
+  messageEl.className = 'feedback-message';
   messageEl.classList.add(isError ? 'feedback-error' : 'feedback-success');
   messageEl.style.display = 'block';
 
@@ -44,7 +44,7 @@ imageUpload.addEventListener('change', async (e) => {
   }
 });
 
-backButton.addEventListener('click', () =>  {
+backButton.addEventListener('click', () => {
   window.location.href = `../card-grid/card-grid.html?deckId=${deckId}`;
 });
 
@@ -53,7 +53,10 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault(); // prevents losing info from page reload
 
   if (!deckId) {
-    showFeedbackMessage('You currently have no deck selected, access your decks from the deck view.', true);
+    showFeedbackMessage(
+      'You currently have no deck selected, access your decks from the deck view.',
+      true,
+    );
     return;
   }
 
