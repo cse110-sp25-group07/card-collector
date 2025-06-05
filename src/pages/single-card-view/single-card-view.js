@@ -13,6 +13,7 @@ async function renderCards() {
   // Create all cards
   deck.cardIds.forEach(async (cardID, index) => {
     let card = await getCardById(cardID);
+    if (cardID === currentCard.id) goToCard(index);
 
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
@@ -71,15 +72,16 @@ function nextCard() {
   animateToCard();
 }
 
-function goToCard(index) {
+async function goToCard(index) {
   currentIndex = index;
-  animateToCard();
+  currentCardId = deck.cardIds[currentIndex];
+  await animateToCard();
 }
 
 async function animateToCard() {
   if (editMode) return;
-
-  currentCard = await getCardById(deck.cardIds[currentIndex]);
+  currentCardId = deck.cardIds[currentIndex];
+  currentCard = await getCardById(currentCardId);
 
   // Update main card name immediately for responsiveness
   mainCardName.textContent = currentCard.name;
@@ -210,18 +212,12 @@ function ToggleEditMode() {
   )[0].textContent = currentCard.evolution;
 }
 
-// TODO: Once deck is given in URL, load in correctly similar to below
-// const params = new URLSearchParams(window.location.search);
-// const deckId = params.get('deckId');
-// const cardId = params.get('cardId');
-// if (!deckId) console.error('No deckId found in URL.');
-// let deck = getDeckById(deckId);
-// if (!cardId) console.error('No cardId found in URL.');
-// let currentCard = getCardById(cardId);
+const params = new URLSearchParams(window.location.search);
+const deckId = params.get('deckId');
+const cardId = params.get('cardId');
+let deck, currentCard, currentCardId;
 
-// Using fixed dummy data stored in IndexedDB
-let deck = await getDeckById('eeveelutions');
-let currentCardID = deck.cardIds[0];
-let currentCard = await getCardById(currentCardID);
-
-renderCards();
+deck = await getDeckById(deckId);
+currentCard = await getCardById(cardId);
+currentCardId = currentCard.id;
+await renderCards();
