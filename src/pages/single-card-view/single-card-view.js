@@ -19,8 +19,7 @@ async function renderCards() {
   cardIndicator.innerHTML = '';
 
   // Create all cards
-  let currentDeck = await getDeckById(currentDeckID);
-  currentDeck.cardIDs.forEach(async (cardID, index) => {
+  deck.cardIds.forEach(async (cardID, index) => {
     let card = await getCardById(cardID);
 
     const cardDiv = document.createElement('div');
@@ -34,9 +33,9 @@ async function renderCards() {
         <div class="card-hp">${card.hp}</div>
       </div>
       <form class="card-info-edit" style="display: none">
-        <input class="card-type" value="${card.type}"></input>
-        <input class="card-evolution" value="${card.evolution}"></input>
-        <input class="card-hp" value="${card.hp}"></input>
+        <input class="card-type-input" value="${card.type}"></input>
+        <input class="card-evolution-input" value="${card.evolution}"></input>
+        <input class="card-hp-input" value="${card.hp}"></input>
       </div>
     `;
 
@@ -51,7 +50,7 @@ async function renderCards() {
   });
 
   // Update main card name
-  mainCardName.textContent = debugCards[currentIndex].name;
+  mainCardName.textContent = currentCard.name;
 
   // Position carousel
   carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -67,19 +66,23 @@ function updateIndicators() {
   });
 }
 
-function prevCard() {
-  if (isAnimating) return;
+async function prevCard() {
+  if (editMode) return;
+  // if (isAnimating) return;
   isAnimating = true;
 
-  currentIndex = (currentIndex - 1 + debugCards.length) % debugCards.length;
+  currentIndex = (currentIndex - 1 + deck.cardIds.length) % deck.cardIds.length;
+  currentCard = await getCardById(deck.cardIds[currentIndex]);
   animateToCard();
 }
 
-function nextCard() {
-  if (isAnimating) return;
+async function nextCard() {
+  if (editMode) return;
+  // if (isAnimating) return;
   isAnimating = true;
 
-  currentIndex = (currentIndex + 1) % debugCards.length;
+  currentIndex = (currentIndex + 1) % deck.cardIds.length;
+  currentCard = await getCardById(deck.cardIds[currentIndex]);
   animateToCard();
 }
 
@@ -93,7 +96,7 @@ function goToCard(index) {
 
 function animateToCard() {
   // Update main card name immediately for responsiveness
-  mainCardName.textContent = debugCards[currentIndex].name;
+  mainCardName.textContent = currentCard.name;
 
   // Animate carousel
   carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -174,12 +177,10 @@ const manageButton = document.getElementsByClassName('manage-button')[0];
 manageButton.addEventListener('click', async () => {
   if (editMode) {
     try {
-      let currentCard = await getCardById(currentCardID);
-
-      currentCard.name = cardElements[currentIndex].getElementsByClassName('card-name-input').textContent;
-      currentCard.type = cardElements[currentIndex].getElementsByClassName('card-type-input').textContent;
-      currentCard.hp = cardElements[currentIndex].getElementsByClassName('card-hp-input').textContent;
-      currentCard.evolution = cardElements[currentIndex].getElementsByClassName('card-evolution-input').textContent;
+      // currentCard.name = cardElements[currentIndex].getElementsByClassName('card-name-input').value;
+      currentCard.type = cardElements[currentIndex].getElementsByClassName('card-type-input')[0].value;
+      currentCard.hp = cardElements[currentIndex].getElementsByClassName('card-hp-input')[0].value;
+      currentCard.evolution = cardElements[currentIndex].getElementsByClassName('card-evolution-input')[0].value;
 
       await addCard(currentCard);
     } catch (error) {
@@ -200,144 +201,15 @@ function ToggleEditMode() {
   cardInfoElement.style.display = editMode ? 'none' : 'block';
   cardInfoEditElement.style.display = editMode ? 'block' : 'none';
 
-  mainCardName.textContent = debugCards[currentIndex].name;
-  cardElements[currentIndex].getElementsByClassName('card-type')[0].textContent = debugCards[currentIndex].type;
-  cardElements[currentIndex].getElementsByClassName('card-hp')[0].textContent = debugCards[currentIndex].hp;
-  cardElements[currentIndex].getElementsByClassName('card-evolution')[0].textContent = debugCards[currentIndex].evolution;
+  mainCardName.textContent = currentCard.name;
+
+  cardElements[currentIndex].getElementsByClassName('card-type')[0].textContent = currentCard.type;
+  cardElements[currentIndex].getElementsByClassName('card-hp')[0].textContent = currentCard.hp;
+  cardElements[currentIndex].getElementsByClassName('card-evolution')[0].textContent = currentCard.evolution;
 }
 
-// TODO: Remove debug deck when Deck ID is fixed
-const debugCards = [
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH45/SWSH45_EN_52.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Vaporeon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH4/SWSH4_EN_30.png',
-    type: 'Water',
-    hp: '110',
-    evolution: 'Stage 1',
-  },
+let deck = await getDeckById('eeveelutions');
+let currentCardID = deck.cardIds[0];
+let currentCard = await getCardById(currentCardID);
 
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH118.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Jolteon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_135.png',
-    type: 'Electric',
-    hp: '110',
-    evolution: 'Stage 1',
-  },
-
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH042.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Flareon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_136.png',
-    type: 'Fire',
-    hp: '130',
-    evolution: 'Stage 1',
-  },
-
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SVP/SVP_EN_43.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Espeon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH174.png',
-    type: 'Psychic',
-    hp: '110',
-    evolution: 'Stage 1',
-  },
-
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SMP/SMP_EN_SM184.png',
-    type: 'Normal',
-    hp: '50',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Umbreon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV03/SV03_EN_130.png',
-    type: 'Dark',
-    hp: '110',
-    evolution: 'Stage 1',
-  },
-
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH175.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Leafeon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV06/SV06_EN_11.png',
-    type: 'Grass',
-    hp: '120',
-    evolution: 'Stage 1',
-  },
-
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH190.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Glaceon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH192.png',
-    type: 'Water',
-    hp: '110',
-    evolution: 'Stage 1',
-  },
-
-  {
-    name: 'Eevee',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH095.png',
-    type: 'Normal',
-    hp: '60',
-    evolution: 'Basic',
-  },
-  {
-    name: 'Sylveon',
-    imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV6PT5/SV6PT5_EN_22.png',
-    type: 'Psychic',
-    hp: '120',
-    evolution: 'Stage 1',
-  },
-];
-const debugDeck = new Deck({ name: 'Oops! All Eeveelutions' });
-let cardID = "";
-debugCards.forEach(async (cardJSON) => {
-  cardID = await addCard(Card.fromJSON(cardJSON));
-  debugDeck.addCard(cardID);
-});
-let currentDeckID = await addDeck(debugDeck);
-let currentCardID = await getCardById(cardID);
-
-window.onload = () => {
-  addDeck(debugDeck);
-  renderCards();
-};
+renderCards();
