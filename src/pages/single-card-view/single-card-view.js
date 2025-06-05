@@ -1,14 +1,6 @@
-import {
-  addCard,
-  addDeck,
-  getCardById,
-  getDeckById,
-} from '../../data/indexedDB.js';
-import { Deck } from '../../data/deck.js';
-import { Card } from '../../data/card.js';
+import { addCard, getCardById, getDeckById } from '../../data/indexedDB.js';
 
 let currentIndex = 0;
-let isAnimating = false;
 const carousel = document.getElementById('carousel');
 const mainCardName = document.getElementById('mainCardName');
 const cardIndicator = document.getElementById('cardIndicator');
@@ -26,7 +18,7 @@ async function renderCards() {
     cardDiv.className = 'card';
 
     cardDiv.innerHTML = `
-      <img class="card-image" src="${card.imageURL}" alt="Picture of the ${card.name} card"></img>
+      <img class="card-image" src="${card.imageURL}" alt="${card.name} card picture"></img>
       <div class="card-info">
         <div class="card-type">${card.type}</div>
         <div class="card-evolution">${card.evolution}</div>
@@ -55,7 +47,6 @@ async function renderCards() {
   // Position carousel
   carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-  // Update indicators
   updateIndicators();
 }
 
@@ -66,35 +57,30 @@ function updateIndicators() {
   });
 }
 
-async function prevCard() {
+function prevCard() {
   if (editMode) return;
-  // if (isAnimating) return;
-  isAnimating = true;
 
   currentIndex = (currentIndex - 1 + deck.cardIds.length) % deck.cardIds.length;
-  currentCard = await getCardById(deck.cardIds[currentIndex]);
   animateToCard();
 }
 
-async function nextCard() {
+function nextCard() {
   if (editMode) return;
-  // if (isAnimating) return;
-  isAnimating = true;
 
   currentIndex = (currentIndex + 1) % deck.cardIds.length;
-  currentCard = await getCardById(deck.cardIds[currentIndex]);
   animateToCard();
 }
 
 function goToCard(index) {
-  if (isAnimating || index === currentIndex) return;
-  isAnimating = true;
-
   currentIndex = index;
   animateToCard();
 }
 
-function animateToCard() {
+async function animateToCard() {
+  if (editMode) return;
+
+  currentCard = await getCardById(deck.cardIds[currentIndex]);
+
   // Update main card name immediately for responsiveness
   mainCardName.textContent = currentCard.name;
 
@@ -103,13 +89,9 @@ function animateToCard() {
 
   // Update indicators
   updateIndicators();
-
-  // Reset animation flag
-  setTimeout(() => {
-    isAnimating = false;
-  }, 400);
 }
 
+// Return to deck view
 function goBack() {
   // Add a subtle animation before the alert
   const container = document.querySelector('.card-container');
@@ -123,11 +105,13 @@ function goBack() {
   }, 150);
 }
 
-// Touch/swipe support
-let startX = 0;
-let startY = 0;
-let distX = 0;
-let distY = 0;
+// Button navigation
+document
+  .getElementsByClassName('prev-button')[0]
+  .addEventListener('click', prevCard);
+document
+  .getElementsByClassName('next-button')[0]
+  .addEventListener('click', nextCard);
 
 // Keyboard navigation
 document.addEventListener('keydown', function (event) {
@@ -143,6 +127,12 @@ document.addEventListener('keydown', function (event) {
       break;
   }
 });
+
+// Touch/swipe support
+let startX = 0;
+let startY = 0;
+let distX = 0;
+let distY = 0;
 
 carousel.addEventListener('touchstart', function (e) {
   startX = e.touches[0].clientX;
@@ -167,9 +157,6 @@ carousel.addEventListener('touchend', function (e) {
   }
 });
 
-document.getElementsByClassName('prev-button')[0].addEventListener('click', prevCard);
-document.getElementsByClassName('next-button')[0].addEventListener('click', nextCard);
-
 // Manage card values
 let editMode = false;
 const manageButton = document.getElementsByClassName('manage-button')[0];
@@ -178,9 +165,17 @@ manageButton.addEventListener('click', async () => {
   if (editMode) {
     try {
       // currentCard.name = cardElements[currentIndex].getElementsByClassName('card-name-input').value;
-      currentCard.type = cardElements[currentIndex].getElementsByClassName('card-type-input')[0].value;
-      currentCard.hp = cardElements[currentIndex].getElementsByClassName('card-hp-input')[0].value;
-      currentCard.evolution = cardElements[currentIndex].getElementsByClassName('card-evolution-input')[0].value;
+      currentCard.type =
+        cardElements[currentIndex].getElementsByClassName(
+          'card-type-input',
+        )[0].value;
+      currentCard.hp =
+        cardElements[currentIndex].getElementsByClassName(
+          'card-hp-input',
+        )[0].value;
+      currentCard.evolution = cardElements[currentIndex].getElementsByClassName(
+        'card-evolution-input',
+      )[0].value;
 
       await addCard(currentCard);
     } catch (error) {
@@ -196,18 +191,35 @@ function ToggleEditMode() {
   editMode = !editMode;
   manageButton.innerHTML = editMode ? 'Confirm' : 'Manage';
 
-  const cardInfoElement = cardElements[currentIndex].getElementsByClassName('card-info')[0];
-  const cardInfoEditElement = cardElements[currentIndex].getElementsByClassName('card-info-edit')[0];
+  const cardInfoElement =
+    cardElements[currentIndex].getElementsByClassName('card-info')[0];
+  const cardInfoEditElement =
+    cardElements[currentIndex].getElementsByClassName('card-info-edit')[0];
   cardInfoElement.style.display = editMode ? 'none' : 'block';
   cardInfoEditElement.style.display = editMode ? 'block' : 'none';
 
   mainCardName.textContent = currentCard.name;
 
-  cardElements[currentIndex].getElementsByClassName('card-type')[0].textContent = currentCard.type;
-  cardElements[currentIndex].getElementsByClassName('card-hp')[0].textContent = currentCard.hp;
-  cardElements[currentIndex].getElementsByClassName('card-evolution')[0].textContent = currentCard.evolution;
+  cardElements[currentIndex].getElementsByClassName(
+    'card-type',
+  )[0].textContent = currentCard.type;
+  cardElements[currentIndex].getElementsByClassName('card-hp')[0].textContent =
+    currentCard.hp;
+  cardElements[currentIndex].getElementsByClassName(
+    'card-evolution',
+  )[0].textContent = currentCard.evolution;
 }
 
+// TODO: Once deck is given in URL, load in correctly similar to below
+// const params = new URLSearchParams(window.location.search);
+// const deckId = params.get('deckId');
+// const cardId = params.get('cardId');
+// if (!deckId) console.error('No deckId found in URL.');
+// let deck = getDeckById(deckId);
+// if (!cardId) console.error('No cardId found in URL.');
+// let currentCard = getCardById(cardId);
+
+// Using fixed dummy data stored in IndexedDB
 let deck = await getDeckById('eeveelutions');
 let currentCardID = deck.cardIds[0];
 let currentCard = await getCardById(currentCardID);
