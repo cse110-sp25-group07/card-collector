@@ -217,7 +217,33 @@ const deckId = params.get('deckId');
 const cardId = params.get('cardId');
 let deck, currentCard, currentCardId;
 
-deck = await getDeckById(deckId);
-currentCard = await getCardById(cardId);
-currentCardId = currentCard.id;
-await renderCards();
+let errorCount = 0;
+
+if (!deckId) {
+  console.error(`Missing URL search param deckId`);
+  errorCount++;
+} else {
+  deck = await getDeckById(deckId);
+  if (!deck) {
+    console.error(`Could not get deck with deckId=${deckId}`);
+    errorCount++;
+  }
+}
+if (!cardId) {
+  console.error(`Missing URL search param cardId`);
+  errorCount++;
+} else {
+  currentCard = await getCardById(cardId);
+  if (!currentCard) {
+    console.error(`Could not get card with cardId=${cardId}`);
+    errorCount++;
+  }
+}
+
+if (errorCount > 0) {
+  alert('Failed to load card!');
+  goBack();
+} else {
+  currentCardId = currentCard.id;
+  await renderCards();
+}
