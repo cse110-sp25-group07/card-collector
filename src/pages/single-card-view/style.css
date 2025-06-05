@@ -128,7 +128,7 @@ body {
   transform: translateX(100%);
 }
 
-.card-info {
+.card-info, .card-info-edit {
   text-align: center;
   line-height: 1.6;
   font-size: 16px;
@@ -141,7 +141,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.card-info div {
+.card-info div, .card-info-edit input {
+  display: block;
+  text-align: center;
   margin: 4px 0;
 }
 
