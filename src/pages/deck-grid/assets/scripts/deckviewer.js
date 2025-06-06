@@ -75,7 +75,7 @@ function init() {
     // Get the decks from localStorage
     let decks = await getDecksFromStorage();
     //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
-    const exampleDeck = { id: 1, name: 'exampleDeck', cards: [] };
+    //const exampleDeck = { id: 1, name: 'exampleDeck', cards: [] };
     //decks.push(exampleDeck);
     //decks.push(exampleDeck);
     //decks.push(exampleDeck);
