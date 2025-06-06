@@ -168,12 +168,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         ) {
           try {
             cardId = crypto.randomUUID();
-          } catch (e) {
-            cardId =
-              'c_' +
-              Date.now().toString(36) +
-              Math.random().toString(36).slice(2);
-          }
+                      } catch {
+             cardId =
+               'c_' +
+               Date.now().toString(36) +
+               Math.random().toString(36).slice(2);
+            }
         } else {
           cardId =
             'c_' +

@@ -14,7 +14,7 @@ export class Deck {
       ) {
         try {
           id = crypto.randomUUID();
-        } catch (e) {
+        } catch {
           // Fallback if crypto.randomUUID fails
           id =
             'd_' +

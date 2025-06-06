@@ -18,7 +18,7 @@ export class Card {
       ) {
         try {
           id = crypto.randomUUID();
-        } catch (e) {
+        } catch {
           // Fallback if crypto.randomUUID fails
           id =
             'c_' +

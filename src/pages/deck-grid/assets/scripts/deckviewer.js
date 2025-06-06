@@ -376,17 +376,7 @@ function showBulkDeleteConfirmation() {
   deleteModal.classList.add('show');
 }
 
-/**
- * Show delete confirmation modal (legacy - kept for compatibility)
- */
-function showDeleteConfirmation(deck) {
-  const deleteModal = document.getElementById('delete-modal');
-  const modalContent = deleteModal.querySelector('.modal-content h2');
 
-  modalContent.textContent = `Delete "${deck.name}"?`;
-  deleteModal.dataset.deckId = deck.id;
-  deleteModal.classList.add('show');
-}
 
 /**
  * Show mode instructions
