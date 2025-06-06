@@ -61,7 +61,6 @@ function init() {
   storageExampleDeck.addCard(cardImgExample.id);
   storageExampleDeck.addCard(cardImgExample2.id);
 
-
   addCard(cardImgExample3);
   addCard(cardImgExample4);
   storageExampleDeck2.addCard(cardImgExample3.id);
