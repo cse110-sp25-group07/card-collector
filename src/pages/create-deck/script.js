@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const thumbnailImage = document.getElementById('thumbnailImage');
   const saveDeckBtn = document.getElementById('saveDeckBtn');
   const addCardsBtn = document.getElementById('addCardsBtn');
+  const backBtn = document.getElementById('backBtn');
 
   // Selected cards preview
   const selectedCardsSection = document.getElementById('selectedCardsSection');
@@ -64,6 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (existingDeck) {
         // Update title
         document.querySelector('h1').textContent = 'EDIT DECK';
+
+        // Display button
+        backBtn.classList.remove('hidden');
+        backBtn.addEventListener('click', () => {
+          window.location.href = '../deck-grid/deckviewui.html';
+        });
 
         // Fill in form data
         deckNameInput.value = existingDeck.name;
