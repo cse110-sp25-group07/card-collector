@@ -72,7 +72,7 @@ async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
   const heading = document.querySelector('h1');
   if (deck && deck.name) {
-    heading.textContent = `${deck.name} Deck`;
+    heading.textContent = `${deck.name}`;
   }
 }
 
@@ -148,13 +148,13 @@ function renderCardGrid(cards) {
 }
 
 //sets up the search, filter and manage buttons
-function backSearchSortManageBtnsSetup(allCards) {
+function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
   back.addEventListener('click', () => {
-    //TODO Implement go back once Max finishes his all-deck-view implementations
-    //window.location.href = `../all-deck-view
-    console.log('Implement Go Back');
+    window.location.href = '../deck-grid/deckviewui.html';
   });
+
+  if (!allCards.length) return;
 
   //Manage Button
   const manage = document.getElementById('manage-toggle');
@@ -163,10 +163,11 @@ function backSearchSortManageBtnsSetup(allCards) {
   });
 
   //Create Button
-  //TODO Implement Create Button
   const create = document.getElementById('create-card');
   create.addEventListener('click', () => {
-    console.log('Implement creation of cards');
+    const params = new URLSearchParams(window.location.search);
+    const deckId = params.get('deckId');
+    window.location.href = `../create-card/create-card.html?deckId=${deckId}`;
   });
 
   //Sort Cards Selection
@@ -332,3 +333,5 @@ async function init() {
 }
 
 init();
+
+backSearchSortManageBtnsSetup();
