@@ -11,6 +11,50 @@
   <body>
     <div class="page-container">
       <h1>Deck View</h1>
+
+      <!-- Deck Management Controls -->
+      <div class="deck-controls">
+        <button
+          id="menu-btn"
+          class="menu-btn"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="dropdown-menu"
+        >
+          <span class="btn-icon" aria-hidden="true">☰</span>
+          Manage Decks
+        </button>
+        <div
+          class="dropdown-menu"
+          id="dropdown-menu"
+          role="menu"
+          aria-hidden="true"
+        >
+          <button role="menuitem" id="create-deck-btn" class="control-btn">
+            <span class="btn-icon" aria-hidden="true">+</span>
+            Create Deck
+          </button>
+          <button
+            role="menuitem"
+            id="edit-deck-btn"
+            class="control-btn"
+            disabled
+          >
+            <span class="btn-icon" aria-hidden="true">✎</span>
+            Edit Deck
+          </button>
+          <button
+            role="menuitem"
+            id="delete-deck-btn"
+            class="control-btn"
+            disabled
+          >
+            <span class="btn-icon" aria-hidden="true">🗑</span>
+            Delete Deck
+          </button>
+        </div>
+      </div>
+
       <div id="deck-box" class="fancy-box">
         <h2>Decks</h2>
         <div id="deck-viewer">
@@ -23,6 +67,18 @@
             <p>Create your first deck to get started!</p>
             <button class="create-deck-btn">Create New Deck</button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation modal for delete -->
+    <div id="delete-modal" class="modal">
+      <div class="modal-content">
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete this deck?</p>
+        <div class="modal-buttons">
+          <button id="confirm-delete" class="danger-btn">Delete</button>
+          <button id="cancel-delete" class="secondary-btn">Cancel</button>
         </div>
       </div>
     </div>
