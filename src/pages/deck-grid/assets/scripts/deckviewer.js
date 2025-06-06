@@ -376,8 +376,6 @@ function showBulkDeleteConfirmation() {
   deleteModal.classList.add('show');
 }
 
-
-
 /**
  * Show mode instructions
  */
