@@ -62,7 +62,9 @@ function updateIndicators() {
 
 function prevCard() {
   if (editMode) return;
-  selectedCardIndex = (selectedCardIndex - 1 + loadedDeck.cardIds.length) % loadedDeck.cardIds.length;
+  selectedCardIndex =
+    (selectedCardIndex - 1 + loadedDeck.cardIds.length) %
+    loadedDeck.cardIds.length;
   animateToCard();
 }
 
@@ -173,9 +175,9 @@ manageButton.addEventListener('click', async () => {
         cardElements[selectedCardIndex].getElementsByClassName(
           'card-hp-input',
         )[0].value;
-      selectedCard.evolution = cardElements[selectedCardIndex].getElementsByClassName(
-        'card-evolution-input',
-      )[0].value;
+      selectedCard.evolution = cardElements[
+        selectedCardIndex
+      ].getElementsByClassName('card-evolution-input')[0].value;
       await addCard(selectedCard);
     } catch (error) {
       console.error('Failed to save card! ->', error);
@@ -189,7 +191,7 @@ manageButton.addEventListener('click', async () => {
 // Enable card info div and disable card info form, or vice versa
 function ToggleEditMode() {
   const selectedCardElement = cardElements[selectedCardIndex];
-  
+
   editMode = !editMode;
   manageButton.innerHTML = editMode ? 'Confirm' : 'Manage';
 
@@ -203,14 +205,12 @@ function ToggleEditMode() {
 
   // Updates selected card's displayed info
   selectedCardName.textContent = selectedCard.name;
-  selectedCardElement.getElementsByClassName(
-    'card-type',
-  )[0].textContent = selectedCard.type;
+  selectedCardElement.getElementsByClassName('card-type')[0].textContent =
+    selectedCard.type;
   selectedCardElement.getElementsByClassName('card-hp')[0].textContent =
     selectedCard.hp;
-  selectedCardElement.getElementsByClassName(
-    'card-evolution',
-  )[0].textContent = selectedCard.evolution;
+  selectedCardElement.getElementsByClassName('card-evolution')[0].textContent =
+    selectedCard.evolution;
 }
 
 async function loadDataFromURL() {
@@ -247,5 +247,5 @@ async function loadDataFromURL() {
   } else {
     currentCardId = selectedCard.id;
     await renderCards();
-  } 
+  }
 }
