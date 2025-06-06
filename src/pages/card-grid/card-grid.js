@@ -95,7 +95,7 @@ function renderCardGrid(cards) {
           <p>${card.name}</p>
         `;
     cardLink.addEventListener('click', () => {
-      window.location.href = `../single-card-view/display.html?deckId=${deckId}cardId=${card.id}`;
+      window.location.href = `../single-card-view/display.html?deckId=${deckId}&cardId=${card.id}`;
     });
 
     // Edit button
