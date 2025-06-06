@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Update title
         document.querySelector('h1').textContent = 'EDIT DECK';
 
+        // Display button
+        backBtn.classList.remove('hidden');
+        backBtn.addEventListener('click', () => {
+          window.location.href = '../deck-grid/deckviewui.html';
+        });
+
         // Fill in form data
         deckNameInput.value = existingDeck.name;
         if (existingDeck.imageURL) {
