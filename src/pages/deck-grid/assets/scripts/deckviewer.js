@@ -1,12 +1,7 @@
 import { Card } from '../../../../data/card.js';
 import { Deck } from '../../../../data/deck.js';
 import { DeckDisplay } from '../../../../data/deckdisplay.js';
-import {
-  getAllDecks,
-  addDeck,
-  addCard,
-  deleteDeck,
-} from '../../../../data/indexedDB.js';
+import { getAllDecks, addDeck, addCard, deleteDeck } from '../../../../data/indexedDB.js';
 
 customElements.define('deck-display', DeckDisplay);
 
@@ -18,7 +13,7 @@ window.addEventListener('DOMContentLoaded', init);
 
 // Starts the program, all function calls trace back here
 function init() {
-  // Initialize deck management controls
+  // Initialize deck management controls first
   initDeckManagementControls();
 
   //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
@@ -60,28 +55,24 @@ function init() {
   addDeck(storageExampleDeck2);
   //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: MANUALLY DELETE INDEXDB STORAGE IN DEV TOOLS TO RESET /////////////////////////////////////////////////////////////
 
-  customElements.whenDefined('deck-display').then(async () => {
-    // Get the decks from localStorage
-    let decks = await getDecksFromStorage();
-    //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
-    // const exampleDeck = { id: 1, name: 'exampleDeck', cards: [] };
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    // decks.push(exampleDeck);
-    //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
-    addDeckstoDocument(decks);
+  // Load decks immediately
+  loadDecks();
+  
+  // Refresh when page becomes visible (e.g., returning from create/edit)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      loadDecks();
+    }
+  });
+  
+  // Also refresh when window gains focus
+  window.addEventListener('focus', () => {
+    loadDecks();
   });
 }
 
 /**
- * Initialize deck management controls and event listeners
+ * Initialize deck management controls and event listeners - COPIED FROM WORKING DECK-MANAGEMENT
  */
 function initDeckManagementControls() {
   // DOM elements
@@ -94,32 +85,28 @@ function initDeckManagementControls() {
   const confirmDeleteBtn = document.getElementById('confirm-delete');
   const cancelDeleteBtn = document.getElementById('cancel-delete');
 
-  // Menu toggle functionality
+  // Event listeners for menu - EXACT COPY FROM WORKING VERSION
   menuBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isVisible = dropdownMenu.style.display === 'flex';
-    dropdownMenu.style.display = isVisible ? 'none' : 'flex';
-    menuBtn.setAttribute('aria-expanded', !isVisible);
-    dropdownMenu.setAttribute('aria-hidden', isVisible);
+    dropdownMenu.style.display =
+      dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
   });
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside - EXACT COPY FROM WORKING VERSION
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.deck-controls')) {
       dropdownMenu.style.display = 'none';
-      menuBtn.setAttribute('aria-expanded', 'false');
-      dropdownMenu.setAttribute('aria-hidden', 'true');
     }
   });
 
-  // Control button event listeners
+  // Event listeners for buttons - ENHANCED WITH RETURN ROUTING
   createDeckBtn.addEventListener('click', () => {
-    window.location.href = '../create-deck/deckui.html';
+    window.location.href = '../create-deck/deckui.html?returnTo=deck-view';
   });
 
   editDeckBtn.addEventListener('click', () => {
     if (selectedDeckId) {
-      window.location.href = `../create-deck/deckui.html?edit=${selectedDeckId}`;
+      window.location.href = `../create-deck/deckui.html?edit=${selectedDeckId}&returnTo=deck-view`;
     }
   });
 
@@ -134,11 +121,7 @@ function initDeckManagementControls() {
       try {
         await deleteDeck(selectedDeckId);
         deleteModal.classList.remove('show');
-
-        // Refresh the deck display
-        const decks = await getDecksFromStorage();
-        addDeckstoDocument(decks);
-
+        loadDecks(); // refresh the deck display - USE OUR LOAD FUNCTION
         selectedDeckId = null;
         updateButtonStates();
       } catch (error) {
@@ -152,75 +135,52 @@ function initDeckManagementControls() {
     deleteModal.classList.remove('show');
   });
 
-  // Close modal when clicking outside
+  // Close modal when clicking outside - EXACT COPY FROM WORKING VERSION
   deleteModal.addEventListener('click', (e) => {
     if (e.target === deleteModal) {
       deleteModal.classList.remove('show');
     }
   });
+
+  // Handle create deck button in empty state
+  const createDeckBtnEmpty = document.querySelector('.create-deck-btn');
+  if (createDeckBtnEmpty) {
+    createDeckBtnEmpty.addEventListener('click', () => {
+      window.location.href = '../create-deck/deckui.html?returnTo=deck-view';
+    });
+  }
 }
 
 /**
- * Update button states based on selection
+ * Load decks - ADAPTED FROM WORKING DECK-MANAGEMENT VERSION
  */
-function updateButtonStates() {
-  const editDeckBtn = document.getElementById('edit-deck-btn');
-  const deleteDeckBtn = document.getElementById('delete-deck-btn');
-
-  const hasSelection = Boolean(selectedDeckId);
-  editDeckBtn.disabled = !hasSelection;
-  deleteDeckBtn.disabled = !hasSelection;
+async function loadDecks() {
+  try {
+    const decks = await getAllDecks();
+    displayDecks(decks);
+  } catch (error) {
+    console.error('Error loading decks:', error);
+    const deckviewer = document.querySelector('#deck-viewer');
+    deckviewer.innerHTML = '<p class="error">Error loading decks. Please refresh the page.</p>';
+  }
 }
 
 /**
- * Handle deck selection
+ * Display decks - HYBRID APPROACH: Use deck-display elements but with working selection logic
  */
-function handleDeckSelection(deckElement, deckId) {
-  // Remove selection from other decks
-  document.querySelectorAll('deck-display').forEach((deck) => {
-    deck.classList.remove('selected');
-  });
-
-  // Select this deck
-  deckElement.classList.add('selected');
-  selectedDeckId = deckId;
-  updateButtonStates();
-}
-
-/**
- * Reads 'decks' from localStorage and returns an array of
- * all of the decks found (parsed, not in string form). If
- * nothing is found in localStorage for 'decks', an empty array
- * is returned.
- * @returns {Promise<Object[]>} An array of decks found in index
- */
-async function getDecksFromStorage() {
-  let decks = await getAllDecks();
-  console.log(decks.length);
-  return decks;
-}
-
-/**
- * Takes in an array of decks and for each deck creates a
- * new <deck-display> element, adds the deck data to that deck-view
- * using element.data = {...}, and then appends that new deck
- * to <deck>
- * @param {Array<Object>} decks An array of decks
- */
-function addDeckstoDocument(decks) {
+function displayDecks(decks) {
   const deckviewer = document.querySelector('#deck-viewer');
   const emptyState = document.querySelector('#empty-state');
-
+  
   deckviewer.innerHTML = '';
-
+  
   // Show empty state if no decks
   if (!decks || decks.length === 0) {
     emptyState.style.display = 'flex';
-
-    // Handle create deck button in empty state
+    
+    // Re-attach empty state button listener
     const createDeckBtnEmpty = document.querySelector('.create-deck-btn');
     if (createDeckBtnEmpty) {
-      // Remove any existing listeners to avoid duplicates
       createDeckBtnEmpty.removeEventListener('click', handleCreateDeck);
       createDeckBtnEmpty.addEventListener('click', handleCreateDeck);
     }
@@ -228,29 +188,63 @@ function addDeckstoDocument(decks) {
   } else {
     emptyState.style.display = 'none';
   }
+  
+  // Create deck elements with WORKING selection logic from deck-management
+  decks.forEach((deckData) => {
+    const deck = new Deck(deckData);
+    const deckElement = createDeckElement(deck);
+    deckviewer.appendChild(deckElement);
+  });
+}
 
-  // Loop through each of the decks in the passed in array,
-  // create a <deck-display> element for each one, and populate
-  // each <deck-display> with that deck data using element.data = ...
-  // Append each element to the deck-viewer div
-  for (let i = 0; i < decks.length; i++) {
-    let deck = document.createElement('deck-display');
-    deck.data = decks[i];
-
-    // Add click handler for deck selection
-    deck.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      handleDeckSelection(deck, decks[i].id);
+/**
+ * Create deck element - ADAPTED FROM WORKING DECK-MANAGEMENT VERSION
+ */
+function createDeckElement(deck) {
+  // Create a wrapper for the deck-display with selection functionality
+  const wrapper = document.createElement('div');
+  wrapper.className = 'deck-item-wrapper';
+  wrapper.dataset.deckId = deck.id;
+  
+  // Create the deck-display element
+  const deckDisplayElement = document.createElement('deck-display');
+  deckDisplayElement.data = deck;
+  
+  // Add selection functionality - EXACT COPY FROM WORKING VERSION
+  wrapper.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Remove selection from other decks
+    document.querySelectorAll('.deck-item-wrapper').forEach((item) => {
+      item.classList.remove('selected');
     });
 
-    deckviewer.append(deck);
-  }
+    // Select this deck
+    wrapper.classList.add('selected');
+    selectedDeckId = deck.id;
+    updateButtonStates();
+  });
+  
+  wrapper.appendChild(deckDisplayElement);
+  return wrapper;
+}
+
+/**
+ * Update button states - EXACT COPY FROM WORKING VERSION
+ */
+function updateButtonStates() {
+  const editDeckBtn = document.getElementById('edit-deck-btn');
+  const deleteDeckBtn = document.getElementById('delete-deck-btn');
+  
+  const hasSelection = Boolean(selectedDeckId);
+  editDeckBtn.disabled = !hasSelection;
+  deleteDeckBtn.disabled = !hasSelection;
 }
 
 /**
  * Handle create deck button click
  */
 function handleCreateDeck() {
-  window.location.href = '../create-deck/deckui.html';
+  window.location.href = '../create-deck/deckui.html?returnTo=deck-view';
 }

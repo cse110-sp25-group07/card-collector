@@ -299,8 +299,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         resetForm();
       }
 
-      // Return to deck management page
-      window.location.href = '../deck-management/deck-management.html';
+      // Return to the appropriate deck page based on where user came from
+      const urlParams = new URLSearchParams(window.location.search);
+      const returnTo = urlParams.get('returnTo') || 'deck-management';
+      
+      if (returnTo === 'deck-view') {
+        window.location.href = '../deck-grid/deckviewui.html';
+      } else {
+        window.location.href = '../deck-management/deck-management.html';
+      }
     } catch (err) {
       console.error(err);
       showNotification('Error saving deck. Please try again.', 'error');

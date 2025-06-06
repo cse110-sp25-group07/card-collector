@@ -224,22 +224,28 @@ h3 {
   align-content: start;
 }
 
-deck-display {
+.deck-item-wrapper {
   transition: all 0.3s ease;
   margin: auto;
   max-width: 280px;
   cursor: pointer;
   border-radius: 8px;
   border: 2px solid transparent;
+  padding: 4px;
 }
 
-deck-display:hover {
+.deck-item-wrapper:hover {
   transform: scale(1.02);
 }
 
-deck-display.selected {
+.deck-item-wrapper.selected {
   border: 2px solid #d9a441;
   box-shadow: 0 0 0 2px rgba(217, 164, 65, 0.2);
+}
+
+deck-display {
+  width: 100%;
+  display: block;
 }
 
 /* Empty State Styles */
