@@ -10,7 +10,28 @@ export class Card {
    * @param {string} evolution - The evolution stage of a pokemon (Basic, Stage 1, Stage 2).
    */
   constructor({ id, name, imageURL, type, hp, evolution }) {
-    this.id = id || crypto.randomUUID();
+    // Generate ID if not provided - using a fallback for crypto.randomUUID
+    if (!id) {
+      if (
+        typeof crypto !== 'undefined' &&
+        typeof crypto.randomUUID === 'function'
+      ) {
+        try {
+          id = crypto.randomUUID();
+        } catch (e) {
+          // Fallback if crypto.randomUUID fails
+          id =
+            'c_' +
+            Date.now().toString(36) +
+            Math.random().toString(36).slice(2);
+        }
+      } else {
+        // Fallback ID generation
+        id =
+          'c_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+      }
+    }
+    this.id = id;
     this.name = name;
     this.imageURL = imageURL;
     this.type = type;

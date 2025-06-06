@@ -5,7 +5,28 @@ export class Deck {
    * @param {string} name - Deck name.
    * @param {string[]} cardIds - Array of card IDs in the deck.
    */
-  constructor({ id = crypto.randomUUID(), imageURL, name = '', cardIds = [] }) {
+  constructor({ id, imageURL, name = '', cardIds = [] }) {
+    // Generate ID if not provided - using a fallback for crypto.randomUUID
+    if (!id) {
+      if (
+        typeof crypto !== 'undefined' &&
+        typeof crypto.randomUUID === 'function'
+      ) {
+        try {
+          id = crypto.randomUUID();
+        } catch (e) {
+          // Fallback if crypto.randomUUID fails
+          id =
+            'd_' +
+            Date.now().toString(36) +
+            Math.random().toString(36).slice(2);
+        }
+      } else {
+        // Fallback ID generation
+        id =
+          'd_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+      }
+    }
     this.id = id;
     this.name = name;
     this.imageURL = imageURL;

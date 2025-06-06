@@ -16,6 +16,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const editDeckId = urlParams.get('edit');
   let existingDeck = null;
 
+  // // Update back button text based on return destination
+  // if (backBtn) {
+  //   const backText = returnTo === 'deck-management' ? 'Back to Deck Management' : 'Back to Deck View';
+  //   backBtn.innerHTML = `
+  //     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  //       <path d="M19 12H5M12 19l-7-7 7-7"/>
+  //     </svg>
+  //     ${backText}
+  //   `;
+  // }
+
   // Deck form elements
   const deckNameInput = document.getElementById('deckName');
   const thumbnailContainer = document.getElementById('cardBackContainer');
@@ -26,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const thumbnailImage = document.getElementById('thumbnailImage');
   const saveDeckBtn = document.getElementById('saveDeckBtn');
   const addCardsBtn = document.getElementById('addCardsBtn');
+  const backBtn = document.getElementById('backBtn');
 
   // Selected cards preview
   const selectedCardsSection = document.getElementById('selectedCardsSection');
@@ -90,6 +102,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   thumbnailInput.addEventListener('change', handleThumbnailUpload);
   addCardsBtn.addEventListener('click', openCardModal);
   saveDeckBtn.addEventListener('click', saveDeck);
+  backBtn.addEventListener('click', handleBackNavigation);
 
   closeModalBtn.addEventListener('click', closeCardModal);
   cancelBtn.addEventListener('click', closeCardModal);
@@ -147,8 +160,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = ({ target }) => {
+        // Generate ID with fallback
+        let cardId;
+        if (
+          typeof crypto !== 'undefined' &&
+          typeof crypto.randomUUID === 'function'
+        ) {
+          try {
+            cardId = crypto.randomUUID();
+          } catch (e) {
+            cardId =
+              'c_' +
+              Date.now().toString(36) +
+              Math.random().toString(36).slice(2);
+          }
+        } else {
+          cardId =
+            'c_' +
+            Date.now().toString(36) +
+            Math.random().toString(36).slice(2);
+        }
+
         const cardData = {
-          id: crypto.randomUUID(),
+          id: cardId,
           name: file.name.replace(/\.[^/.]+$/, ''),
           imageData: target.result,
         };
@@ -299,17 +333,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         resetForm();
       }
 
-      // Return to the appropriate deck page based on where user came from
-      const urlParams = new URLSearchParams(window.location.search);
-      const returnTo = urlParams.get('returnTo') || 'deck-management';
-      
-      if (returnTo === 'deck-view') {
-        window.location.href = '../deck-grid/deckviewui.html';
-      } else {
-        window.location.href = '../deck-management/deck-management.html';
-      }
+      // Always return to deck view page
+      window.location.href = '../deck-grid/deckviewui.html';
     } catch (err) {
-      console.error(err);
+      console.error('Error saving deck:', err);
       showNotification('Error saving deck. Please try again.', 'error');
     }
   }
@@ -326,5 +353,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     notification.className = `notification ${type}`;
     notification.classList.add('show');
     setTimeout(() => notification.classList.remove('show'), 3000);
+  }
+
+  function handleBackNavigation() {
+    // Always go back to deck view page
+    console.log('Back button clicked - navigating to deckviewui.html');
+    window.location.href = '../deck-grid/deckviewui.html';
   }
 });
