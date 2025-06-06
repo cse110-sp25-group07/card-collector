@@ -12,6 +12,7 @@ await loadDataFromURL();
 
 // Creates a new element for each stored card and places them in the carousel
 async function renderCards() {
+  document.getElementById('deckName').textContent = loadedDeck.name;
   loadedDeck.cardIds.forEach(async (cardId, index) => {
     // Reconstruct card from card ids in loaded deck
     let cardData = await getCardById(cardId);
