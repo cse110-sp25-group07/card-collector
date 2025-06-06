@@ -302,7 +302,7 @@ async function init() {
   const root = document.getElementById('card-grid-root');
 
   const params = new URLSearchParams(window.location.search);
-  const deckId = Number(params.get('deckId'));
+  const deckId = params.get('deckId');
   if (!deckId) {
     console.error('No deckId found in URL.');
     return;

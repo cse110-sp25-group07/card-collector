@@ -758,3 +758,21 @@ h1 {
     flex-direction: column;
   }
 }
+
+/* ======================================
+   Edit Page Back Button
+   ====================================== */
+.main-container {
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#backBtn {
+  position: absolute;
+  top: 20px;   
+  left: 20px;  
+  z-index: 10; 
+}

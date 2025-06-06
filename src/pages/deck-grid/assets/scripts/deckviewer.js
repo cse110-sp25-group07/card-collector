@@ -12,20 +12,20 @@ window.addEventListener('DOMContentLoaded', init);
 function init() {
   //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
   const storageExampleDeck = new Deck({
-    id: 4,
+    id: '4',
     imageUrl: '',
     name: 'servkjqhferk fhwerkjvhwdkjh',
     cardIds: [],
   });
   const storageExampleDeck2 = new Deck({
-    id: 5,
+    id: '5',
     imageUrl: '',
     name: 'n',
     cardIds: [],
   });
 
   const cardImgExample = new Card({
-    id: 1,
+    id: '1',
     name: 'gyatt',
     imageURL: '../create-deck/assets/images/card-back-evil.jpg',
     type: 'water',
@@ -33,7 +33,7 @@ function init() {
     evolution: 'vaporeon idk man',
   });
   const cardImgExample2 = new Card({
-    id: 2,
+    id: '2',
     name: 'gyatt',
     imageURL: '../create-deck/assets/images/card-back-evil.jpg',
     type: 'water',
@@ -41,7 +41,7 @@ function init() {
     evolution: 'vaporeon idk man',
   });
   const cardImgExample3 = new Card({
-    id: 3,
+    id: '3',
     name: 'gyatt',
     imageURL: '../create-deck/assets/images/card-back-evil.jpg',
     type: 'water',
@@ -49,7 +49,7 @@ function init() {
     evolution: 'vaporeon idk man',
   });
   const cardImgExample4 = new Card({
-    id: 4,
+    id: '4',
     name: 'gyatt',
     imageURL: '../create-deck/assets/images/card-back.webp',
     type: 'water',
