@@ -40,10 +40,32 @@ function init() {
     hp: 5,
     evolution: 'vaporeon idk man',
   });
+  const cardImgExample3 = new Card({
+    id: 3,
+    name: 'gyatt',
+    imageURL: '../create-deck/assets/images/card-back-evil.jpg',
+    type: 'water',
+    hp: 5,
+    evolution: 'vaporeon idk man',
+  });
+  const cardImgExample4 = new Card({
+    id: 4,
+    name: 'gyatt',
+    imageURL: '../create-deck/assets/images/card-back.webp',
+    type: 'water',
+    hp: 5,
+    evolution: 'vaporeon idk man',
+  });
   addCard(cardImgExample);
   addCard(cardImgExample2);
   storageExampleDeck.addCard(cardImgExample.id);
   storageExampleDeck.addCard(cardImgExample2.id);
+
+
+  addCard(cardImgExample3);
+  addCard(cardImgExample4);
+  storageExampleDeck2.addCard(cardImgExample3.id);
+  storageExampleDeck2.addCard(cardImgExample4.id);
 
   addDeck(storageExampleDeck);
   addDeck(storageExampleDeck2);
@@ -54,16 +76,16 @@ function init() {
     let decks = await getDecksFromStorage();
     //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
     const exampleDeck = { id: 1, name: 'exampleDeck', cards: [] };
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
-    decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
+    //decks.push(exampleDeck);
     //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
     addDeckstoDocument(decks);
   });

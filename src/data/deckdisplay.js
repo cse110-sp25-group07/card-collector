@@ -137,6 +137,9 @@ export class DeckDisplay extends HTMLElement {
       ${imgElements}
      </div>
      `;
+    this.shadowRoot.querySelector(".deckImageStack").addEventListener("click", () => {
+      window.location = `../card-grid/card-grid.html?deckId=${this.id}`;
+    });
   }
 
   /**
