@@ -1,5 +1,5 @@
-import { Card } from '../../data/card.js';
-import { addCard, getDeckById, updateDeck } from '../../data/indexedDB.js';
+import { Card } from '../data/card.js';
+import { addCard, getDeckById, updateDeck } from '../data/indexedDB.js';
 
 const form = document.getElementById('card-form');
 const imageUpload = document.getElementById('image-upload');

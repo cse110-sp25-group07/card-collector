@@ -4,8 +4,8 @@ import {
   getDeckById,
   updateDeck,
 } from '../../data/indexedDB.js';
-import { Deck } from '../../data/deck.js';
-import { Card } from '../../data/card.js';
+import { Deck } from '../data/deck.js';
+import { Card } from '../data/card.js';
 
 /**
  * script.js — Connects the Deck Creator UI to IndexedDB via the reusable API.

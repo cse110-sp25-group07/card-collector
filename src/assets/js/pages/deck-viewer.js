@@ -1,12 +1,12 @@
-import { Card } from '../../../../data/card.js';
-import { Deck } from '../../../../data/deck.js';
-import { DeckDisplay } from '../../../../data/deckdisplay.js';
+import { Card } from '../data/card.js';
+import { Deck } from '../data/deck.js';
+import { DeckDisplay } from '../components/deck-display.js';
 import {
   getAllDecks,
   addDeck,
   addCard,
   deleteDeck,
-} from '../../../../data/indexedDB.js';
+} from '../data/indexedDB.js';
 
 customElements.define('deck-display', DeckDisplay);
 

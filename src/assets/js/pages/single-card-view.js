@@ -1,4 +1,4 @@
-import { addCard, getCardById, getDeckById } from '../../data/indexedDB.js';
+import { addCard, getCardById, getDeckById } from '../data/indexedDB';
 
 // Initialization
 let selectedCardIndex = 0;

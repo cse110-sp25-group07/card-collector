@@ -3,7 +3,7 @@ import {
   getDeckById,
   deleteCard,
   addDeck,
-} from '../../data/indexedDB.js';
+} from '../data/indexedDB.js';
 
 //List of Dummy Cards
 //TODO Delete this and create unit tests for sort and search
