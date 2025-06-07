@@ -136,7 +136,7 @@ function initDeckManagementControls() {
 
   // Event listeners for buttons
   createDeckBtn.addEventListener('click', () => {
-    window.location.href = '../create-deck/deckui.html';
+    window.location.href = '/src/pages/deck-ui.html';
   });
 
   editDeckBtn.addEventListener('click', () => {
@@ -211,7 +211,7 @@ function initDeckManagementControls() {
   const createDeckBtnEmpty = document.querySelector('.create-deck-btn');
   if (createDeckBtnEmpty) {
     createDeckBtnEmpty.addEventListener('click', () => {
-      window.location.href = '../create-deck/deckui.html';
+      window.location.href = '/src/pages/deck-ui.html';
     });
   }
 }
@@ -320,10 +320,10 @@ function updateModeDisplay() {
 function handleDeckClick(deck, element) {
   if (currentMode === 'view') {
     // Navigate to card view for this deck
-    window.location.href = `../card-grid/card-grid.html?deckId=${deck.id}`;
+    window.location.href = `/src/pages/card-grid.html?deckId=${deck.id}`;
   } else if (currentMode === 'edit') {
     // Navigate to edit page
-    window.location.href = `../create-deck/deckui.html?edit=${deck.id}`;
+    window.location.href = `/src/pages/deck-ui.html?edit=${deck.id}`;
   } else if (currentMode === 'delete') {
     // Toggle selection for bulk delete
     toggleDeckSelection(deck, element);
@@ -566,5 +566,5 @@ function createDeckElement(deck) {
  * Handle create deck button click
  */
 function handleCreateDeck() {
-  window.location.href = '../create-deck/deckui.html';
+  window.location.href = '/src/pages/deck-ui.html';
 }

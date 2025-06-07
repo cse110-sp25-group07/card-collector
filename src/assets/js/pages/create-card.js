@@ -45,7 +45,7 @@ imageUpload.addEventListener('change', async (e) => {
 });
 
 backButton.addEventListener('click', () => {
-  window.location.href = `../card-grid/card-grid.html?deckId=${deckId}`;
+  window.location.href = `/src/pages/card-grid.html?deckId=${deckId}`;
 });
 
 // When the form is submitted, create a new card and store it in IndexedDB

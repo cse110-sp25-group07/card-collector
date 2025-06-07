@@ -95,7 +95,7 @@ function renderCardGrid(cards) {
           <p>${card.name}</p>
         `;
     cardLink.addEventListener('click', () => {
-      window.location.href = `../single-card-view/display.html?deckId=${deckId}&cardId=${card.id}`;
+      window.location.href = `/src/pages/single-card-display.html?deckId=${deckId}&cardId=${card.id}`;
     });
 
     // Edit button
@@ -151,7 +151,7 @@ function renderCardGrid(cards) {
 function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
   back.addEventListener('click', () => {
-    window.location.href = '../deck-grid/deckviewui.html';
+    window.location.href = '/src/pages/deck-view-ui.html';
   });
 
   //Create Button
@@ -159,7 +159,7 @@ function backSearchSortManageBtnsSetup(allCards = []) {
   create.addEventListener('click', () => {
     const params = new URLSearchParams(window.location.search);
     const deckId = params.get('deckId');
-    window.location.href = `../create-card/create-card.html?deckId=${deckId}`;
+    window.location.href = `/src/pages/create-card.html?deckId=${deckId}`;
   });
 
   if (!allCards.length) return;

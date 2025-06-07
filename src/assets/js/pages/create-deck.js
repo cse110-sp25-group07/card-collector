@@ -3,7 +3,7 @@ import {
   addDeck,
   getDeckById,
   updateDeck,
-} from '../../data/indexedDB.js';
+} from '../data/indexedDB.js';
 import { Deck } from '../data/deck.js';
 import { Card } from '../data/card.js';
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Display button
         backBtn.classList.remove('hidden');
         backBtn.addEventListener('click', () => {
-          window.location.href = '../deck-grid/deckviewui.html';
+          window.location.href = '/src/pages/deck-view-ui.html';
         });
 
         // Fill in form data
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // Always return to deck view page
-      window.location.href = '../deck-grid/deckviewui.html';
+      window.location.href = '/src/pages/deck-view-ui.html';
     } catch (err) {
       console.error('Error saving deck:', err);
       showNotification('Error saving deck. Please try again.', 'error');
@@ -364,6 +364,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   function handleBackNavigation() {
     // Always go back to deck view page
     console.log('Back button clicked - navigating to deckviewui.html');
-    window.location.href = '../deck-grid/deckviewui.html';
+    window.location.href = '/src/pages/deck-view-ui.html';
   }
 });
