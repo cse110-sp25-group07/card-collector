@@ -1,19 +1,22 @@
 class NavBar extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
 
-    const nav = document.createElement('nav');
-    nav.setAttribute('role', 'navigation');
-    nav.setAttribute('aria-label', 'Main Navigation');
+    const wrapper = document.createElement('header');
+    wrapper.classList.add('page-header');
 
-    nav.innerHTML = `
-      <a href="index.html">Home</a>
-      <a href="decks.html">Decks</a>
-      <a href="upload.html">Upload</a>
+    wrapper.innerHTML = `
+      <h1 class="site-title">
+        <a href="/card-collector/index.html">Card Collector</a>
+      </h1>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/card-collector/index.html">Deck View</a></li>
+        </ul>
+      </nav>
     `;
 
-    this.shadowRoot.append(nav);
+    this.appendChild(wrapper);
   }
 }
 

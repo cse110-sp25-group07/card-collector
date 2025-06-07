@@ -1,20 +1,25 @@
 body {
   font-family: "Nunito", sans-serif;
-  background: #ecf3f6; /* Alice Blue */
+  background: #ECF3F6; /* Alice Blue */
   margin: 0;
-  padding: 1rem;
+  padding: 0;
   color: #333;
 }
 
 .page-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  background-color: #f0f0f0;
-  max-width: none;
-  margin-inline: auto;
-}
+  padding: 1rem 2rem;
+  background-color: #ECF3F6; /* Alice Blue */
+  max-width:none;
+  margin: 0;
+  border-bottom: 2px solid #d8d8d8;
+} 
+
 .site-title {
   margin: 0;
   font-size: 1.75rem;
@@ -30,7 +35,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
 }
 .navbar ul {
   list-style: none;
@@ -54,7 +58,9 @@ body {
   text-decoration: underline;
 }
 
-
+main {
+  padding-top: 2rem;
+}
 .tabs {
   display: flex;
   justify-content: center;
