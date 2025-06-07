@@ -1,0 +1,172 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #ecf3f6; /* Alice Blue */
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ecf3f6; /* Alice Blue */
+  max-width: none;
+  margin: 0;
+  border-bottom: 2px solid #d8d8d8;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.site-title a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+
+/* Prevent visited link color change */
+.navbar a:visited {
+  color: black;
+}
+
+/* Hover state */
+.navbar a:hover {
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+main {
+  padding-top: 2rem;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  background: #ecf3f6;
+  border-radius: 16px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.tab.active {
+  background: #97a2e8; /* Vista Blue */
+  color: white;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.toggle {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background: #a1c5e7; /* Powder Blue */
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.toggle::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  transition: left 0.3s;
+}
+
+.toggle.active {
+  background: #5cab5c;
+}
+
+.toggle.active::after {
+  left: 21px;
+}
+
+.search-input {
+  padding: 0.4rem 0.8rem;
+  border: 2px solid #b9d3f2;
+  border-radius: 12px;
+  background: white;
+  font-size: 0.9rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 2px solid #cdfff0;
+  box-shadow: 0 4px 8px rgba(151, 162, 232, 0.15);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card-info {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.card-name {
+  color: #333;
+}
+
+.card-hp {
+  color: #abcb38; /* Yellow Green */
+}

@@ -1,0 +1,31 @@
+/* assets/css/global.css */
+
+/* Reset + Box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* CSS variables for your theme */
+:root {
+  --bg-color: #cddff0;
+  --text-color: #333;
+}
+
+/* Global body styles */
+html,
+body {
+  height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+}
+
+/* Common layout (e.g. a max-width container) */
+.container {
+  width: min(90%, 800px);
+  margin: 0 auto;
+}
