@@ -1,4 +1,14 @@
+/**
+ * @class NavBar
+ * @extends HTMLElement
+ * @description 
+ * Defines a reusable <nav-bar> custom element that renders the main site header, 
+ * including the site title and navigation links. 
+ */
 class NavBar extends HTMLElement {
+  /**
+   * Constructs the NavBar component linking the home deck view page and any future pages
+   */
   constructor() {
     super();
 
