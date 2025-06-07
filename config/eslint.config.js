@@ -5,7 +5,7 @@ import eslintPluginJest from 'eslint-plugin-jest';
 
 export default defineConfig([
   {
-    ignores: ['jsdocs/**'],
+    ignores: ['jsdocs/**', '.history/**'],
   },
   {
     files: ['**/*.{js,mjs,cjs}'],

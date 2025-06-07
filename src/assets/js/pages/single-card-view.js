@@ -1,4 +1,4 @@
-import { addCard, getCardById, getDeckById } from '../../data/indexedDB.js';
+import { addCard, getCardById, getDeckById } from '../data/indexedDB.js';
 
 // Initialization
 let selectedCardIndex = 0;
@@ -96,16 +96,9 @@ async function animateToCard() {
 
 // Returns to deck view page
 function goBack() {
-  // Add a subtle animation before the alert
-  const container = document.querySelector('.card-container');
-  container.style.transform = 'scale(0.98)';
-  container.style.opacity = '0.8';
-
-  setTimeout(() => {
-    container.style.transform = 'scale(1)';
-    container.style.opacity = '1';
-    alert('Going back to Card View...');
-  }, 150);
+  const params = new URLSearchParams(window.location.search);
+  const deckId = params.get('deckId');
+  window.location.href = `/src/pages/card-grid.html?deckId=${deckId}`;
 }
 
 // Button navigation
@@ -115,6 +108,11 @@ document
 document
   .getElementsByClassName('next-button')[0]
   .addEventListener('click', nextCard);
+
+// Back Button
+document.querySelector('.back-button').addEventListener('click', () => {
+  goBack();
+});
 
 // Keyboard navigation
 document.addEventListener('keydown', function (event) {

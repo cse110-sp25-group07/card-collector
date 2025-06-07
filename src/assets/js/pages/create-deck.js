@@ -3,9 +3,9 @@ import {
   addDeck,
   getDeckById,
   updateDeck,
-} from '../../data/indexedDB.js';
-import { Deck } from '../../data/deck.js';
-import { Card } from '../../data/card.js';
+} from '../data/indexedDB.js';
+import { Deck } from '../data/deck.js';
+import { Card } from '../data/card.js';
 
 /**
  * script.js — Connects the Deck Creator UI to IndexedDB via the reusable API.
@@ -15,17 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const editDeckId = urlParams.get('edit');
   let existingDeck = null;
-
-  // // Update back button text based on return destination
-  // if (backBtn) {
-  //   const backText = returnTo === 'deck-management' ? 'Back to Deck Management' : 'Back to Deck View';
-  //   backBtn.innerHTML = `
-  //     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-  //       <path d="M19 12H5M12 19l-7-7 7-7"/>
-  //     </svg>
-  //     ${backText}
-  //   `;
-  // }
 
   // Deck form elements
   const deckNameInput = document.getElementById('deckName');
@@ -80,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Display button
         backBtn.classList.remove('hidden');
         backBtn.addEventListener('click', () => {
-          window.location.href = '../deck-grid/deckviewui.html';
+          window.location.href = '/src/pages/deck-view-ui.html';
         });
 
         // Fill in form data
@@ -340,7 +329,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // Always return to deck view page
-      window.location.href = '../deck-grid/deckviewui.html';
+      window.location.href = '/src/pages/deck-view-ui.html';
     } catch (err) {
       console.error('Error saving deck:', err);
       showNotification('Error saving deck. Please try again.', 'error');
@@ -364,6 +353,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   function handleBackNavigation() {
     // Always go back to deck view page
     console.log('Back button clicked - navigating to deckviewui.html');
-    window.location.href = '../deck-grid/deckviewui.html';
+    window.location.href = '/src/pages/deck-view-ui.html';
   }
 });

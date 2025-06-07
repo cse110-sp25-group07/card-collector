@@ -3,70 +3,7 @@ import {
   getDeckById,
   deleteCard,
   addDeck,
-} from '../../data/indexedDB.js';
-
-//List of Dummy Cards
-//TODO Delete this and create unit tests for sort and search
-/*
-const dummyCards = [
-  {
-    name: 'Pikachu',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-    type: "electric",
-    hp: 100,
-    evolution: 'Raichu'
-  },
-  {
-    name: 'Charmander',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
-    type: "fire",
-    hp: 80,
-    evolution: 'Charmeleon'
-  },
-  {
-    name: 'Raichu',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png',
-    type: "electric",
-    hp: 101,
-    evolution: ''
-  },
-  {
-    name: 'Bulbasaur',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-    type: "grass",
-    hp: 101,
-    evolution: 'Ivysaur'
-  },
-  {
-    name: 'Electrode',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/100.png',
-    type: "electric",
-    hp: 99,
-    evolution: 'Voltorb'
-  },
-  {
-    name: 'Voltorb',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/101.png',
-    type: "electric",
-    hp: 140,
-    evolution: ''
-  },
-  {
-    name: 'Ivysaur',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
-    type: "grass",
-    hp: 150,
-    evolution: 'Venosaur'
-  },
-  {
-    name: 'Venosaur',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
-    type: "grass",
-    hp: 200,    
-    evolution: ''
-  }
-];
-*/
+} from '../data/indexedDB.js';
 
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
@@ -95,7 +32,7 @@ function renderCardGrid(cards) {
           <p>${card.name}</p>
         `;
     cardLink.addEventListener('click', () => {
-      window.location.href = `../single-card-view/display.html?deckId=${deckId}&cardId=${card.id}`;
+      window.location.href = `/src/pages/single-card-display.html?deckId=${deckId}&cardId=${card.id}`;
     });
 
     // Edit button
@@ -151,7 +88,7 @@ function renderCardGrid(cards) {
 function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
   back.addEventListener('click', () => {
-    window.location.href = '../deck-grid/deckviewui.html';
+    window.location.href = '/src/pages/deck-view-ui.html';
   });
 
   //Create Button
@@ -159,7 +96,7 @@ function backSearchSortManageBtnsSetup(allCards = []) {
   create.addEventListener('click', () => {
     const params = new URLSearchParams(window.location.search);
     const deckId = params.get('deckId');
-    window.location.href = `../create-card/create-card.html?deckId=${deckId}`;
+    window.location.href = `/src/pages/create-card.html?deckId=${deckId}`;
   });
 
   if (!allCards.length) return;
@@ -243,7 +180,10 @@ function sortCards(allCards, sortOption) {
       sortedCards.sort((firstCard, secondCard) => {
         //use locale Compare so we can sort pokemon types that arent completely english chars
         //just sorts types alphabetically
-        return firstCard.type.localeCompare(secondCard.type);
+        //first two lines are to ensure that this works with absent type
+        const typeA = firstCard.type || '';
+        const typeB = secondCard.type || '';
+        return typeA.localeCompare(typeB);
       });
       break;
     //when sorting by hp we sort by alpha first then hp
@@ -321,15 +261,6 @@ async function init() {
   const grid = renderCardGrid(cards);
   root.appendChild(grid);
   backSearchSortManageBtnsSetup(cards);
-  /*
-  //This is just for the dummyCards testing
-  //TODO Delete this once I implement some unit tests
-  
-  const root = document.getElementById('card-grid-root');
-  const grid = renderCardGrid(dummyCards);
-  root.appendChild(grid);
-  backSearchSortManageBtnsSetup(dummyCards);
-*/
 }
 
 init();
