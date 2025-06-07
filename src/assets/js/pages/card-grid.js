@@ -180,7 +180,10 @@ function sortCards(allCards, sortOption) {
       sortedCards.sort((firstCard, secondCard) => {
         //use locale Compare so we can sort pokemon types that arent completely english chars
         //just sorts types alphabetically
-        return firstCard.type.localeCompare(secondCard.type);
+        //first two lines are to ensure that this works with absent type
+        const typeA = firstCard.type || '';
+        const typeB = secondCard.type || '';
+        return typeA.localeCompare(typeB);
       });
       break;
     //when sorting by hp we sort by alpha first then hp

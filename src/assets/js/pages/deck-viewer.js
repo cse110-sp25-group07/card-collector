@@ -1,9 +1,6 @@
 import { Deck } from '../data/deck.js';
 import { DeckDisplay } from '../components/deck-display.js';
-import {
-  getAllDecks,
-  deleteDeck,
-} from '../data/indexedDB.js';
+import { getAllDecks, deleteDeck } from '../data/indexedDB.js';
 
 customElements.define('deck-display', DeckDisplay);
 
