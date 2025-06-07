@@ -1,6 +1,6 @@
 body {
-  font-family: "Nunito", sans-serif;
-  background: #ECF3F6; /* Alice Blue */
+  font-family: 'Nunito', sans-serif;
+  background: #ecf3f6; /* Alice Blue */
   margin: 0;
   padding: 0;
   color: #333;
@@ -14,11 +14,11 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #ECF3F6; /* Alice Blue */
-  max-width:none;
+  background-color: #ecf3f6; /* Alice Blue */
+  max-width: none;
   margin: 0;
   border-bottom: 2px solid #d8d8d8;
-} 
+}
 
 .site-title {
   margin: 0;
@@ -27,7 +27,7 @@ body {
 }
 .site-title a {
   text-decoration: none;
-  color: inherit; 
+  color: inherit;
   cursor: pointer;
 }
 .navbar {
@@ -43,7 +43,7 @@ body {
 }
 .navbar a {
   text-decoration: none;
-  color: black;             
+  color: black;
   font-weight: 700;
 }
 
@@ -101,7 +101,7 @@ main {
 }
 
 .toggle::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 18px;
   height: 18px;
@@ -170,5 +170,3 @@ main {
 .card-hp {
   color: #abcb38; /* Yellow Green */
 }
-
-

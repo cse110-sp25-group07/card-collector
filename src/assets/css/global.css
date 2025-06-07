@@ -11,12 +11,13 @@
 
 /* CSS variables for your theme */
 :root {
-  --bg-color: #CDDFF0;
+  --bg-color: #cddff0;
   --text-color: #333;
 }
 
 /* Global body styles */
-html, body {
+html,
+body {
   height: 100%;
   background-color: var(--bg-color);
   color: var(--text-color);
