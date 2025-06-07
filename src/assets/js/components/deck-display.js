@@ -1,4 +1,4 @@
-import { getCardById } from './indexedDB.js';
+import { getCardById } from '../data/indexedDB.js';
 /**
  * Creates a deck display based upon an exisiting deck
  * @property {number} id - Unique deck ID

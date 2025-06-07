@@ -1,4 +1,4 @@
-import { Card } from '../data/card';
+import { Card } from '../assets/js/data/card';
 
 describe('Card class', () => {
   describe('constructor', () => {

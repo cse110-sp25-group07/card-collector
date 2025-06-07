@@ -1,4 +1,4 @@
-import { Deck } from '../data/deck';
+import { Deck } from '../assets/js/data/deck';
 
 describe('Deck class', () => {
   describe('constructor', () => {

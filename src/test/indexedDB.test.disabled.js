@@ -11,9 +11,13 @@
 ---------------------------------------------------------------- */
 
 import 'fake-indexeddb/auto';
-import { addCard, addDeck, getCardsFromDeck } from '../data/indexedDB.js';
-import { Card } from '../data/card.js';
-import { Deck } from '../data/deck.js';
+import {
+  addCard,
+  addDeck,
+  getCardsFromDeck,
+} from '../assets/js/data/indexedDB.js';
+import { Card } from '../assets/js/data/card.js';
+import { Deck } from '../assets/js/data/deck.js';
 
 describe('indexedDB data layer – getCardsFromDeck', () => {
   let deckIdA, deckIdB, deckIdC; // Electric/Fire, Water, Grass
