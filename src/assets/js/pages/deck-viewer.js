@@ -23,65 +23,6 @@ function init() {
   // Initialize deck management controls first
   initDeckManagementControls();
 
-  //////////////////////////////////////////////////////////// EXAMPLE DECKS AND CARDS: REMOVE UPON ACTUAL USE //////////////////////////////////////////////////////////////////////////////////////////
-  const storageExampleDeck = new Deck({
-    id: '4',
-    imageUrl: '',
-    name: 'servkjqhferk fhwerkjvhwdkjh',
-    cardIds: [],
-  });
-  const storageExampleDeck2 = new Deck({
-    id: '5',
-    imageUrl: '',
-    name: 'n',
-    cardIds: [],
-  });
-
-  const cardImgExample = new Card({
-    id: '1',
-    name: 'gyatt',
-    imageURL: '../create-deck/assets/images/card-back-evil.jpg',
-    type: 'water',
-    hp: 5,
-    evolution: 'vaporeon idk man',
-  });
-  const cardImgExample2 = new Card({
-    id: '2',
-    name: 'gyatt',
-    imageURL: '../create-deck/assets/images/card-back-evil.jpg',
-    type: 'water',
-    hp: 5,
-    evolution: 'vaporeon idk man',
-  });
-  const cardImgExample3 = new Card({
-    id: '3',
-    name: 'gyatt',
-    imageURL: '../create-deck/assets/images/card-back-evil.jpg',
-    type: 'water',
-    hp: 5,
-    evolution: 'vaporeon idk man',
-  });
-  const cardImgExample4 = new Card({
-    id: '4',
-    name: 'gyatt',
-    imageURL: '../create-deck/assets/images/card-back.webp',
-    type: 'water',
-    hp: 5,
-    evolution: 'vaporeon idk man',
-  });
-  addCard(cardImgExample);
-  addCard(cardImgExample2);
-  storageExampleDeck.addCard(cardImgExample.id);
-  storageExampleDeck.addCard(cardImgExample2.id);
-
-  addCard(cardImgExample3);
-  addCard(cardImgExample4);
-  storageExampleDeck2.addCard(cardImgExample3.id);
-  storageExampleDeck2.addCard(cardImgExample4.id);
-
-  addDeck(storageExampleDeck);
-  addDeck(storageExampleDeck2);
-  // Load decks immediately
   loadDecks();
 
   // Refresh when page becomes visible (e.g., returning from create/edit)

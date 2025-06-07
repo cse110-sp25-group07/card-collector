@@ -5,69 +5,6 @@ import {
   addDeck,
 } from '../data/indexedDB.js';
 
-//List of Dummy Cards
-//TODO Delete this and create unit tests for sort and search
-/*
-const dummyCards = [
-  {
-    name: 'Pikachu',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-    type: "electric",
-    hp: 100,
-    evolution: 'Raichu'
-  },
-  {
-    name: 'Charmander',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
-    type: "fire",
-    hp: 80,
-    evolution: 'Charmeleon'
-  },
-  {
-    name: 'Raichu',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png',
-    type: "electric",
-    hp: 101,
-    evolution: ''
-  },
-  {
-    name: 'Bulbasaur',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-    type: "grass",
-    hp: 101,
-    evolution: 'Ivysaur'
-  },
-  {
-    name: 'Electrode',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/100.png',
-    type: "electric",
-    hp: 99,
-    evolution: 'Voltorb'
-  },
-  {
-    name: 'Voltorb',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/101.png',
-    type: "electric",
-    hp: 140,
-    evolution: ''
-  },
-  {
-    name: 'Ivysaur',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
-    type: "grass",
-    hp: 150,
-    evolution: 'Venosaur'
-  },
-  {
-    name: 'Venosaur',
-    imageURL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
-    type: "grass",
-    hp: 200,    
-    evolution: ''
-  }
-];
-*/
-
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
   const heading = document.querySelector('h1');
@@ -321,15 +258,6 @@ async function init() {
   const grid = renderCardGrid(cards);
   root.appendChild(grid);
   backSearchSortManageBtnsSetup(cards);
-  /*
-  //This is just for the dummyCards testing
-  //TODO Delete this once I implement some unit tests
-  
-  const root = document.getElementById('card-grid-root');
-  const grid = renderCardGrid(dummyCards);
-  root.appendChild(grid);
-  backSearchSortManageBtnsSetup(dummyCards);
-*/
 }
 
 init();

@@ -16,17 +16,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const editDeckId = urlParams.get('edit');
   let existingDeck = null;
 
-  // // Update back button text based on return destination
-  // if (backBtn) {
-  //   const backText = returnTo === 'deck-management' ? 'Back to Deck Management' : 'Back to Deck View';
-  //   backBtn.innerHTML = `
-  //     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-  //       <path d="M19 12H5M12 19l-7-7 7-7"/>
-  //     </svg>
-  //     ${backText}
-  //   `;
-  // }
-
   // Deck form elements
   const deckNameInput = document.getElementById('deckName');
   const thumbnailContainer = document.getElementById('cardBackContainer');
