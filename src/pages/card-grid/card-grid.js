@@ -154,20 +154,20 @@ function backSearchSortManageBtnsSetup(allCards = []) {
     window.location.href = '../deck-grid/deckviewui.html';
   });
 
-  if (!allCards.length) return;
-
-  //Manage Button
-  const manage = document.getElementById('manage-toggle');
-  manage.addEventListener('click', () => {
-    document.body.classList.toggle('manage-visible');
-  });
-
   //Create Button
   const create = document.getElementById('create-card');
   create.addEventListener('click', () => {
     const params = new URLSearchParams(window.location.search);
     const deckId = params.get('deckId');
     window.location.href = `../create-card/create-card.html?deckId=${deckId}`;
+  });
+
+  if (!allCards.length) return;
+
+  //Manage Button
+  const manage = document.getElementById('manage-toggle');
+  manage.addEventListener('click', () => {
+    document.body.classList.toggle('manage-visible');
   });
 
   //Sort Cards Selection
