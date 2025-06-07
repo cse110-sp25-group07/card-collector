@@ -1,10 +1,7 @@
-import { Card } from '../data/card.js';
 import { Deck } from '../data/deck.js';
 import { DeckDisplay } from '../components/deck-display.js';
 import {
   getAllDecks,
-  addDeck,
-  addCard,
   deleteDeck,
 } from '../data/indexedDB.js';
 

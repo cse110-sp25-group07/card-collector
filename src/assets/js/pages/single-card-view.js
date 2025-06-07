@@ -109,7 +109,7 @@ document
   .getElementsByClassName('next-button')[0]
   .addEventListener('click', nextCard);
 
-// Back Button  
+// Back Button
 document.querySelector('.back-button').addEventListener('click', () => {
   goBack();
 });
