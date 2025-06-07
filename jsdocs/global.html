@@ -422,7 +422,7 @@
     
 
     
-    <h4 class="name" id="addDeckstoDocument"><span class="type-signature"></span>addDeckstoDocument<span class="signature">(decks)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="createDeckElement"><span class="type-signature"></span>createDeckElement<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -430,10 +430,7 @@
 
 
 <div class="description">
-    <p>Takes in an array of decks and for each deck creates a
-new <deck-display> element, adds the deck data to that deck-view
-using element.data = {...}, and then appends that new deck
-to <deck></p>
+    <p>Create deck element</p>
 </div>
 
 
@@ -442,55 +439,6 @@ to <deck></p>
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>decks</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>An array of decks</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -526,7 +474,7 @@ to <deck></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line113">line 113</a>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line550">line 550</a>
     </li></ul></dd>
     
 
@@ -861,6 +809,534 @@ to <deck></p>
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deselectAllDecks"><span class="type-signature"></span>deselectAllDecks<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Deselect all decks</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line363">line 363</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="displayDecks"><span class="type-signature"></span>displayDecks<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Display decks</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line513">line 513</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enterDeleteMode"><span class="type-signature"></span>enterDeleteMode<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Enter delete mode - highlight all decks as selectable</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line231">line 231</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enterEditMode"><span class="type-signature"></span>enterEditMode<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Enter edit mode - highlight all decks as selectable</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line222">line 222</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="exitDeleteMode"><span class="type-signature"></span>exitDeleteMode<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Exit delete mode</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line252">line 252</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="exitEditMode"><span class="type-signature"></span>exitEditMode<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Exit edit mode</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line243">line 243</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1451,7 +1927,7 @@ to <deck></p>
     
 
     
-    <h4 class="name" id="getDecksFromStorage"><span class="type-signature">(async) </span>getDecksFromStorage<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    <h4 class="name" id="handleCreateDeck"><span class="type-signature"></span>handleCreateDeck<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -1459,10 +1935,7 @@ to <deck></p>
 
 
 <div class="description">
-    <p>Reads 'decks' from localStorage and returns an array of
-all of the decks found (parsed, not in string form). If
-nothing is found in localStorage for 'decks', an empty array
-is returned.</p>
+    <p>Handle create deck button click</p>
 </div>
 
 
@@ -1506,7 +1979,7 @@ is returned.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line100">line 100</a>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line568">line 568</a>
     </li></ul></dd>
     
 
@@ -1531,28 +2004,798 @@ is returned.</p>
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-<div class="param-desc">
-    <p>An array of decks found in index</p>
+            
+
+    
+
+    
+    <h4 class="name" id="handleDeckClick"><span class="type-signature"></span>handleDeckClick<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Handle deck click based on current mode</p>
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
 
 
-    </dd>
-</dl>
+
+
+
+
+
+
+
+
+<dl class="details">
 
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line320">line 320</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hideModeInstructions"><span class="type-signature"></span>hideModeInstructions<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Hide mode instructions</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line488">line 488</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initDeckManagementControls"><span class="type-signature"></span>initDeckManagementControls<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Initialize deck management controls and event listeners</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line103">line 103</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="loadDecks"><span class="type-signature">(async) </span>loadDecks<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Load decks</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line498">line 498</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="selectAllDecks"><span class="type-signature"></span>selectAllDecks<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Select all decks</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line351">line 351</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="showBulkDeleteConfirmation"><span class="type-signature"></span>showBulkDeleteConfirmation<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Show bulk delete confirmation modal</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line390">line 390</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="showModeInstructions"><span class="type-signature"></span>showModeInstructions<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Show mode instructions</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line414">line 414</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toggleDeckSelection"><span class="type-signature"></span>toggleDeckSelection<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Toggle deck selection for bulk delete</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line336">line 336</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateBulkDeleteButton"><span class="type-signature"></span>updateBulkDeleteButton<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Update bulk delete button visibility and text</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line374">line 374</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1747,6 +2990,94 @@ is returned.</p>
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="updateModeDisplay"><span class="type-signature"></span>updateModeDisplay<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Update visual display based on current mode</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_deck-grid_assets_scripts_deckviewer.js.html">pages/deck-grid/assets/scripts/deckviewer.js</a>, <a href="pages_deck-grid_assets_scripts_deckviewer.js.html#line262">line 262</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -1762,13 +3093,13 @@ is returned.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card_Card.html">Card</a></li><li><a href="Deck_Deck.html">Deck</a></li><li><a href="DeckDisplay.html">DeckDisplay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addCard">addCard</a></li><li><a href="global.html#addDeck">addDeck</a></li><li><a href="global.html#addDeckstoDocument">addDeckstoDocument</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteDeck">deleteDeck</a></li><li><a href="global.html#getAllDecks">getAllDecks</a></li><li><a href="global.html#getCardById">getCardById</a></li><li><a href="global.html#getCardsFromDeck">getCardsFromDeck</a></li><li><a href="global.html#getDeckById">getDeckById</a></li><li><a href="global.html#getDecksFromStorage">getDecksFromStorage</a></li><li><a href="global.html#updateDeck">updateDeck</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card_Card.html">Card</a></li><li><a href="Deck_Deck.html">Deck</a></li><li><a href="DeckDisplay.html">DeckDisplay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addCard">addCard</a></li><li><a href="global.html#addDeck">addDeck</a></li><li><a href="global.html#createDeckElement">createDeckElement</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteDeck">deleteDeck</a></li><li><a href="global.html#deselectAllDecks">deselectAllDecks</a></li><li><a href="global.html#displayDecks">displayDecks</a></li><li><a href="global.html#enterDeleteMode">enterDeleteMode</a></li><li><a href="global.html#enterEditMode">enterEditMode</a></li><li><a href="global.html#exitDeleteMode">exitDeleteMode</a></li><li><a href="global.html#exitEditMode">exitEditMode</a></li><li><a href="global.html#getAllDecks">getAllDecks</a></li><li><a href="global.html#getCardById">getCardById</a></li><li><a href="global.html#getCardsFromDeck">getCardsFromDeck</a></li><li><a href="global.html#getDeckById">getDeckById</a></li><li><a href="global.html#handleCreateDeck">handleCreateDeck</a></li><li><a href="global.html#handleDeckClick">handleDeckClick</a></li><li><a href="global.html#hideModeInstructions">hideModeInstructions</a></li><li><a href="global.html#initDeckManagementControls">initDeckManagementControls</a></li><li><a href="global.html#loadDecks">loadDecks</a></li><li><a href="global.html#selectAllDecks">selectAllDecks</a></li><li><a href="global.html#showBulkDeleteConfirmation">showBulkDeleteConfirmation</a></li><li><a href="global.html#showModeInstructions">showModeInstructions</a></li><li><a href="global.html#toggleDeckSelection">toggleDeckSelection</a></li><li><a href="global.html#updateBulkDeleteButton">updateBulkDeleteButton</a></li><li><a href="global.html#updateDeck">updateDeck</a></li><li><a href="global.html#updateModeDisplay">updateModeDisplay</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Jun 07 2025 01:49:54 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Jun 07 2025 04:16:51 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
