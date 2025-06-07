@@ -1,3 +1,13 @@
+// Helper function to generate UUID v4 compatible fallback
+function generateFallbackUUID() {
+  // Generate a UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 export class Deck {
   /**
    * Creates a deck with a unique ID, a name, and a list of card IDs.
@@ -15,16 +25,12 @@ export class Deck {
         try {
           id = crypto.randomUUID();
         } catch {
-          // Fallback if crypto.randomUUID fails
-          id =
-            'd_' +
-            Date.now().toString(36) +
-            Math.random().toString(36).slice(2);
+          // Fallback UUID generation if crypto.randomUUID fails
+          id = generateFallbackUUID();
         }
       } else {
-        // Fallback ID generation
-        id =
-          'd_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
+        // Fallback UUID generation
+        id = generateFallbackUUID();
       }
     }
     this.id = id;

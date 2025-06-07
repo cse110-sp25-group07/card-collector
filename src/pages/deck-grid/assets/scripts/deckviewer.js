@@ -102,8 +102,10 @@ function init() {
  */
 function initDeckManagementControls() {
   // DOM elements
-  const menuBtn = document.getElementById('menu-btn');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
+  const manageBtnContainer = document.getElementById('manage-btn-container');
+  const manageBtn = document.getElementById('manage-btn');
+  const manageMenuExpanded = document.getElementById('manage-menu-expanded');
+  const backBtn = document.getElementById('back-btn');
   const createDeckBtn = document.getElementById('create-deck-btn');
   const editDeckBtn = document.getElementById('edit-deck-btn');
   const deleteDeckBtn = document.getElementById('delete-deck-btn');
@@ -111,19 +113,26 @@ function initDeckManagementControls() {
   const confirmDeleteBtn = document.getElementById('confirm-delete');
   const cancelDeleteBtn = document.getElementById('cancel-delete');
 
-  // Event listeners for menu
-  menuBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    dropdownMenu.style.display =
-      dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+  // Event listeners for manage button
+  manageBtn.addEventListener('click', () => {
+    expandManageMenu();
   });
 
-  // Close dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.deck-controls')) {
-      dropdownMenu.style.display = 'none';
-    }
+  // Event listener for back button
+  backBtn.addEventListener('click', () => {
+    collapseManageMenu();
   });
+
+  // Functions to expand and collapse manage menu
+  function expandManageMenu() {
+    manageBtnContainer.style.display = 'none';
+    manageMenuExpanded.style.display = 'flex';
+  }
+
+  function collapseManageMenu() {
+    manageMenuExpanded.style.display = 'none';
+    manageBtnContainer.style.display = 'flex';
+  }
 
   // Event listeners for buttons
   createDeckBtn.addEventListener('click', () => {
@@ -136,6 +145,7 @@ function initDeckManagementControls() {
     } else {
       enterEditMode();
     }
+    collapseManageMenu(); // Close manage menu when entering a mode
   });
 
   deleteDeckBtn.addEventListener('click', () => {
@@ -144,6 +154,7 @@ function initDeckManagementControls() {
     } else {
       enterDeleteMode();
     }
+    collapseManageMenu(); // Close manage menu when entering a mode
   });
 
   confirmDeleteBtn.addEventListener('click', async () => {
@@ -259,20 +270,22 @@ function updateModeDisplay() {
   // Update button states
   if (currentMode === 'edit') {
     deckViewer.classList.add('edit-mode');
-    editBtn.textContent = '✕ Cancel Edit';
+    editBtn.innerHTML =
+      '<span class="btn-icon">✕</span><span class="btn-text">Cancel Edit</span>';
     editBtn.classList.add('cancel-mode');
     deleteBtn.disabled = true;
   } else if (currentMode === 'delete') {
     deckViewer.classList.add('delete-mode');
-    deleteBtn.textContent = '✕ Cancel Delete';
+    deleteBtn.innerHTML =
+      '<span class="btn-icon">✕</span><span class="btn-text">Cancel Delete</span>';
     deleteBtn.classList.add('cancel-mode');
     editBtn.disabled = true;
   } else {
     // View mode
     editBtn.innerHTML =
-      '<span class="btn-icon" aria-hidden="true">✎</span>Edit Deck';
+      '<span class="btn-icon">✎</span><span class="btn-text">Edit Deck</span>';
     deleteBtn.innerHTML =
-      '<span class="btn-icon" aria-hidden="true">🗑</span>Delete Deck';
+      '<span class="btn-icon">🗑</span><span class="btn-text">Delete Deck</span>';
     editBtn.classList.remove('cancel-mode');
     deleteBtn.classList.remove('cancel-mode');
     editBtn.disabled = false;

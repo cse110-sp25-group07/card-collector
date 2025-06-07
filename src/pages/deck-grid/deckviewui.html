@@ -10,53 +10,42 @@
 
   <body>
     <div class="page-container">
-      <h1>Deck View</h1>
+      <h1>Your Decks</h1>
 
-      <!-- Deck Management Controls -->
-      <div class="deck-controls">
-        <button
-          id="menu-btn"
-          class="menu-btn"
-          aria-expanded="false"
-          aria-haspopup="true"
-          aria-controls="dropdown-menu"
-        >
-          <span class="btn-icon" aria-hidden="true">☰</span>
-          Manage Decks
-        </button>
+      <!-- Floating Deck Management Controls -->
+      <div class="floating-manage-controls">
+        <!-- Collapsed state - single Manage button -->
+        <div class="manage-btn-container" id="manage-btn-container">
+          <button id="manage-btn" class="manage-btn">
+            <span class="btn-text">Manage</span>
+          </button>
+        </div>
+
+        <!-- Expanded state - menu with back arrow and action buttons -->
         <div
-          class="dropdown-menu"
-          id="dropdown-menu"
-          role="menu"
-          aria-hidden="true"
+          class="manage-menu-expanded"
+          id="manage-menu-expanded"
+          style="display: none"
         >
-          <button role="menuitem" id="create-deck-btn" class="control-btn">
-            <span class="btn-icon" aria-hidden="true">+</span>
-            Create Deck
+          <button id="back-btn" class="back-btn" aria-label="Close manage menu">
+            <span class="btn-icon">←</span>
           </button>
-          <button
-            role="menuitem"
-            id="edit-deck-btn"
-            class="control-btn"
-            disabled
-          >
-            <span class="btn-icon" aria-hidden="true">✎</span>
-            Edit Deck
+          <button id="create-deck-btn" class="action-btn">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Create Deck</span>
           </button>
-          <button
-            role="menuitem"
-            id="delete-deck-btn"
-            class="control-btn"
-            disabled
-          >
-            <span class="btn-icon" aria-hidden="true">🗑</span>
-            Delete Deck
+          <button id="edit-deck-btn" class="action-btn" disabled>
+            <span class="btn-icon">✎</span>
+            <span class="btn-text">Edit Deck</span>
+          </button>
+          <button id="delete-deck-btn" class="action-btn" disabled>
+            <span class="btn-icon">🗑</span>
+            <span class="btn-text">Delete Deck</span>
           </button>
         </div>
       </div>
 
       <div id="deck-box" class="fancy-box">
-        <h2>Decks</h2>
         <div id="deck-viewer">
           <!-- Decks will be populated here -->
         </div>
