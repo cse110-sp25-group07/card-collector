@@ -1,3 +1,13 @@
+// Helper function to generate UUID v4 compatible fallback
+function generateFallbackUUID() {
+  // Generate a UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c == 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 export class Deck {
   /**
    * Creates a deck with a unique ID, a name, and a list of card IDs.
@@ -5,7 +15,24 @@ export class Deck {
    * @param {string} name - Deck name.
    * @param {string[]} cardIds - Array of card IDs in the deck.
    */
-  constructor({ id = crypto.randomUUID(), imageURL, name = '', cardIds = [] }) {
+  constructor({ id, imageURL, name = '', cardIds = [] }) {
+    // Generate ID if not provided - using a fallback for crypto.randomUUID
+    if (!id) {
+      if (
+        typeof crypto !== 'undefined' &&
+        typeof crypto.randomUUID === 'function'
+      ) {
+        try {
+          id = crypto.randomUUID();
+        } catch {
+          // Fallback UUID generation if crypto.randomUUID fails
+          id = generateFallbackUUID();
+        }
+      } else {
+        // Fallback UUID generation
+        id = generateFallbackUUID();
+      }
+    }
     this.id = id;
     this.name = name;
     this.imageURL = imageURL;
