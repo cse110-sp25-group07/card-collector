@@ -3,30 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <title>Single Card View</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/src/assets/images/card-collector-logo.png"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
     <link rel="stylesheet" href="../assets/css/single-card.css" />
+    <script src="../assets/js/components/navbar.js" defer></script>
   </head>
   <body>
-    <div class="card-container">
-      <div class="header">
-        <button class="back-button" title="Go back">←</button>
-        <h2 class="deck-name" id="deckName">Deck</h2>
+    <nav-bar></nav-bar>
+    <main>
+      <div class="card-container">
+        <div class="header">
+          <button class="back-button" title="Go back">←</button>
+          <h2 class="deck-name" id="deckName">Deck</h2>
+        </div>
+
+        <h3 class="main-card-name" id="mainCardName"></h3>
+
+        <div class="carousel-wrapper">
+          <button class="navigation prev-button" title="Previous card"></button>
+          <button class="navigation next-button" title="Next card"></button>
+
+          <div class="carousel" id="carousel"></div>
+        </div>
+
+        <div class="card-indicator" id="cardIndicator"></div>
+
+        <button class="manage-button">Manage Card</button>
       </div>
-
-      <h3 class="main-card-name" id="mainCardName"></h3>
-
-      <div class="carousel-wrapper">
-        <button class="navigation prev-button" title="Previous card"></button>
-        <button class="navigation next-button" title="Next card"></button>
-
-        <div class="carousel" id="carousel"></div>
-      </div>
-
-      <div class="card-indicator" id="cardIndicator"></div>
-
-      <button class="manage-button">Manage Card</button>
-    </div>
-
+    </main>
     <script type="module" src="../assets/js/pages/single-card-view.js"></script>
   </body>
 </html>
