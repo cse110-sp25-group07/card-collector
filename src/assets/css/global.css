@@ -1,31 +1,69 @@
-/* assets/css/global.css */
-
-/* Reset + Box-sizing */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Typography and base layout */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #ecf3f6; /* Alice Blue */
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
-/* CSS variables for your theme */
-:root {
-  --bg-color: #cddff0;
-  --text-color: #333;
+/* Sticky header bar */
+.page-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ecf3f6;
+  margin: 0;
+  border-bottom: 2px solid #d8d8d8;
 }
 
-/* Global body styles */
-html,
-body {
-  height: 100%;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: Arial, sans-serif;
+/* Site title styling */
+.site-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
-/* Common layout (e.g. a max-width container) */
-.container {
-  width: min(90%, 800px);
-  margin: 0 auto;
+.site-title a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Navigation bar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+
+.navbar a:visited {
+  color: black;
+}
+
+.navbar a:hover {
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+/* Main content spacing */
+main {
+  padding-top: 2rem;
 }
