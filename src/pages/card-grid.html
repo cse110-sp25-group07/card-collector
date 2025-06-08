@@ -4,34 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>View All Cards</title>
+    <link rel="stylesheet" href="../assets/css/global.css" />
     <link rel="stylesheet" href="../assets/css/card-grid.css" />
+    <script src="../assets/js/components/navbar.js" defer></script>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/src/assets/images/card-collector-logo.png"
+    />
   </head>
   <body>
-    <h1>No Deck Chosen</h1>
+    <nav-bar></nav-bar>
+    <section class="header-row">
+      <div class="back-controls">
+        <button id="go-back" class="back-button" aria-label="Go Back">❮ Decks</button>
+      </div>
+      <h2>No Deck Chosen</h2>
+    </section>
+    <main class="content-container">
+      <div class="sort-controls">
+        <label for="sort-cards" class="sort-label">Sort By:</label>
+        <select id="sort-cards">
+          <option value="default">Default</option>
+          <option value="names-alpha">Name A→Z</option>
+          <option value="names-rev-alpha">Name Z→A</option>
+          <option value="evolution">Evolution</option>
+          <option value="type">Type</option>
+          <option value="hp">HP (Hit Points)</option>
+        </select>
+      </div>
 
-    <div class="sort-controls">
-      <label for="sort-cards" class="sort-label">Sort By:</label>
-      <select id="sort-cards">
-        <option value="default">Default</option>
-        <option value="names-alpha">Name A→Z</option>
-        <option value="names-rev-alpha">Name Z→A</option>
-        <option value="evolution">Evolution</option>
-        <option value="type">Type</option>
-        <option value="hp">HP (Hit Points)</option>
-      </select>
-    </div>
+      <input type="text" id="search-cards" placeholder="Search cards by name" />
 
-    <input type="text" id="search-cards" placeholder="Search cards by name" />
+      <div id="card-grid-root"></div>
 
-    <div id="card-grid-root"></div>
+      <script type="module" src="../assets/js/pages/card-grid.js"></script>
 
-    <script type="module" src="../assets/js/pages/card-grid.js"></script>
-    <div class="back-controls">
-      <button id="go-back" class="back-button" aria-label="Go Back"></button>
-    </div>
-    <div class="manage-controls">
-      <button id="manage-toggle">Manage</button>
-      <button id="create-card">Create</button>
-    </div>
+      <div class="manage-controls">
+        <button id="manage-toggle">Manage</button>
+        <button id="create-card">Create</button>
+      </div>
+    </main>
   </body>
 </html>
