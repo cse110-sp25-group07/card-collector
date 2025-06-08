@@ -14,9 +14,10 @@ h1 {
 
 h2 {
   color: var(--accent-color, black);
-  text-align: center;
-  margin: 0;
   font-size: clamp(1.2rem, 3vw, 1.8rem);
+  width: 100%;         /* span the full container */
+  text-align: center;  /* center the text */
+  margin: 0;  
 }
 
 h3 {

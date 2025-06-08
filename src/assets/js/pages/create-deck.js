@@ -58,21 +58,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   const selectedCards = new Set();
   let selectedCardsData = [];
 
-  // Initialize form for editing if needed
+  // ---- Initialization for editing mode ----
+
   if (editDeckId) {
     try {
       existingDeck = await getDeckById(editDeckId);
       if (existingDeck) {
-        // Update title
+        // Update page title
         document.querySelector('h1').textContent = 'EDIT DECK';
 
-        // Display button
+        // Show Back button
         backBtn.classList.remove('hidden');
         backBtn.addEventListener('click', () => {
           window.location.href = '/src/pages/deck-view-ui.html';
         });
 
-        // Fill in form data
+        // Pre-fill form data
         deckNameInput.value = existingDeck.name;
         if (existingDeck.imageURL) {
           thumbnail = existingDeck.imageURL;
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           thumbnailContainer.classList.add('has-custom-image');
         }
 
-        // Update button text
+        // Change save button text
         saveDeckBtn.textContent = 'Save Changes';
       }
     } catch (error) {
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // ---- Event Listeners ----
+
   thumbnailUpload.addEventListener('click', () => thumbnailInput.click());
   thumbnailInput.addEventListener('change', handleThumbnailUpload);
   addCardsBtn.addEventListener('click', openCardModal);
@@ -112,6 +114,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // ---- Handlers ----
+
+  /**
+   * Handles uploading of a new deck thumbnail.
+   * @param {Event} e - The change event from the file input.
+   */
   function handleThumbnailUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -119,31 +126,39 @@ document.addEventListener('DOMContentLoaded', async () => {
     const reader = new FileReader();
     reader.onload = ({ target }) => {
       thumbnail = target.result;
-      // 1) set & show the new thumbnail
       thumbnailImage.src = thumbnail;
       thumbnailImage.style.display = 'block';
-      // 2) hide only the _old_ default back & the plus-icon
       cardBackImage.style.display = 'none';
       addIconOverlay.style.display = 'none';
-      // 3) bump brightness back up via your CSS
       thumbnailContainer.classList.add('has-custom-image');
       showNotification('Thumbnail uploaded successfully');
     };
     reader.readAsDataURL(file);
   }
 
+  /**
+   * Opens the card selection modal.
+   */
   function openCardModal() {
     cardModal.classList.add('show');
     document.body.style.overflow = 'hidden';
   }
+
+  /**
+   * Closes the card selection modal.
+   */
   function closeCardModal() {
     cardModal.classList.remove('show');
     document.body.style.overflow = 'auto';
   }
 
+  /**
+   * Processes multiple image uploads for cards.
+   * @param {Event} e - The change event from the file input.
+   */
   function handleCardImagesUpload(e) {
     const files = Array.from(e.target.files).filter((f) =>
-      f.type.startsWith('image/'),
+      f.type.startsWith('image/')
     );
     if (!files.length) {
       showNotification('No valid image files selected', 'error');
@@ -152,33 +167,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const emptyState = cardsGrid.querySelector('.empty-state');
     if (emptyState) emptyState.remove();
     selectionControls.style.display = 'flex';
+
     files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = ({ target }) => {
-        // Generate ID with fallback
-        let cardId;
-        if (
-          typeof crypto !== 'undefined' &&
-          typeof crypto.randomUUID === 'function'
-        ) {
-          try {
-            cardId = crypto.randomUUID();
-          } catch {
-            cardId =
-              'c_' +
-              Date.now().toString(36) +
-              Math.random().toString(36).slice(2);
-          }
-        } else {
-          cardId =
-            'c_' +
-            Date.now().toString(36) +
-            Math.random().toString(36).slice(2);
-        }
-
+        const cardId = generateCardId();
         const cardData = {
           id: cardId,
-          name: "",
+          name: '', // no name by default
           imageData: target.result,
         };
         uploadedCards.push(cardData);
@@ -190,30 +186,58 @@ document.addEventListener('DOMContentLoaded', async () => {
     cardImagesInput.value = '';
   }
 
-  function addCardToGrid(cardData) {
-  const el = document.createElement('div');
-  el.className = 'card-item';
-  el.dataset.cardId = cardData.id;
-  let html = `
-    <div class="card-image-container">
-      <img src="${cardData.imageData}" alt="${cardData.name}" class="card-image" />
-    </div>
-    <div class="card-check">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="20,6 9,17 4,12"></polyline>
-      </svg>
-    </div>
-  `;
-  if (cardData.name && cardData.name.trim() !== '') {
-    html += `<p class="card-name">${cardData.name}</p>`;
+  /**
+   * Generates a unique ID for a card.
+   * @returns {string} A unique card identifier.
+   */
+  function generateCardId() {
+    if (crypto?.randomUUID) {
+      try {
+        return crypto.randomUUID();
+      } catch { }
+    }
+    return (
+      'c_' +
+      Date.now().toString(36) +
+      Math.random().toString(36).slice(2)
+    );
   }
 
-  el.innerHTML = html;
-  el.addEventListener('click', () => toggleCardSelection(cardData.id, el));
-  cardsGrid.appendChild(el);
-}
+  /**
+   * Renders a single card tile into the grid.
+   * @param {{id: string, name: string, imageData: string}} cardData
+   */
+  function addCardToGrid(cardData) {
+    const el = document.createElement('div');
+    el.className = 'card-item';
+    el.dataset.cardId = cardData.id;
 
+    let html = `
+      <div class="card-image-container">
+        <img src="${cardData.imageData}" alt="${cardData.name}" class="card-image" />
+      </div>
+      <div class="card-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20,6 9,17 4,12"></polyline>
+        </svg>
+      </div>
+    `;
+    if (cardData.name.trim()) {
+      html += `<p class="card-name">${cardData.name}</p>`;
+    }
 
+    el.innerHTML = html;
+    el.addEventListener('click', () =>
+      toggleCardSelection(cardData.id, el)
+    );
+    cardsGrid.appendChild(el);
+  }
+
+  /**
+   * Toggles selection state for a given card element.
+   * @param {string} id - The card's unique identifier.
+   * @param {HTMLElement} el - The card-item element.
+   */
   function toggleCardSelection(id, el) {
     if (selectedCards.has(id)) {
       selectedCards.delete(id);
@@ -225,39 +249,53 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateSelectionCount();
   }
 
+  /**
+   * Clears all uploaded cards and resets the grid.
+   */
   function clearUploads() {
     uploadedCards.length = 0;
     selectedCards.clear();
     selectedCardsData = [];
-    cardsGrid.innerHTML = `<div class="empty-state">
-      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7,10 12,15 17,10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      <p>No cards uploaded yet. Upload images to see previews.</p>
-    </div>`;
+    cardsGrid.innerHTML = `
+      <div class="empty-state">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7,10 12,15 17,10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <p>No cards uploaded yet. Upload images to see previews.</p>
+      </div>`;
     selectionControls.style.display = 'none';
     updateSelectedCardsPreview();
     showNotification('All uploads cleared', 'success');
   }
 
+  /**
+   * Selects all uploaded cards in the grid.
+   */
   function selectAllCards() {
     uploadedCards.forEach((c) => {
       selectedCards.add(c.id);
       const el = cardsGrid.querySelector(`[data-card-id="${c.id}"]`);
-      if (el) el.classList.add('selected');
+      el?.classList.add('selected');
     });
     updateSelectionCount();
   }
+
+  /**
+   * Deselects all cards in the grid.
+   */
   function deselectAllCards() {
     selectedCards.clear();
     cardsGrid
-      .querySelectorAll('.card-item')
+      .querySelectorAll('.card-item.selected')
       .forEach((el) => el.classList.remove('selected'));
     updateSelectionCount();
   }
 
+  /**
+   * Updates the selection counter UI and confirm button.
+   */
   function updateSelectionCount() {
     const count = selectedCards.size;
     selectionCount.textContent = `${count} cards selected`;
@@ -265,13 +303,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     confirmBtn.disabled = count === 0;
   }
 
+  /**
+   * Confirms current card selection and updates the preview.
+   */
   function confirmCardSelection() {
-    selectedCardsData = uploadedCards.filter((c) => selectedCards.has(c.id));
+    selectedCardsData = uploadedCards.filter((c) =>
+      selectedCards.has(c.id)
+    );
     closeCardModal();
     updateSelectedCardsPreview();
     showNotification(`${selectedCardsData.length} cards selected for deck`);
   }
 
+  /**
+   * Renders selected cards into the preview section below the form.
+   */
   function updateSelectedCardsPreview() {
     if (!selectedCardsSection) return;
     if (!selectedCardsData.length) {
@@ -295,6 +341,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  /**
+   * Saves the deck (new or edited) into IndexedDB.
+   */
   async function saveDeck() {
     const name = deckNameInput.value.trim();
     if (!name) {
@@ -303,37 +352,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-      if (editDeckId) {
-        // Update existing deck
+      if (editDeckId && existingDeck) {
         const updatedDeck = new Deck({
           id: editDeckId,
           name,
           imageURL: thumbnail || defaultDeckImage,
-          cardIds: existingDeck.cardIds, // Preserve existing cards
+          cardIds: existingDeck.cardIds,
         });
-
         await updateDeck(updatedDeck.toJSON());
         showNotification(`Deck "${name}" updated successfully!`);
       } else {
-        // Create new deck
         const deck = new Deck({
           name,
           imageURL: thumbnail || defaultDeckImage,
           cardIds: [],
         });
-
         for (const data of selectedCardsData) {
-          const card = new Card({ name: data.name, imageURL: data.imageData });
+          const card = new Card({
+            name: data.name,
+            imageURL: data.imageData,
+          });
           const id = await addCard(card.toJSON());
           deck.addCard(id);
         }
-
         await addDeck(deck.toJSON());
         showNotification(`Deck "${name}" saved successfully!`);
         resetForm();
       }
-
-      // Always return to deck view page
       window.location.href = '/src/pages/deck-view-ui.html';
     } catch (err) {
       console.error('Error saving deck:', err);
@@ -341,23 +386,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  /**
+   * Resets the form inputs after saving.
+   */
   function resetForm() {
     deckNameInput.value = '';
-    // keep uploaded thumbnail intact; do not revert preview
     selectedCardsData = [];
     updateSelectedCardsPreview();
   }
 
+  /**
+   * Redirects back to the deck view screen.
+   */
+  function handleBackNavigation() {
+    window.location.href = '/src/pages/deck-view-ui.html';
+  }
+
+  /**
+   * Displays a transient notification message.
+   * @param {string} msg - Message to show.
+   * @param {'success'|'error'} [type='success'] - Notification style.
+   */
   function showNotification(msg, type = 'success') {
     notification.textContent = msg;
     notification.className = `notification ${type}`;
     notification.classList.add('show');
     setTimeout(() => notification.classList.remove('show'), 3000);
-  }
-
-  function handleBackNavigation() {
-    // Always go back to deck view page
-    console.log('Back button clicked - navigating to deckviewui.html');
-    window.location.href = '/src/pages/deck-view-ui.html';
   }
 });
