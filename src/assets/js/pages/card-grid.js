@@ -67,8 +67,21 @@ function renderCardGrid(cards) {
         // Save the updated deck
         await addDeck(updatedDeck);
 
-        // Refresh the page to show changes
-        window.location.reload();
+        // REPLACED: Refresh the page to show changes
+        // window.location.reload();
+
+        //REPLACEMENT: re-render updated grid w/o refreshing
+        const updatedCards = await getCardsFromDeck(deckId);
+        const root = document.getElementById('card-grid-root');
+        root.innerHTML = '';
+        root.appendChild(renderCardGrid(updatedCards));
+
+        //REPLACEMENT: re-apply manage-visible class if it was on
+        if(document.body.classList.contains('manage-visible')) {
+          document.body.classList.add('manage-visible');
+        }
+
+
       } catch (err) {
         console.error('Failed to delete card:', err);
         alert('Failed to delete card. See console for details.');
@@ -265,4 +278,4 @@ async function init() {
 
 init();
 
-backSearchSortManageBtnsSetup();
+//backSearchSortManageBtnsSetup();
