@@ -52,6 +52,16 @@ function initDeckManagementControls() {
   manageBtn.addEventListener('click', () => {
     expandManageMenu();
   });
+  document.addEventListener('click', (e) => {
+    // if the menu is open AND the click target is outside both the collapsed & expanded containers…
+    const isOpen = manageMenuExpanded.style.display === 'flex';
+    if (isOpen
+      && !manageBtnContainer.contains(e.target)
+      && !manageMenuExpanded.contains(e.target)
+    ) {
+      collapseManageMenu();
+    }
+  });
 
   // Event listener for back button
   backBtn.addEventListener('click', () => {
@@ -65,8 +75,15 @@ function initDeckManagementControls() {
   }
 
   function collapseManageMenu() {
-    manageMenuExpanded.style.display = 'none';
-    manageBtnContainer.style.display = 'flex';
+    // 1) start the collapse animation
+    manageMenuExpanded.classList.add('closing');
+    
+    // 2) when it's done, actually hide and reset
+    manageMenuExpanded.addEventListener('animationend', () => {
+      manageMenuExpanded.style.display = 'none';
+      manageMenuExpanded.classList.remove('closing');
+      manageBtnContainer.style.display = 'flex';
+    }, { once: true });
   }
 
   // Event listeners for buttons

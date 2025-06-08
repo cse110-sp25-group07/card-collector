@@ -30,7 +30,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #e74c3c;
+  background: #2c3e50;
   color: white;
   border: none;
   padding: 0.75rem 1rem;
@@ -43,7 +43,6 @@ body {
 }
 
 .back-btn:hover {
-  background: #c0392b;
   transform: translateY(-1px);
 }
 
