@@ -1,4 +1,4 @@
-h2{
+h2 {
   margin-bottom: 1rem;
   text-align: center;
   color: hsl(210, 29%, 24%);
@@ -7,12 +7,6 @@ h2{
   position: relative;
   text-align: center;
   margin: 2rem 0;
-  padding: 0 2rem;
-}
-
-.content-container {
-  max-width: 960px;
-  margin: 0 auto;
   padding: 0 2rem;
 }
 
@@ -68,8 +62,6 @@ h2{
   border-radius: 4px;
   cursor: pointer;
 }
-
-
 
 .manage-controls {
   position: fixed;

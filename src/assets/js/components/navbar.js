@@ -21,7 +21,7 @@ class NavBar extends HTMLElement {
       </h1>
       <nav class="navbar">
         <ul>
-          <li><a href="/card-collector/index.html">Deck View</a></li>
+          <li><a href="/index.html">Deck View</a></li>
         </ul>
       </nav>
     `;

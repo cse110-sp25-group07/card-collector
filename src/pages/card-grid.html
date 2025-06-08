@@ -3,25 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <title>View All Cards</title>
-    <link rel="stylesheet" href="../assets/css/global.css" />
-    <link rel="stylesheet" href="../assets/css/card-grid.css" />
-    <script src="../assets/js/components/navbar.js" defer></script>
     <link
       rel="icon"
       type="image/x-icon"
       href="/src/assets/images/card-collector-logo.png"
     />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/card-grid.css" />
+    <script src="../assets/js/components/navbar.js" defer></script>
   </head>
   <body>
     <nav-bar></nav-bar>
     <section class="header-row">
       <div class="back-controls">
-        <button id="go-back" class="back-button" aria-label="Go Back">❮ Decks</button>
+        <button id="go-back" class="back-button" aria-label="Go Back">
+          ❮ Decks
+        </button>
       </div>
       <h2>No Deck Chosen</h2>
     </section>
-    <main class="content-container">
+    <main>
       <div class="sort-controls">
         <label for="sort-cards" class="sort-label">Sort By:</label>
         <select id="sort-cards">

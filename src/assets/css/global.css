@@ -66,4 +66,8 @@ body {
 /* Main content spacing */
 main {
   padding-top: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
+
