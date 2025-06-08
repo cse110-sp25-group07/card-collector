@@ -88,8 +88,11 @@ h3 {
 
 /* Icon inside button */
 .add-deck-btn .btn-icon {
+  width: 1em;  
+  height: 1em;     
+  line-height: 1;
   font-size: 1.25rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }

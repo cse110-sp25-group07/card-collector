@@ -22,108 +22,102 @@
   <body>
     <nav-bar></nav-bar>
     <main>
-      <div class="main-container">
-        <div class="page-header">
-          <button id="backBtn" class="back-btn">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
-            </svg>
-            Back to Deck View
-          </button>
-          <h2>CREATE DECK</h2>
-        </div>
+      <div class="create-deck-header">
+        <button id="backBtn" class="back-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          View All Decks
+        </button>
+        <h2>Create Deck</h2>
+      </div>
 
-        <div class="deck-creation-container">
-          <!-- Deck Creation Section -->
-          <div class="deck-creation-section">
-            <!-- Deck thumbnail with upload functionality -->
-            <div class="thumbnail-display">
-              <div class="thumbnail-container" id="cardBackContainer">
-                <div class="thumbnail-upload" id="thumbnailUpload">
-                  <div class="thumbnail-preview" id="thumbnailPreview">
-                    <div class="upload-placeholder" id="uploadPlaceholder">
-                      <img
-                        src="../assets/images/card-back.webp"
-                        alt="Card back"
-                        id="cardBackImage"
-                      />
-                      <div class="add-icon-overlay" id="addIconOverlay">
-                        <svg
-                          width="48"
-                          height="48"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                        >
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <line x1="12" y1="8" x2="12" y2="16"></line>
-                          <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                      </div>
-                      <img
-                        id="thumbnailImage"
-                        class="thumbnail-image"
-                        style="display: none"
-                        alt="Deck thumbnail"
-                      />
+      <div class="deck-creation-container">
+        <!-- Deck Creation Section -->
+        <div class="deck-creation-section">
+          <!-- Deck thumbnail with upload functionality -->
+          <div class="thumbnail-display">
+            <div class="thumbnail-container" id="cardBackContainer">
+              <div class="thumbnail-upload" id="thumbnailUpload">
+                <div class="thumbnail-preview" id="thumbnailPreview">
+                  <div class="upload-placeholder" id="uploadPlaceholder">
+                    <img
+                      src="../assets/images/card-back.webp"
+                      alt="Card back"
+                      id="cardBackImage"
+                    />
+                    <div class="add-icon-overlay" id="addIconOverlay">
+                      <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                      </svg>
                     </div>
-                    <input
-                      type="file"
-                      id="thumbnailInput"
-                      accept="image/*"
+                    <img
+                      id="thumbnailImage"
+                      class="thumbnail-image"
                       style="display: none"
+                      alt="Deck thumbnail"
                     />
                   </div>
+                  <input
+                    type="file"
+                    id="thumbnailInput"
+                    accept="image/*"
+                    style="display: none"
+                  />
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Deck info form -->
-            <div class="deck-info">
-              <div class="form-group">
-                <label for="deckName">Deck Name:</label>
-                <input
-                  type="text"
-                  id="deckName"
-                  placeholder="Enter deck name"
-                />
-              </div>
+          <!-- Deck info form -->
+          <div class="deck-info">
+            <div class="form-group">
+              <label for="deckName">Deck Name:</label>
+              <input type="text" id="deckName" placeholder="Enter deck name" />
+            </div>
 
-              <div class="form-group">
-                <label for="deckType">Deck type:</label>
-                <select id="deckType">
-                  <option value="pokemon">Pokemon</option>
-                  <option value="magic">Magic: The Gathering</option>
-                  <option value="custom">Custom</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <label for="deckType">Deck type:</label>
+              <select id="deckType">
+                <option value="pokemon">Pokemon</option>
+                <option value="magic">Magic: The Gathering</option>
+                <option value="custom">Custom</option>
+              </select>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-          <button id="saveDeckBtn" class="btn-primary">Save Deck</button>
-          <button id="addCardsBtn" class="btn-secondary">
-            <svg
-              class="btn-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            Add Cards Now
-          </button>
-        </div>
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="saveDeckBtn" class="btn-primary">Save Deck</button>
+        <button id="addCardsBtn" class="btn-secondary">
+          <svg
+            class="btn-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Cards Now
+        </button>
       </div>
 
       <!-- Card Selection Modal -->
@@ -216,7 +210,7 @@
             <button id="clearBtn" class="clear-btn">Clear Uploads</button>
             <button id="cancelBtn" class="btn-outline">Cancel</button>
             <button id="confirmBtn" class="btn-primary" disabled>
-              Add <span id="confirmCount">0</span> Cards
+              Add<span id="confirmCount">0</span>Cards
             </button>
           </div>
         </div>

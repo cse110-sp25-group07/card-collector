@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const cardData = {
           id: cardId,
-          name: file.name.replace(/\.[^/.]+$/, ''),
+          name: "",
           imageData: target.result,
         };
         uploadedCards.push(cardData);
@@ -191,23 +191,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function addCardToGrid(cardData) {
-    const el = document.createElement('div');
-    el.className = 'card-item';
-    el.dataset.cardId = cardData.id;
-    el.innerHTML = `
-      <div class="card-image-container">
-        <img src="${cardData.imageData}" alt="${cardData.name}" class="card-image" />
-      </div>
-      <div class="card-check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="20,6 9,17 4,12"></polyline>
-        </svg>
-      </div>
-      <p class="card-name">${cardData.name}</p>
-    `;
-    el.addEventListener('click', () => toggleCardSelection(cardData.id, el));
-    cardsGrid.appendChild(el);
+  const el = document.createElement('div');
+  el.className = 'card-item';
+  el.dataset.cardId = cardData.id;
+  let html = `
+    <div class="card-image-container">
+      <img src="${cardData.imageData}" alt="${cardData.name}" class="card-image" />
+    </div>
+    <div class="card-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20,6 9,17 4,12"></polyline>
+      </svg>
+    </div>
+  `;
+  if (cardData.name && cardData.name.trim() !== '') {
+    html += `<p class="card-name">${cardData.name}</p>`;
   }
+
+  el.innerHTML = html;
+  el.addEventListener('click', () => toggleCardSelection(cardData.id, el));
+  cardsGrid.appendChild(el);
+}
+
 
   function toggleCardSelection(id, el) {
     if (selectedCards.has(id)) {

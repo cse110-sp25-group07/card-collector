@@ -10,7 +10,7 @@ async function init() {
   const addBtn = document.getElementById('add-deck-btn');
   if (addBtn) {
     addBtn.addEventListener('click', () => {
-      window.location.href = '/src/pages/deck-ui.html';
+      window.location.href = '/src/pages/create-deck-ui.html';
     });
   }
   await loadDecks();
