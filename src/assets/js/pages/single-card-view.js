@@ -111,7 +111,7 @@ async function animateToCard() {
 function goBack() {
   const params = new URLSearchParams(window.location.search);
   const deckId = params.get('deckId');
-  window.location.href = `/src/pages/card-grid.html?deckId=${deckId}`;
+  window.location.href = `card-grid.html?deckId=${deckId}`;
 }
 
 // Button navigation

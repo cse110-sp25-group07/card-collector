@@ -71,7 +71,7 @@ function renderCardGrid(cards) {
     <p>${card.name}</p>
   `;
     cardLink.addEventListener('click', () => {
-      window.location.href = `/src/pages/single-card-display.html?deckId=${deckId}&cardId=${card.id}`;
+      window.location.href = `single-card-display.html?deckId=${deckId}&cardId=${card.id}`;
     });
 
     // DELETE‐MODE “×” ICON
@@ -105,13 +105,13 @@ function renderCardGrid(cards) {
   return container;
 }
 function handleEditDeck(deck) {
-  window.location.href = `/src/pages/create-deck-ui.html?edit=${deck.id}`;
+  window.location.href = `create-deck-ui.html?edit=${deck.id}`;
 }
 //sets up the search, filter and manage buttons
 function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
   back.addEventListener('click', () => {
-    window.location.href = '/index.html';
+    window.location.href = '../../index.html';
   });
 
   //Create Button
@@ -119,7 +119,7 @@ function backSearchSortManageBtnsSetup(allCards = []) {
   create.addEventListener('click', () => {
     const params = new URLSearchParams(window.location.search);
     const deckId = params.get('deckId');
-    window.location.href = `/src/pages/create-card.html?deckId=${deckId}`;
+    window.location.href = `create-card.html?deckId=${deckId}`;
   });
 
   if (!allCards.length) return;
@@ -319,7 +319,7 @@ async function init() {
     try {
       await deleteDeck(deckId);
       // redirect back to deck list
-      window.location.href = '/index.html';
+      window.location.href = '../../index.html';
     } catch (err) {
       console.error('Deck deletion failed:', err);
       alert('Failed to delete deck. Check console for details.');

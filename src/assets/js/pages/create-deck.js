@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('#backBtn .btn-text').textContent = 'View Deck';
         document.title = `Edit Deck: ${existingDeck.name}`;
         backBtn.addEventListener('click', () => {
-          window.location.href = `/src/pages/card-grid.html?deckId=${existingDeck.id}`;
+          window.location.href = `card-grid.html?deckId=${existingDeck.id}`;
         });
         saveDeckBtn.textContent = 'Save Changes';
         deckNameInput.value = existingDeck.name;
@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addDeck(deck.toJSON());
         showNotification(`Deck "${name}" saved successfully!`);
         resetForm();
-        window.location.href = '/index.html';
+        window.location.href = '../../index.html';
       }
     } catch (err) {
       console.error('Error saving deck:', err);
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    * Redirects back to the deck view screen.
    */
   function handleBackNavigation() {
-    window.location.href = '/index.html';
+    window.location.href = '../../index.html';
   }
 
   /**
