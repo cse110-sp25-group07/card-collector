@@ -85,12 +85,26 @@ function renderCardGrid(cards) {
         await deleteCard(card.id);
         // update the deck’s cardIds in IndexedDB
         const deck = await getDeckById(deckId);
-        await addDeck({
+        const updatedDeck = {
           ...deck,
           cardIds: deck.cardIds.filter((id) => id !== card.id),
-        });
-        // remove this tile from the DOM immediately
-        tile.remove();
+        };
+        // Save the updated deck
+        await addDeck(updatedDeck);
+
+        // REPLACED: Refresh the page to show changes
+        // window.location.reload();
+
+        //REPLACEMENT: re-render updated grid w/o refreshing
+        const updatedCards = await getCardsFromDeck(deckId);
+        const root = document.getElementById('card-grid-root');
+        root.innerHTML = '';
+        root.appendChild(renderCardGrid(updatedCards));
+
+        //REPLACEMENT: re-apply manage-visible class if it was on
+        if (document.body.classList.contains('manage-visible')) {
+          document.body.classList.add('manage-visible');
+        }
       } catch (err) {
         console.error('Failed to delete card:', err);
         alert('Could not delete card. See console for details.');
@@ -329,5 +343,3 @@ async function init() {
 }
 
 init();
-
-backSearchSortManageBtnsSetup();
