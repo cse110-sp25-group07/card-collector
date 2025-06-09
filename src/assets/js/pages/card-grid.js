@@ -342,4 +342,3 @@ init();
 backSearchSortManageBtnsSetup();
 
 export { sortCards, sortAlpha, sortEvolutions, searchCards };
-
