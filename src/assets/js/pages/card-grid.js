@@ -162,14 +162,12 @@ function backSearchSortManageBtnsSetup(allCards = []) {
   //Sort Cards Selection
   const sort = document.getElementById('sort-cards');
   sort.addEventListener('change', (e) => {
-    //console.log(`Implement sorting by ${e.target.value}`);
     sortCards(allCards, e.target.value);
   });
 
   //Search Cards
   const search = document.getElementById('search-cards');
   search.addEventListener('input', (e) => {
-    //console.log(`Implement searching by ${e.target.value}`);
     searchCards(allCards, e.target.value);
   });
 }
@@ -195,11 +193,8 @@ function searchCards(allCards, searchTerm) {
     //can change -1 to 0 to make it match the start of the card name instead
     if (cardName.indexOf(term) > -1) {
       filteredCards.push(card);
-      //console.log('Name ', cardName);
-      //console.log('Id ', card.id);
     }
   }
-  //console.log(filteredCards.length);
   root.appendChild(renderCardGrid(filteredCards));
 }
 
@@ -343,3 +338,7 @@ async function init() {
 }
 
 init();
+
+backSearchSortManageBtnsSetup();
+
+export { sortCards, sortAlpha, sortEvolutions, searchCards };
