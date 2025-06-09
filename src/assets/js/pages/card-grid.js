@@ -30,7 +30,7 @@ function showError(msg) {
 }
 
 // run immediately
-(async function verifyDeck() {
+async function verifyDeck() {
   if (!deckId) {
     showError('No deck selected. Please go back and choose a deck.');
     return;
@@ -42,7 +42,7 @@ function showError(msg) {
   }
   // if valid, reveal your header and continue
   headerEl.style.visibility = 'visible';
-})();
+}
 
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
@@ -264,29 +264,39 @@ function sortAlpha(allCards) {
 //returns an array of cards with their evolutions (in alphabetically order)
 //is a slow function if big O of n^2 so maybe there is a better way to do this
 function sortEvolutions(allCards) {
-  const sortedAlpha = sortAlpha(allCards);
-  const seen = [];
+  const nameToCard = new Map(allCards.map((card) => [card.name, card]));
+  const evolvedNames = new Set(
+    allCards.map((card) => card.evolution).filter(Boolean),
+  );
+
+  // Step 1: Find roots (not evolved from any other)
+  const roots = allCards.filter((card) => !evolvedNames.has(card.name));
+  const seen = new Set();
   const sorted = [];
 
-  //Loop through the alphabetically sorted list of cards
-  for (let i = 0; i < sortedAlpha.length; i++) {
-    const card = sortedAlpha[i];
-    //skip the card if we have seen it already
-    if (seen.includes(card)) continue;
-    let curr = card;
-    while (curr != null) {
-      sorted.push(curr);
-      seen.push(curr);
-      //finds the nextCard that has the same name as the current cards evolution
-      const nextCard = sortedAlpha.find((c) => c.name === curr.evolution);
-      curr = nextCard;
+  for (const root of roots.sort((a, b) => a.name.localeCompare(b.name))) {
+    let current = root;
+    while (current && !seen.has(current.id)) {
+      sorted.push(current);
+      seen.add(current.id);
+      current = current.evolution ? nameToCard.get(current.evolution) : null;
     }
   }
+
+  // Step 2: Append leftover cards not already in list
+  for (const card of allCards) {
+    if (!seen.has(card.id)) {
+      sorted.push(card);
+      seen.add(card.id);
+    }
+  }
+
   return sorted;
 }
 
 // entry point
 async function init() {
+  await verifyDeck();
   const root = document.getElementById('card-grid-root');
 
   const params = new URLSearchParams(window.location.search);
@@ -337,8 +347,9 @@ async function init() {
   document.querySelector('.view-deck-header').style.visibility = 'visible';
 }
 
-init();
-
-backSearchSortManageBtnsSetup();
-
-export { sortCards, sortAlpha, sortEvolutions, searchCards };
+if (typeof window !== 'undefined' && window.document) {
+  window.addEventListener('DOMContentLoaded', () => {
+    init();
+  });
+}
+export { sortCards, sortAlpha, sortEvolutions, searchCards, init };
