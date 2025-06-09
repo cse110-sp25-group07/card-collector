@@ -52,49 +52,50 @@ h2 {
 .btn-edit {
   display: flex;
   align-items: center;
-  gap: 0.25rem;         
+  gap: 0.25rem;
   background: #2c3e50;
   color: white;
   border: none;
-  padding: 0.5rem 0.75rem; 
-  border-radius: 6px;   
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
   text-decoration: none;
-  font-size: 0.8rem;     
+  font-size: 0.8rem;
 }
 
 .btn-danger {
   display: flex;
   align-items: center;
-  gap: 0.25rem;         
-  background: #F32013;
+  gap: 0.25rem;
+  background: #f32013;
   color: white;
   border: none;
-  padding: 0.5rem 0.75rem; 
-  border-radius: 6px;   
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
   text-decoration: none;
-  font-size: 0.8rem;     
+  font-size: 0.8rem;
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1rem;            /* space between cards */
-  width: 100%;          /* stretch to fill its parent */
+  gap: 1rem; /* space between cards */
+  width: 100%; /* stretch to fill its parent */
   box-sizing: border-box;
 }
 
 /* your tile styling stays the same */
 .card-tile {
   background: #fff;
+  position: relative;
   border-radius: 12px;
   border: 2px solid #cdfff0;
-  box-shadow: 0 4px 8px rgba(151,162,232,0.15);
+  box-shadow: 0 4px 8px rgba(151, 162, 232, 0.15);
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
@@ -111,26 +112,56 @@ h2 {
   display: block;
 }
 
+.delete-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #f32013;
+  background: #ffffff; /* white background */
+  color: #f32013;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 5;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.manage-visible .delete-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon:hover {
+  transform: scale(1.2);
+}
+
 /* center everything inside each card-content */
 .card-content {
-  display: flex;            
-  flex-direction: column;   
-  align-items: center;      /* center child elements horizontally */
-  text-align: center;       /* center any plain text */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center child elements horizontally */
+  text-align: center; /* center any plain text */
 }
 
-.card-btn{
+.card-btn {
   margin-bottom: 0.5rem;
-  display: inline-flex;         /* keep your icon+text layout */
+  display: inline-flex; /* keep your icon+text layout */
   align-items: center;
-  gap: 0.2rem;                  /* smaller space between icon and text */
-  font-size: 0.75rem;           /* smaller text */
-  padding: 0.25rem 0.5rem;      /* less padding around each button */
-  border-radius: 4px;           /* tighter corners */
-  line-height: 1; 
-
+  gap: 0.2rem; /* smaller space between icon and text */
+  font-size: 0.75rem; /* smaller text */
+  padding: 0.25rem 0.5rem; /* less padding around each button */
+  border-radius: 4px; /* tighter corners */
+  line-height: 1;
 }
-
 
 .manage-visible .manage-hidden {
   display: inline;
@@ -156,7 +187,6 @@ h2 {
   font-size: 0.9rem;
 }
 
-
 .back-btn svg {
   width: 18px;
   height: 18px;
@@ -172,15 +202,12 @@ h2 {
   margin: 0;
 }
 
-#manage-toggle {
-  background-color: #d9a441;
-  color: #2c3e50;
-}
 #create-card {
   background: #b9d3f2;
   color: #2c3e50;
 }
-.manage-controls button {
+.manage-controls .btn-secondary,
+.manage-controls #create-card {
   background-color: #2c3e50;
   color: white;
   cursor: pointer;
@@ -221,3 +248,21 @@ h2 {
   margin-top: 0.25rem;
 }
 
+.btn-outline-danger {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 2px solid #F32013;
+  color: #F32013;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+  background: rgba(243, 32, 19, 0.1);
+}

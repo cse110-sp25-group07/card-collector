@@ -7,11 +7,11 @@ import {
 } from '../data/indexedDB.js';
 
 const feedbackEl = document.getElementById('feedback-message');
-const headerEl   = document.querySelector('.view-deck-header');
-const gridRoot   = document.getElementById('card-grid-root');
+const headerEl = document.querySelector('.view-deck-header');
+const gridRoot = document.getElementById('card-grid-root');
 const controlsEl = document.querySelector('.manage-controls');
-const sortEl     = document.querySelector('.sort-controls');
-const searchEl   = document.getElementById('search-cards');
+const sortEl = document.querySelector('.sort-controls');
+const searchEl = document.getElementById('search-cards');
 
 // grab deckId
 const params = new URLSearchParams(window.location.search);
@@ -30,7 +30,7 @@ function showError(msg) {
 }
 
 // run immediately
-;(async function verifyDeck() {
+; (async function verifyDeck() {
   if (!deckId) {
     showError('No deck selected. Please go back and choose a deck.');
     return;
@@ -63,49 +63,41 @@ function renderCardGrid(cards) {
     const tile = document.createElement('div');
     tile.classList.add('card-tile');
 
-    // clickable image + name div
+    // clickable image + name
     const cardLink = document.createElement('div');
     cardLink.classList.add('card-content');
     cardLink.innerHTML = `
-          <img src="${card.imageURL}" alt="${card.name}" />
-          <p>${card.name}</p>
-        `;
+    <img src="${card.imageURL}" alt="${card.name}" />
+    <p>${card.name}</p>
+  `;
     cardLink.addEventListener('click', () => {
       window.location.href = `/src/pages/single-card-display.html?deckId=${deckId}&cardId=${card.id}`;
     });
-    // Edit button
-    const editBtn = document.createElement('button');
-    editBtn.innerHTML = '<span class="btn-icon">✎</span><span class="btn-text">Edit</span>';
-    editBtn.classList.add('btn-secondary', 'manage-hidden', 'card-btn');
-    editBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // prevent triggering cardLink click
-      window.location.href = `/src/pages/create-card.html?deckId=${deckId}&cardId=${card.id}`;
-    });
 
-    // Delete button
-    const deleteBtn = document.createElement('button');
-    deleteBtn.innerHTML = '<span class="btn-icon">🗑</span><span class="btn-text">Delete</span>';
-    deleteBtn.classList.add('btn-danger', 'manage-hidden', 'card-btn');
+    // DELETE‐MODE “×” ICON
+    const deleteBtn = document.createElement('div');
+    deleteBtn.classList.add('delete-icon');
+    deleteBtn.textContent = '×';
     deleteBtn.addEventListener('click', async (e) => {
-      e.stopPropagation(); // prevent triggering cardLink click
-      if (!confirm(`Are you sure you want to delete “${card.name}”?`)) return;
+      e.stopPropagation();
       try {
+        // remove the card row from IndexedDB
         await deleteCard(card.id);
-        // remove from deck + re-render
+        // update the deck’s cardIds in IndexedDB
         const deck = await getDeckById(deckId);
         await addDeck({
           ...deck,
           cardIds: deck.cardIds.filter((id) => id !== card.id),
         });
-        window.location.reload();
+        // remove this tile from the DOM immediately
+        tile.remove();
       } catch (err) {
-        console.error(err);
-        alert('Failed to delete card.');
+        console.error('Failed to delete card:', err);
+        alert('Could not delete card. See console for details.');
       }
     });
 
     tile.appendChild(cardLink);
-    tile.appendChild(editBtn);
     tile.appendChild(deleteBtn);
     container.appendChild(tile);
   });
@@ -134,10 +126,25 @@ function backSearchSortManageBtnsSetup(allCards = []) {
 
   //Manage Button
   const manage = document.getElementById('manage-toggle');
+  let inDeleteMode = false;
   manage.addEventListener('click', () => {
-    document.body.classList.toggle('manage-visible');
-  });
+    inDeleteMode = !inDeleteMode;
 
+    // Toggle the body class to show/hide delete icons
+    document.body.classList.toggle('manage-visible', inDeleteMode);
+
+    if (inDeleteMode) {
+      // Entering delete mode
+      manage.textContent = 'Cancel Delete';
+      manage.classList.add('btn-outline-danger');
+      manage.classList.remove('btn-secondary');
+    } else {
+      // Exiting delete mode
+      manage.textContent = 'Delete Cards';
+      manage.classList.remove('btn-outline-danger');
+      manage.classList.add('btn-secondary');
+    }
+  });
   //Sort Cards Selection
   const sort = document.getElementById('sort-cards');
   sort.addEventListener('change', (e) => {
@@ -151,6 +158,7 @@ function backSearchSortManageBtnsSetup(allCards = []) {
     //console.log(`Implement searching by ${e.target.value}`);
     searchCards(allCards, e.target.value);
   });
+
 }
 
 //looks through all the cards in the deck and tries to find the one with a name matching searchTerm
@@ -271,8 +279,8 @@ function sortEvolutions(allCards) {
 
 // entry point
 async function init() {
-  const root = document.getElementById('card-grid-root'); 
-  
+  const root = document.getElementById('card-grid-root');
+
   const params = new URLSearchParams(window.location.search);
   const deckId = params.get('deckId');
   if (!deckId) {
