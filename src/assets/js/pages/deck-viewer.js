@@ -5,7 +5,19 @@ import { getAllDecks } from '../data/indexedDB.js';
 customElements.define('deck-display', DeckDisplay);
 
 window.addEventListener('DOMContentLoaded', init);
+/**
+ * @typedef {Object} DeckJSON
+ * @property {string} id
+ * @property {string} name
+ * @property {Array<CardJSON>} cards
+ */
 
+/**
+ * @typedef {Object} CardJSON
+ * @property {string} id
+ * @property {string} name
+ * @property {string} image
+ */
 /**
  * Entry point: sets up the "Add Deck" button and loads existing decks.
  * @returns {Promise<void>}
@@ -40,7 +52,7 @@ async function loadDecks() {
   );
 
   try {
-    /** @type {import('../data/deck.js').DeckJSON[]} */
+    /** @type {DeckJSON[]} */
     const decks = await getAllDecks();
 
     // Clear out any existing items
