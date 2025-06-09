@@ -3,11 +3,13 @@ import {
   getDeckById,
   deleteCard,
   addDeck,
+  deleteDeck
 } from '../data/indexedDB.js';
+
 
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
-  const heading = document.querySelector('h1');
+  const heading = document.querySelector('h2');
   if (deck && deck.name) {
     heading.textContent = `${deck.name}`;
   }
@@ -83,7 +85,9 @@ function renderCardGrid(cards) {
 
   return container;
 }
-
+function handleEditDeck(deck, element) {
+  window.location.href = `/src/pages/create-deck-ui.html?edit=${deck.id}`;
+}
 //sets up the search, filter and manage buttons
 function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
@@ -261,6 +265,32 @@ async function init() {
   const grid = renderCardGrid(cards);
   root.appendChild(grid);
   backSearchSortManageBtnsSetup(cards);
+  const editDeckBtn = document.getElementById('edit-deck-details');
+  editDeckBtn.addEventListener('click', () => {
+    handleEditDeck(deck, editDeckBtn);
+  });
+  const deleteDeckBtn = document.getElementById('delete-deck');
+  deleteDeckBtn.addEventListener('click', async () => {
+    // get the current deckId
+    const params = new URLSearchParams(window.location.search);
+    const deckId = params.get('deckId');
+    if (!deckId) {
+      return alert('No deck selected to delete.');
+    }
+
+    // simple JS confirmation
+    const ok = confirm('Are you sure you want to delete this entire deck?');
+    if (!ok) return;
+
+    try {
+      await deleteDeck(deckId);
+      // redirect back to deck list
+      window.location.href = '/src/pages/deck-view-ui.html';
+    } catch (err) {
+      console.error('Deck deletion failed:', err);
+      alert('Failed to delete deck. Check console for details.');
+    }
+  });
 }
 
 init();

@@ -21,15 +21,32 @@
   </head>
   <body>
     <nav-bar></nav-bar>
-    <section class="header-row">
-      <div class="back-controls">
-        <button id="go-back" class="back-button" aria-label="Go Back">
-          ❮ Decks
-        </button>
-      </div>
-      <h2>No Deck Chosen</h2>
-    </section>
     <main>
+      <section class="view-deck-header">
+        <button id="go-back" class="back-btn" aria-label="Go Back">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          View All Decks
+        </button>
+        <h2>No Deck Chosen</h2>
+        <div class="button-group">
+          <button id="edit-deck-details" class="btn-edit">
+            <span class="btn-icon">✎</span>
+            <span class="btn-text">Edit Deck Details</span>
+          </button>
+          <button id="delete-deck" class="btn-danger">
+            <span class="btn-icon">🗑</span>
+            <span class="btn-text">Delete Deck</span>
+          </button>
+        </div>
+      </section>
+
       <div class="sort-controls">
         <label for="sort-cards" class="sort-label">Sort By:</label>
         <select id="sort-cards">
@@ -49,8 +66,8 @@
       <script type="module" src="../assets/js/pages/card-grid.js"></script>
 
       <div class="manage-controls">
-        <button id="manage-toggle">Manage</button>
-        <button id="create-card">Create</button>
+        <button id="manage-toggle" class="btn-secondary">Manage Cards</button>
+        <button id="create-card" class="btn-secondary">Create Card</button>
       </div>
     </main>
   </body>

@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const selectedCards = new Set();
   let selectedCardsData = [];
 
+  backBtn.addEventListener('click', handleBackNavigation);
   // ---- Initialization for editing mode ----
 
   if (editDeckId) {
@@ -65,12 +66,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       existingDeck = await getDeckById(editDeckId);
       if (existingDeck) {
         // Update page title
-        document.querySelector('h1').textContent = 'EDIT DECK';
-
+        document.querySelector('h2').textContent = 'Edit Deck';
+        document.querySelector('#backBtn .btn-text').textContent = 'View Deck';
         // Show Back button
-        backBtn.classList.remove('hidden');
         backBtn.addEventListener('click', () => {
-          window.location.href = '/src/pages/deck-view-ui.html';
+          window.location.href = `/src/pages/card-grid.html?deckId=${existingDeck.id}`;
         });
 
         // Pre-fill form data
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   thumbnailInput.addEventListener('change', handleThumbnailUpload);
   addCardsBtn.addEventListener('click', openCardModal);
   saveDeckBtn.addEventListener('click', saveDeck);
-  backBtn.addEventListener('click', handleBackNavigation);
+
 
   closeModalBtn.addEventListener('click', closeCardModal);
   cancelBtn.addEventListener('click', closeCardModal);
@@ -378,8 +378,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addDeck(deck.toJSON());
         showNotification(`Deck "${name}" saved successfully!`);
         resetForm();
+        window.location.href = '/src/pages/deck-view-ui.html';
       }
-      window.location.href = '/src/pages/deck-view-ui.html';
+
     } catch (err) {
       console.error('Error saving deck:', err);
       showNotification('Error saving deck. Please try again.', 'error');

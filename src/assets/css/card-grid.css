@@ -1,14 +1,70 @@
+* {
+  font-family: inherit;
+}
 h2 {
   margin-bottom: 1rem;
   text-align: center;
   color: hsl(210, 29%, 24%);
 }
-.header-row {
+.view-deck-header {
   position: relative;
-  text-align: center;
-  margin: 2rem 0;
-  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 1rem 2rem;
 }
+.view-deck-header h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+.view-deck-header .button-group {
+  grid-column: 3;
+  display: flex;
+  gap: 0.5rem;
+}
+.view-deck-header .back-btn,
+.view-deck-header .btn-edit,
+.view-deck-header .btn-danger {
+  position: static;
+  transform: none;
+  margin: 0;
+}
+
+.btn-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;         
+  background: #2c3e50;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem; 
+  border-radius: 6px;   
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.8rem;     
+}
+
+.btn-danger {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;         
+  background: #F32013;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem; 
+  border-radius: 6px;   
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.8rem;     
+}
+
+
 
 .card-grid {
   display: grid;
@@ -45,33 +101,60 @@ h2 {
   display: none;
 }
 
-.back-controls {
-  margin: 1rem;
-}
-
-.back-button {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  padding: 0.5rem 0.75rem;
-  background-color: #2c3e50;
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2c3e50;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.back-btn svg {
+  width: 18px;
+  height: 18px;
+}
 
 .manage-controls {
   position: fixed;
   display: flex;
-  bottom: 1rem;
-  left: 1rem;
+  bottom: 2rem;
+  left: 2rem;
   gap: 1rem;
+  z-index: 1000;
+  margin: 0;
 }
 
+#manage-toggle {
+  background-color: #d9a441;
+  color: #2c3e50;
+}
+#create-card {
+  background: #b9d3f2;
+  color: #2c3e50;
+}
 .manage-controls button {
   background-color: #2c3e50;
   color: white;
@@ -93,7 +176,7 @@ h2 {
 }
 
 #sort-cards {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   border: 1px solid #ddd;
   border-radius: 999px;
   font-size: 1rem;
