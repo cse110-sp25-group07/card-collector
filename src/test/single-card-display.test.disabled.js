@@ -1,55 +1,58 @@
-import "expect-puppeteer";
-import {jest} from '@jest/globals'
+import 'expect-puppeteer';
+import { jest } from '@jest/globals';
 
 import 'fake-indexeddb/auto';
-import {
-  addCard,
-  addDeck,
-} from '../assets/js/data/indexedDB.js';
+import { addCard, addDeck } from '../assets/js/data/indexedDB.js';
 import { Card } from '../assets/js/data/card.js';
 import { Deck } from '../assets/js/data/deck.js';
-import { expect } from "expect-puppeteer";
+import { expect } from 'expect-puppeteer';
 
 describe('Single Card View Test', () => {
   const eeveeCardJSONs = [
     {
       name: 'Eevee',
-      imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH45/SWSH45_EN_52.png',
+      imageURL:
+        'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH45/SWSH45_EN_52.png',
       type: 'Normal',
       hp: '60',
       evolution: 'Basic',
     },
     {
       name: 'Vaporeon',
-      imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH4/SWSH4_EN_30.png',
+      imageURL:
+        'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSH4/SWSH4_EN_30.png',
       type: 'Water',
       hp: '110',
       evolution: 'Stage 1',
     },
     {
       name: 'Eevee',
-      imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH118.png',
+      imageURL:
+        'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH118.png',
       type: 'Normal',
       hp: '60',
       evolution: 'Basic',
     },
     {
       name: 'Jolteon',
-      imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_135.png',
+      imageURL:
+        'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_135.png',
       type: 'Electric',
       hp: '110',
       evolution: 'Stage 1',
     },
     {
       name: 'Eevee',
-      imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH042.png',
+      imageURL:
+        'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SWSHP/SWSHP_EN_SWSH042.png',
       type: 'Normal',
       hp: '60',
       evolution: 'Basic',
     },
     {
       name: 'Flareon',
-      imageURL: 'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_136.png',
+      imageURL:
+        'https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV3PT5/SV3PT5_EN_136.png',
       type: 'Fire',
       hp: '130',
       evolution: 'Stage 1',
@@ -59,7 +62,7 @@ describe('Single Card View Test', () => {
   beforeAll(async () => {
     // Create cards and deck in local storage
     let deck = new Deck({
-      name: "Original Eeveelutions",
+      name: 'Original Eeveelutions',
       cardIds: [],
     });
     for (let eeveeJSON of eeveeCardJSONs) {
@@ -74,14 +77,14 @@ describe('Single Card View Test', () => {
   });
 
   it('should open without errors', async () => {
-    await page.screenshot({path: 'opening.png', fullPage: true});
+    await page.screenshot({ path: 'opening.png', fullPage: true });
   });
 
   it('should toggle the manage button', async () => {
     const manageButton = await page.$('#manage-button');
     await manageButton.click();
 
-    expect(manageButton.toElement('button').innerHTML).toBe('Confirm')
+    expect(manageButton.toElement('button').innerHTML).toBe('Confirm');
     await manageButton.click();
 
     expect(manageButton.toElement('button').innerHTML).toBe('Manage');
