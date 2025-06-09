@@ -6,6 +6,43 @@ import {
   deleteDeck
 } from '../data/indexedDB.js';
 
+const feedbackEl = document.getElementById('feedback-message');
+const headerEl   = document.querySelector('.view-deck-header');
+const gridRoot   = document.getElementById('card-grid-root');
+const controlsEl = document.querySelector('.manage-controls');
+const sortEl     = document.querySelector('.sort-controls');
+const searchEl   = document.getElementById('search-cards');
+
+// grab deckId
+const params = new URLSearchParams(window.location.search);
+const deckId = params.get('deckId');
+
+// helper to show/hide everything
+function showError(msg) {
+  feedbackEl.textContent = msg;
+  feedbackEl.className = 'feedback-message feedback-error';
+  feedbackEl.style.display = 'block';
+  headerEl.style.display = 'none';
+  sortEl.style.display = 'none';
+  searchEl.style.display = 'none';
+  gridRoot.style.display = 'none';
+  controlsEl.style.display = 'none';
+}
+
+// run immediately
+;(async function verifyDeck() {
+  if (!deckId) {
+    showError('No deck selected. Please go back and choose a deck.');
+    return;
+  }
+  const deck = await getDeckById(deckId);
+  if (!deck) {
+    showError('Deck not found. Please use a valid deck link.');
+    return;
+  }
+  // if valid, reveal your header and continue
+  headerEl.style.visibility = 'visible';
+})();
 
 async function updateTitleWithDeckName(deckId) {
   const deck = await getDeckById(deckId);
@@ -234,8 +271,8 @@ function sortEvolutions(allCards) {
 
 // entry point
 async function init() {
-  const root = document.getElementById('card-grid-root');
-
+  const root = document.getElementById('card-grid-root'); 
+  
   const params = new URLSearchParams(window.location.search);
   const deckId = params.get('deckId');
   if (!deckId) {

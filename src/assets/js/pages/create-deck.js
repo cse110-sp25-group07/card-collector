@@ -64,16 +64,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (editDeckId) {
     try {
       existingDeck = await getDeckById(editDeckId);
-      if (existingDeck) {
-        // Update page title
+
+      if (!existingDeck) {
+        showNotification(
+          '⚠️ Deck not found—creating a new deck instead.',
+          'error'
+        );
+        history.replaceState(null, '', window.location.pathname);
+      } else {
+        // Valid deck, so we can edit
         document.querySelector('h2').textContent = 'Edit Deck';
         document.querySelector('#backBtn .btn-text').textContent = 'View Deck';
-        // Show Back button
         backBtn.addEventListener('click', () => {
           window.location.href = `/src/pages/card-grid.html?deckId=${existingDeck.id}`;
         });
-
-        // Pre-fill form data
+        saveDeckBtn.textContent = 'Save Changes';
         deckNameInput.value = existingDeck.name;
         if (existingDeck.imageURL) {
           thumbnail = existingDeck.imageURL;
@@ -83,15 +88,14 @@ document.addEventListener('DOMContentLoaded', async () => {
           addIconOverlay.style.display = 'none';
           thumbnailContainer.classList.add('has-custom-image');
         }
-
-        // Change save button text
-        saveDeckBtn.textContent = 'Save Changes';
       }
-    } catch (error) {
-      console.error('Error loading deck for editing:', error);
+    } catch (err) {
+      console.error('Error loading deck for editing:', err);
       showNotification('Error loading deck data', 'error');
+      history.replaceState(null, '', window.location.pathname);
     }
   }
+
   document.querySelector('.create-deck-header').style.visibility = 'visible';
 
   // ---- Event Listeners ----
