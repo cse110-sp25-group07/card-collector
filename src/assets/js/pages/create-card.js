@@ -40,7 +40,7 @@ function showFeedbackMessage(message, isError = false) {
     form.style.display = 'none';
     showFeedbackMessage(
       'No deck selected. Please go back and choose a deck first.',
-      true
+      true,
     );
     return;
   }
@@ -49,10 +49,7 @@ function showFeedbackMessage(message, isError = false) {
   const deck = await getDeckById(deckId);
   if (!deck) {
     form.style.display = 'none';
-    showFeedbackMessage(
-      'Deck not found. Please use a valid deck link.',
-      true
-    );
+    showFeedbackMessage('Deck not found. Please use a valid deck link.', true);
     return;
   }
 })();

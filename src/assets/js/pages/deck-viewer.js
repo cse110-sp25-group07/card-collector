@@ -32,8 +32,12 @@ async function init() {
  * @returns {Promise<void>}
  */
 async function loadDecks() {
-  const viewer = /** @type {HTMLElement} */ (document.getElementById('deck-viewer'));
-  const emptyState = /** @type {HTMLElement} */ (document.getElementById('empty-state'));
+  const viewer = /** @type {HTMLElement} */ (
+    document.getElementById('deck-viewer')
+  );
+  const emptyState = /** @type {HTMLElement} */ (
+    document.getElementById('empty-state')
+  );
 
   try {
     /** @type {import('../data/deck.js').DeckJSON[]} */
@@ -52,7 +56,7 @@ async function loadDecks() {
     emptyState.style.display = 'none';
 
     // Render each deck
-    decks.forEach(deckData => {
+    decks.forEach((deckData) => {
       // Create a container for the deck-display element
       const wrapper = document.createElement('div');
       wrapper.className = 'deck-item-wrapper';
@@ -77,5 +81,4 @@ async function loadDecks() {
     console.error('Error loading decks:', error);
     viewer.innerHTML = '<p class="error">Error loading decks.</p>';
   }
-  
 }

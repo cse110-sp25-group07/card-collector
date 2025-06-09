@@ -10,23 +10,18 @@ const cardElements = [];
 const errorEl = document.getElementById('single-card-error');
 const cardContainerEl = document.querySelector('.card-container');
 
-
 await loadDataFromURL();
 document.querySelector('main').classList.remove('hidden-until-ready');
 
 // Creates a new element for each stored card and places them in the carousel
 async function renderCards() {
   document.getElementById('deckName').textContent = loadedDeck.name;
-  const params = new URLSearchParams(window.location.search);
-  const deckId = params.get('deckId');
-  const cardId = params.get('cardId');
 
   loadedDeck.cardIds.forEach(async (cardId, index) => {
     // Reconstruct card from card ids in loaded deck
     let cardData = await getCardById(cardId);
     if (cardId === selectedCard.id) goToCard(index);
 
-    // TODO: Consider generating HTML with template
     // Create card element from reconstructed card
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
@@ -208,8 +203,8 @@ manageButton.addEventListener('click', async () => {
 // Enable card info div and disable card info form, or vice versa
 function ToggleEditMode() {
   const selectedCardElement = cardElements[selectedCardIndex];
-  const indicatorEl       = document.querySelector('.card-indicator');
-  
+  const indicatorEl = document.querySelector('.card-indicator');
+
   editMode = !editMode;
   manageButton.innerHTML = editMode ? 'Confirm' : 'Manage';
   document.querySelector('main').classList.toggle('edit-mode', editMode);
@@ -243,7 +238,7 @@ async function loadDataFromURL() {
 
   // Validate deckId
   if (!deckId) {
-    showError("No deck specified. Please go back and choose a deck first.");
+    showError('No deck specified. Please go back and choose a deck first.');
     return;
   }
   loadedDeck = await getDeckById(deckId);
@@ -254,7 +249,7 @@ async function loadDataFromURL() {
 
   // Validate cardId
   if (!cardId) {
-    showError("No card specified. Please pick a card from the deck.");
+    showError('No card specified. Please pick a card from the deck.');
     return;
   }
   selectedCard = await getCardById(cardId);
@@ -266,7 +261,6 @@ async function loadDataFromURL() {
   // Everything’s good!
   currentCardId = selectedCard.id;
   await renderCards();
-
 }
 
 // Helper to display an on-page error and hide the normal UI
@@ -276,4 +270,3 @@ function showError(message) {
   // hide the normal carousel UI
   cardContainerEl.style.display = 'none';
 }
-

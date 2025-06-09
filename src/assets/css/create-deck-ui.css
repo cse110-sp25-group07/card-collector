@@ -18,21 +18,21 @@ body {
    Page Header
    ====================================== */
 .create-deck-header {
-  position: relative;            /* establish a positioning context */
+  position: relative; /* establish a positioning context */
   display: flex;
-  justify-content: center;       /* center children (in practice just the h2) */
+  justify-content: center; /* center children (in practice just the h2) */
   align-items: center;
   margin-bottom: 2rem;
-  visibility: hidden; 
+  visibility: hidden;
 }
 
 .create-deck-header h2 {
-  margin: 0;                     /* no default margins */
-}  
+  margin: 0; /* no default margins */
+}
 
 .back-btn {
-  position: absolute;            /* remove it from the flex flow */
-  left: 1rem;    
+  position: absolute; /* remove it from the flex flow */
+  left: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -68,7 +68,6 @@ h2 {
 /* ======================================
    Layout Containers
    ====================================== */
-
 
 .deck-creation-container {
   display: flex;
@@ -112,7 +111,6 @@ h2 {
   cursor: pointer;
   transition: transform 0.2s ease;
   line-height: 0;
-  
 }
 
 .thumbnail-container:hover {
@@ -200,7 +198,7 @@ h2 {
 .btn-secondary {
   display: flex;
   align-items: center;
-  justify-content: center;   /* ← add this */
+  justify-content: center; /* ← add this */
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   background-color: transparent;
@@ -210,7 +208,6 @@ h2 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 
 .btn-secondary:hover {
   background-color: rgba(217, 164, 65, 0.1);
@@ -340,12 +337,12 @@ h2 {
    Modal Header & Close bottons
    ====================================== */
 .modal-header {
-  position: relative;         /* establish a positioning context */
+  position: relative; /* establish a positioning context */
   display: flex;
-  justify-content: center;    /* center the <h2> */
+  justify-content: center; /* center the <h2> */
   align-items: center;
   padding: 1.5rem;
-  margin-bottom: 0;           /* you already have a bottom border, so no extra margin needed */
+  margin-bottom: 0; /* you already have a bottom border, so no extra margin needed */
   border-bottom: 1px solid #2c3645;
 }
 
@@ -551,7 +548,7 @@ h2 {
 }
 
 .card-preview.selected::after {
-  content: "✓";
+  content: '✓';
   position: absolute;
   top: 2px;
   right: 2px;
@@ -568,9 +565,11 @@ h2 {
 }
 .card-image-container {
   /* start with no visible border */
-  border:4px solid transparent;
-  border-radius: 6px;  /* match your image corners */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 4px solid transparent;
+  border-radius: 6px; /* match your image corners */
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card-item {
@@ -580,10 +579,8 @@ h2 {
 .card-item.selected .card-image-container {
   /* highlight only the image wrapper */
   border-color: #d9a441;
-  box-shadow: 0 0 0 4px rgba(217,164,65,0.5);
+  box-shadow: 0 0 0 4px rgba(217, 164, 65, 0.5);
 }
-
-
 
 /* hide by default */
 .card-item .card-check {
@@ -598,11 +595,11 @@ h2 {
   right: 8px;
   width: 24px;
   height: 24px;
-  background: #d9a441;             /* your gold */
+  background: #d9a441; /* your gold */
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 1;
   transition: transform 0.2s ease;
 }
@@ -619,7 +616,6 @@ h2 {
   stroke: #fff;
   stroke-width: 3;
 }
-
 
 .card-image-container {
   aspect-ratio: 2 / 3;
@@ -821,7 +817,6 @@ h2 {
     font-size: 1.8rem;
   }
 
-
   .deck-creation-section {
     padding: 1.5rem;
     margin: 0 0.5rem;
@@ -883,4 +878,3 @@ h2 {
 .hidden {
   display: none !important;
 }
-

@@ -68,14 +68,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!existingDeck) {
         showNotification(
           '⚠️ Deck not found—creating a new deck instead.',
-          'error'
+          'error',
         );
         history.replaceState(null, '', window.location.pathname);
       } else {
         // Valid deck, so we can edit
         document.querySelector('h2').textContent = 'Edit Deck';
         document.querySelector('#backBtn .btn-text').textContent = 'View Deck';
-        document.title = (`Edit Deck: ${existingDeck.name}`);
+        document.title = `Edit Deck: ${existingDeck.name}`;
         backBtn.addEventListener('click', () => {
           window.location.href = `/src/pages/card-grid.html?deckId=${existingDeck.id}`;
         });
@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   thumbnailInput.addEventListener('change', handleThumbnailUpload);
   addCardsBtn.addEventListener('click', openCardModal);
   saveDeckBtn.addEventListener('click', saveDeck);
-
 
   closeModalBtn.addEventListener('click', closeCardModal);
   cancelBtn.addEventListener('click', closeCardModal);
@@ -164,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    */
   function handleCardImagesUpload(e) {
     const files = Array.from(e.target.files).filter((f) =>
-      f.type.startsWith('image/')
+      f.type.startsWith('image/'),
     );
     if (!files.length) {
       showNotification('No valid image files selected', 'error');
@@ -198,15 +197,9 @@ document.addEventListener('DOMContentLoaded', async () => {
    */
   function generateCardId() {
     if (crypto?.randomUUID) {
-      try {
-        return crypto.randomUUID();
-      } catch { }
+      return crypto.randomUUID();
     }
-    return (
-      'c_' +
-      Date.now().toString(36) +
-      Math.random().toString(36).slice(2)
-    );
+    return 'c_' + Date.now().toString(36) + Math.random().toString(36).slice(2);
   }
 
   /**
@@ -233,9 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     el.innerHTML = html;
-    el.addEventListener('click', () =>
-      toggleCardSelection(cardData.id, el)
-    );
+    el.addEventListener('click', () => toggleCardSelection(cardData.id, el));
     cardsGrid.appendChild(el);
   }
 
@@ -313,9 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    * Confirms current card selection and updates the preview.
    */
   function confirmCardSelection() {
-    selectedCardsData = uploadedCards.filter((c) =>
-      selectedCards.has(c.id)
-    );
+    selectedCardsData = uploadedCards.filter((c) => selectedCards.has(c.id));
     closeCardModal();
     updateSelectedCardsPreview();
     showNotification(`${selectedCardsData.length} cards selected for deck`);
@@ -386,7 +375,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         resetForm();
         window.location.href = '/src/pages/deck-view-ui.html';
       }
-
     } catch (err) {
       console.error('Error saving deck:', err);
       showNotification('Error saving deck. Please try again.', 'error');

@@ -7,7 +7,6 @@ h2 {
   color: hsl(210, 29%, 24%);
 }
 
-
 .view-deck-header {
   position: relative;
   display: grid;
@@ -255,8 +254,8 @@ h2 {
   align-items: center;
   gap: 0.4rem;
   background: transparent;
-  border: 2px solid #F32013;
-  color: #F32013;
+  border: 2px solid #f32013;
+  color: #f32013;
   padding: 0.75rem 1rem;
   border-radius: 8px;
   font-weight: 500;

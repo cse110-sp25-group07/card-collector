@@ -110,7 +110,7 @@
 }
 
 .card-image::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -143,7 +143,6 @@
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 
 .card-info-edit {
   display: flex;
@@ -335,14 +334,14 @@ main.edit-mode .prev-button,
 main.edit-mode .next-button,
 main.edit-mode .card-indicator {
   display: none !important;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 @media (min-width: 769px) {
   .prev-button {
-    left: 16px;   /* pull it in from the left edge */
+    left: 16px; /* pull it in from the left edge */
   }
   .next-button {
-    right: 16px;  /* pull it in from the right edge */
+    right: 16px; /* pull it in from the right edge */
   }
 }

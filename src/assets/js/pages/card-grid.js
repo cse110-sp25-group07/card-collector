@@ -3,7 +3,7 @@ import {
   getDeckById,
   deleteCard,
   addDeck,
-  deleteDeck
+  deleteDeck,
 } from '../data/indexedDB.js';
 
 const feedbackEl = document.getElementById('feedback-message');
@@ -30,7 +30,7 @@ function showError(msg) {
 }
 
 // run immediately
-; (async function verifyDeck() {
+(async function verifyDeck() {
   if (!deckId) {
     showError('No deck selected. Please go back and choose a deck.');
     return;
@@ -104,7 +104,7 @@ function renderCardGrid(cards) {
 
   return container;
 }
-function handleEditDeck(deck, element) {
+function handleEditDeck(deck) {
   window.location.href = `/src/pages/create-deck-ui.html?edit=${deck.id}`;
 }
 //sets up the search, filter and manage buttons
@@ -158,7 +158,6 @@ function backSearchSortManageBtnsSetup(allCards = []) {
     //console.log(`Implement searching by ${e.target.value}`);
     searchCards(allCards, e.target.value);
   });
-
 }
 
 //looks through all the cards in the deck and tries to find the one with a name matching searchTerm

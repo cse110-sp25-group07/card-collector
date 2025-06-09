@@ -29,9 +29,9 @@ label {
   color: hsl(210, 29%, 24%);
 }
 
-input[type="text"],
-input[type="number"],
-input[type="file"] {
+input[type='text'],
+input[type='number'],
+input[type='file'] {
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   border: 1px solid #ddd;
@@ -39,9 +39,9 @@ input[type="file"] {
   width: 100%;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="file"]:focus {
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='file']:focus {
   outline: none;
   border-color: #d9a441; /* brand gold */
   box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.2);
@@ -65,28 +65,30 @@ button {
   font-weight: 500;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
   text-decoration: none;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   background: #d9a441;
   color: #2c3e50;
   border: none;
 }
 
-button[type="submit"]:hover {
+button[type='submit']:hover {
   transform: translateY(-2px);
   background: color-mix(in srgb, #d9a441 80%, black);
 }
 
-button[type="button"]#back-button {
+button[type='button']#back-button {
   background: transparent;
   color: #2c3e50;
   border: 2px solid #2c3e50;
 }
 
-button[type="button"]#back-button:hover {
+button[type='button']#back-button:hover {
   background: #2c3e50;
   color: white;
   transform: translateY(-2px);
