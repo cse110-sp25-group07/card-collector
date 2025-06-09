@@ -23,6 +23,7 @@ async function init() {
   }
 
   await loadDecks();
+  document.getElementById('deck-box').style.visibility = 'visible';
 }
 
 /**
@@ -76,4 +77,5 @@ async function loadDecks() {
     console.error('Error loading decks:', error);
     viewer.innerHTML = '<p class="error">Error loading decks.</p>';
   }
+  
 }

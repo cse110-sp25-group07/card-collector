@@ -23,6 +23,7 @@ body {
   justify-content: center;       /* center children (in practice just the h2) */
   align-items: center;
   margin-bottom: 2rem;
+  visibility: hidden; 
 }
 
 .create-deck-header h2 {

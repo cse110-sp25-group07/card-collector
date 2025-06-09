@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       showNotification('Error loading deck data', 'error');
     }
   }
+  document.querySelector('.create-deck-header').style.visibility = 'visible';
 
   // ---- Event Listeners ----
 

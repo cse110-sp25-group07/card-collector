@@ -12,6 +12,7 @@ h2 {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   padding: 1rem 2rem;
+  visibility: hidden;
 }
 .view-deck-header h2 {
   position: absolute;

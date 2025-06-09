@@ -392,6 +392,7 @@ deck-display {
   }
   #deck-box {
   margin-bottom: 2rem;
+  visibility: hidden;
 }
 
   .modal-content {

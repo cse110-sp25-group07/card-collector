@@ -291,6 +291,7 @@ async function init() {
       alert('Failed to delete deck. Check console for details.');
     }
   });
+  document.querySelector('.view-deck-header').style.visibility = 'visible';
 }
 
 init();
