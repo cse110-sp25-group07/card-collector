@@ -3,35 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <title>View All Cards</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/src/assets/images/card-collector-logo.png"
+    />
+    <link rel="stylesheet" href="../assets/css/global.css" />
     <link rel="stylesheet" href="../assets/css/card-grid.css" />
+    <script src="../assets/js/components/navbar.js" defer></script>
   </head>
   <body>
-    <h1>No Deck Chosen</h1>
+    <nav-bar></nav-bar>
+    <main>
+      <div id="feedback-message" class="feedback-message"></div>
+      <section class="view-deck-header">
+        <button id="go-back" class="back-btn" aria-label="Go Back">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          View All Decks
+        </button>
+        <h2>No Deck Chosen</h2>
+        <div class="button-group">
+          <button id="edit-deck-details" class="btn-edit">
+            <span class="btn-icon">✎</span>
+            <span class="btn-text">Edit Deck Details</span>
+          </button>
+          <button id="delete-deck" class="btn-danger">
+            <span class="btn-icon">🗑</span>
+            <span class="btn-text">Delete Deck</span>
+          </button>
+        </div>
+      </section>
 
-    <div class="sort-controls">
-      <label for="sort-cards" class="sort-label">Sort By:</label>
-      <select id="sort-cards">
-        <option value="default">Default</option>
-        <option value="names-alpha">Name A→Z</option>
-        <option value="names-rev-alpha">Name Z→A</option>
-        <option value="evolution">Evolution</option>
-        <option value="type">Type</option>
-        <option value="hp">HP (Hit Points)</option>
-      </select>
-    </div>
+      <div class="sort-controls">
+        <label for="sort-cards" class="sort-label">Sort By:</label>
+        <select id="sort-cards">
+          <option value="default">Default</option>
+          <option value="names-alpha">Name A→Z</option>
+          <option value="names-rev-alpha">Name Z→A</option>
+          <option value="evolution">Evolution</option>
+          <option value="type">Type</option>
+          <option value="hp">HP (Hit Points)</option>
+        </select>
+      </div>
 
-    <input type="text" id="search-cards" placeholder="Search cards by name" />
+      <input type="text" id="search-cards" placeholder="Search cards by name" />
 
-    <div id="card-grid-root"></div>
+      <div id="card-grid-root"></div>
 
-    <script type="module" src="../assets/js/pages/card-grid.js"></script>
-    <div class="back-controls">
-      <button id="go-back" class="back-button" aria-label="Go Back"></button>
-    </div>
-    <div class="manage-controls">
-      <button id="manage-toggle">Manage</button>
-      <button id="create-card">Create</button>
-    </div>
+      <script type="module" src="../assets/js/pages/card-grid.js"></script>
+
+      <div class="manage-controls">
+        <button id="manage-toggle" class="btn-outline-danger">
+          <span class="btn-text">Delete Cards</span>
+        </button>
+        <button id="create-card" class="btn-secondary">
+          <span class="btn-icon">＋</span>
+          <span class="btn-text">Create Card</span>
+        </button>
+      </div>
+    </main>
   </body>
 </html>

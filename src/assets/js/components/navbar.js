@@ -17,11 +17,11 @@ class NavBar extends HTMLElement {
 
     wrapper.innerHTML = `
       <h1 class="site-title">
-        <a href="/card-collector/index.html">Card Collector</a>
+        <a href="/index.html">Card Collector</a>
       </h1>
       <nav class="navbar">
         <ul>
-          <li><a href="/card-collector/index.html">Deck View</a></li>
+          <li><a href="/index.html">Deck View</a></li>
         </ul>
       </nav>
     `;

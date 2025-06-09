@@ -7,33 +7,46 @@ const carousel = document.getElementById('carousel');
 const selectedCardName = document.getElementById('mainCardName');
 const cardIndicator = document.getElementById('cardIndicator');
 const cardElements = [];
+const errorEl = document.getElementById('single-card-error');
+const cardContainerEl = document.querySelector('.card-container');
 
 await loadDataFromURL();
+document.querySelector('main').classList.remove('hidden-until-ready');
 
 // Creates a new element for each stored card and places them in the carousel
 async function renderCards() {
   document.getElementById('deckName').textContent = loadedDeck.name;
+
   loadedDeck.cardIds.forEach(async (cardId, index) => {
     // Reconstruct card from card ids in loaded deck
     let cardData = await getCardById(cardId);
     if (cardId === selectedCard.id) goToCard(index);
 
-    // TODO: Consider generating HTML with template
     // Create card element from reconstructed card
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
     cardDiv.innerHTML = `
-      <img class="card-image" src="${cardData.imageURL}" alt="${cardData.name} card picture"></img>
-      <div class="card-info">
-        <div class="card-type">${cardData.type}</div>
-        <div class="card-evolution">${cardData.evolution}</div>
-        <div class="card-hp">${cardData.hp}</div>
+      <img class="card-image" src="${cardData.imageURL}" alt="${cardData.name} card picture">
+       <div class="card-info">
+        <div><strong>Type:</strong> <span class="card-type">${cardData.type}</span></div>
+        <div><strong>Stage:</strong> <span class="card-evolution">${cardData.evolution}</span></div>
+        <div><strong>HP:</strong> <span class="card-hp">${cardData.hp}</span></div>
       </div>
+
       <form class="card-info-edit" style="display: none">
-        <input class="card-type-input" value="${cardData.type}"></input>
-        <input class="card-evolution-input" value="${cardData.evolution}"></input>
-        <input class="card-hp-input" value="${cardData.hp}"></input>
-      </div>
+        <div class="edit-field">
+          <label>Type: </label>
+          <input class="card-type-input" value="${cardData.type}">
+        </div>
+        <div class="edit-field">
+          <label>Stage: </label>
+          <input class="card-evolution-input" value="${cardData.evolution}">
+        </div>
+        <div class="edit-field">
+          <label>HP: </label>
+          <input class="card-hp-input" value="${cardData.hp}">
+        </div>
+      </form>
     `;
     carousel.appendChild(cardDiv);
     cardElements.push(cardDiv);
@@ -190,9 +203,14 @@ manageButton.addEventListener('click', async () => {
 // Enable card info div and disable card info form, or vice versa
 function ToggleEditMode() {
   const selectedCardElement = cardElements[selectedCardIndex];
+  const indicatorEl = document.querySelector('.card-indicator');
 
   editMode = !editMode;
   manageButton.innerHTML = editMode ? 'Confirm' : 'Manage';
+  document.querySelector('main').classList.toggle('edit-mode', editMode);
+
+  // hide/show the nav bubbles
+  indicatorEl.style.display = editMode ? 'none' : 'flex';
 
   // Finds selected card's corresponding card info
   const cardInfoElement =
@@ -218,33 +236,37 @@ async function loadDataFromURL() {
   const deckId = params.get('deckId');
   const cardId = params.get('cardId');
 
-  // Error checking for loading deck and card from URL IDs
-  let errorCount = 0;
+  // Validate deckId
   if (!deckId) {
-    console.error(`Missing URL search param deckId`);
-    errorCount++;
-  } else {
-    loadedDeck = await getDeckById(deckId);
-    if (!loadedDeck) {
-      console.error(`Could not get deck with deckId=${deckId}`);
-      errorCount++;
-    }
+    showError('No deck specified. Please go back and choose a deck first.');
+    return;
   }
+  loadedDeck = await getDeckById(deckId);
+  if (!loadedDeck) {
+    showError(`Can't find deck “${deckId}”. Please use a valid link.`);
+    return;
+  }
+
+  // Validate cardId
   if (!cardId) {
-    console.error(`Missing URL search param cardId`);
-    errorCount++;
-  } else {
-    selectedCard = await getCardById(cardId);
-    if (!selectedCard) {
-      console.error(`Could not get card with cardId=${cardId}`);
-      errorCount++;
-    }
+    showError('No card specified. Please pick a card from the deck.');
+    return;
   }
-  if (errorCount > 0) {
-    alert('Failed to load card!');
-    throw new Error('Failed to load card!');
-  } else {
-    currentCardId = selectedCard.id;
-    await renderCards();
+  selectedCard = await getCardById(cardId);
+  if (!selectedCard) {
+    showError(`Can't find card “${cardId}”. It may have been deleted.`);
+    return;
   }
+
+  // Everything’s good!
+  currentCardId = selectedCard.id;
+  await renderCards();
+}
+
+// Helper to display an on-page error and hide the normal UI
+function showError(message) {
+  errorEl.textContent = message;
+  errorEl.style.display = 'block';
+  // hide the normal carousel UI
+  cardContainerEl.style.display = 'none';
 }
