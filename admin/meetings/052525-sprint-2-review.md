@@ -1,4 +1,4 @@
-# 5/19 Sprint 2
+# 5/25 Sprint 2
 
 Meeting Time: 5/25 2:00 PM
 

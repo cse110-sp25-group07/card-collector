@@ -1,4 +1,4 @@
-# 5/19 Sprint 2
+# 6/01 Sprint 3
 
 Meeting Time: 6/01
 
