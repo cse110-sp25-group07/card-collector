@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Valid deck, so we can edit
         document.querySelector('h2').textContent = 'Edit Deck';
         document.querySelector('#backBtn .btn-text').textContent = 'View Deck';
+        document.title = (`Edit Deck: ${existingDeck.name}`);
         backBtn.addEventListener('click', () => {
           window.location.href = `/src/pages/card-grid.html?deckId=${existingDeck.id}`;
         });
