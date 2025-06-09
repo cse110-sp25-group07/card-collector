@@ -35,6 +35,10 @@ async function renderCards() {
 
       <form class="card-info-edit" style="display: none">
         <div class="edit-field">
+          <label>Name: </label>
+          <input class="card-name-input" value="${cardData.name}">
+        </div>
+        <div class="edit-field">
           <label>Type: </label>
           <input class="card-type-input" value="${cardData.type}">
         </div>
@@ -111,7 +115,7 @@ async function animateToCard() {
 function goBack() {
   const params = new URLSearchParams(window.location.search);
   const deckId = params.get('deckId');
-  window.location.href = `/src/pages/card-grid.html?deckId=${deckId}`;
+  window.location.href = `card-grid.html?deckId=${deckId}`;
 }
 
 // Button navigation
@@ -179,6 +183,10 @@ manageButton.addEventListener('click', async () => {
   if (editMode) {
     try {
       // Updates selected card's stored data upon exiting edit mode
+      selectedCard.name =
+        cardElements[selectedCardIndex].getElementsByClassName(
+          'card-name-input',
+        )[0].value;
       selectedCard.type =
         cardElements[selectedCardIndex].getElementsByClassName(
           'card-type-input',
