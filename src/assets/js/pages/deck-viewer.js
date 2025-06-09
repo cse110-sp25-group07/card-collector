@@ -71,7 +71,7 @@ async function loadDecks() {
        * @listens MouseEvent
        */
       wrapper.addEventListener('click', () => {
-        window.location.href = `../pages/card-grid.html?deckId=${deckData.id}`;
+        window.location.href = `/src/pages/card-grid.html?deckId=${deckData.id}`;
       });
 
       wrapper.appendChild(deckEl);

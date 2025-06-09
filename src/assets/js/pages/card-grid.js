@@ -111,7 +111,7 @@ function handleEditDeck(deck) {
 function backSearchSortManageBtnsSetup(allCards = []) {
   const back = document.getElementById('go-back');
   back.addEventListener('click', () => {
-    window.location.href = '/src/pages/deck-view-ui.html';
+    window.location.href = '/index.html';
   });
 
   //Create Button
@@ -319,7 +319,7 @@ async function init() {
     try {
       await deleteDeck(deckId);
       // redirect back to deck list
-      window.location.href = '/src/pages/deck-view-ui.html';
+      window.location.href = '/index.html';
     } catch (err) {
       console.error('Deck deletion failed:', err);
       alert('Failed to delete deck. Check console for details.');

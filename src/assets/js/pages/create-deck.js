@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await addDeck(deck.toJSON());
         showNotification(`Deck "${name}" saved successfully!`);
         resetForm();
-        window.location.href = '/src/pages/deck-view-ui.html';
+        window.location.href = '/index.html';
       }
     } catch (err) {
       console.error('Error saving deck:', err);
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    * Redirects back to the deck view screen.
    */
   function handleBackNavigation() {
-    window.location.href = '/src/pages/deck-view-ui.html';
+    window.location.href = '/index.html';
   }
 
   /**
