@@ -85,11 +85,10 @@ function renderCardGrid(cards) {
         await deleteCard(card.id);
         // update the deck’s cardIds in IndexedDB
         const deck = await getDeckById(deckId);
-        await addDeck({
+        const updatedDeck = {
           ...deck,
           cardIds: deck.cardIds.filter((id) => id !== card.id),
         };
-
         // Save the updated deck
         await addDeck(updatedDeck);
 
@@ -103,7 +102,7 @@ function renderCardGrid(cards) {
         root.appendChild(renderCardGrid(updatedCards));
 
         //REPLACEMENT: re-apply manage-visible class if it was on
-        if(document.body.classList.contains('manage-visible')) {
+        if (document.body.classList.contains('manage-visible')) {
           document.body.classList.add('manage-visible');
         }
       } catch (err) {
@@ -344,5 +343,3 @@ async function init() {
 }
 
 init();
-
-//backSearchSortManageBtnsSetup();
