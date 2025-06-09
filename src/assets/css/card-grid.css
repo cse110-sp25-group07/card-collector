@@ -33,6 +33,22 @@ h2 {
   margin: 0;
 }
 
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
 .btn-edit {
   display: flex;
   align-items: center;
@@ -103,6 +119,17 @@ h2 {
   text-align: center;       /* center any plain text */
 }
 
+.card-btn{
+  margin-bottom: 0.5rem;
+  display: inline-flex;         /* keep your icon+text layout */
+  align-items: center;
+  gap: 0.2rem;                  /* smaller space between icon and text */
+  font-size: 0.75rem;           /* smaller text */
+  padding: 0.25rem 0.5rem;      /* less padding around each button */
+  border-radius: 4px;           /* tighter corners */
+  line-height: 1; 
+
+}
 
 
 .manage-visible .manage-hidden {
@@ -129,21 +156,7 @@ h2 {
   font-size: 0.9rem;
 }
 
-.btn-secondary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: #2c3e50;
-  color: white;
-  border: none;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
+
 .back-btn svg {
   width: 18px;
   height: 18px;

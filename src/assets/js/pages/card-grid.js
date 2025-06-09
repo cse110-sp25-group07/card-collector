@@ -36,44 +36,34 @@ function renderCardGrid(cards) {
     cardLink.addEventListener('click', () => {
       window.location.href = `/src/pages/single-card-display.html?deckId=${deckId}&cardId=${card.id}`;
     });
-
     // Edit button
     const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    editBtn.classList.add('card-btn', 'manage-hidden');
+    editBtn.innerHTML = '<span class="btn-icon">✎</span><span class="btn-text">Edit</span>';
+    editBtn.classList.add('btn-secondary', 'manage-hidden', 'card-btn');
     editBtn.addEventListener('click', (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
-      alert(`Edit ${card.name} (not implemented yet)`);
+      window.location.href = `/src/pages/create-card.html?deckId=${deckId}&cardId=${card.id}`;
     });
 
     // Delete button
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.classList.add('card-btn', 'manage-hidden');
+    deleteBtn.innerHTML = '<span class="btn-icon">🗑</span><span class="btn-text">Delete</span>';
+    deleteBtn.classList.add('btn-danger', 'manage-hidden', 'card-btn');
     deleteBtn.addEventListener('click', async (e) => {
       e.stopPropagation(); // prevent triggering cardLink click
+      if (!confirm(`Are you sure you want to delete “${card.name}”?`)) return;
       try {
-        // Delete the card from IndexedDB
         await deleteCard(card.id);
-
-        // Remove card ID from the deck
+        // remove from deck + re-render
         const deck = await getDeckById(deckId);
-        if (!deck) throw new Error('Deck not found');
-
-        // Remove the card ID from the deck's cardIds
-        const updatedDeck = {
+        await addDeck({
           ...deck,
           cardIds: deck.cardIds.filter((id) => id !== card.id),
-        };
-
-        // Save the updated deck
-        await addDeck(updatedDeck);
-
-        // Refresh the page to show changes
+        });
         window.location.reload();
       } catch (err) {
-        console.error('Failed to delete card:', err);
-        alert('Failed to delete card. See console for details.');
+        console.error(err);
+        alert('Failed to delete card.');
       }
     });
 

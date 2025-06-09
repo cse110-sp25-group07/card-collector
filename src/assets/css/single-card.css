@@ -2,15 +2,6 @@
   box-sizing: border-box;
 }
 
-main {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-}
-
 .card-container {
   width: 100%;
   max-width: 480px;
@@ -21,6 +12,8 @@ main {
   padding: 24px;
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 .header {
