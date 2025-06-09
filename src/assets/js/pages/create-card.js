@@ -33,7 +33,26 @@ function showFeedbackMessage(message, isError = false) {
     messageEl.style.display = 'none';
   }, 5000);
 }
+// Immediately check for a valid deck before doing anything else
+(async function verifyDeck() {
+  // No deckId at all
+  if (!deckId) {
+    form.style.display = 'none';
+    showFeedbackMessage(
+      'No deck selected. Please go back and choose a deck first.',
+      true,
+    );
+    return;
+  }
 
+  // Deck ID exists but doesn’t actually match a stored deck
+  const deck = await getDeckById(deckId);
+  if (!deck) {
+    form.style.display = 'none';
+    showFeedbackMessage('Deck not found. Please use a valid deck link.', true);
+    return;
+  }
+})();
 //When an image is uploaded... change the image preview to that image
 imageUpload.addEventListener('change', async (e) => {
   const file = e.target.files[0];
@@ -45,7 +64,7 @@ imageUpload.addEventListener('change', async (e) => {
 });
 
 backButton.addEventListener('click', () => {
-  window.location.href = `/src/pages/card-grid.html?deckId=${deckId}`;
+  window.location.href = `card-grid.html?deckId=${deckId}`;
 });
 
 // When the form is submitted, create a new card and store it in IndexedDB

@@ -1,42 +1,167 @@
-body {
-  font-family: sans-serif;
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
+* {
+  font-family: inherit;
 }
-
-h1 {
-  font-size: 2rem;
+h2 {
   margin-bottom: 1rem;
   text-align: center;
-  color: #2c3e50;
+  color: hsl(210, 29%, 24%);
+}
+
+.view-deck-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 1rem 2rem;
+  visibility: hidden;
+}
+.view-deck-header h2 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+}
+.view-deck-header .button-group {
+  grid-column: 3;
+  display: flex;
+  gap: 0.5rem;
+}
+.view-deck-header .back-btn,
+.view-deck-header .btn-edit,
+.view-deck-header .btn-danger {
+  position: static;
+  transform: none;
+  margin: 0;
+}
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.btn-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.btn-danger {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #f32013;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.8rem;
 }
 
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 20px;
+  gap: 1rem; /* space between cards */
+  width: 100%; /* stretch to fill its parent */
+  box-sizing: border-box;
 }
 
+/* your tile styling stays the same */
 .card-tile {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  text-align: center;
-  transition: transform 0.2s ease;
-  background-color: #f9f9f9;
+  background: #fff;
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid #cdfff0;
+  box-shadow: 0 4px 8px rgba(151, 162, 232, 0.15);
+  overflow: hidden;
   cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
-
 .card-tile:hover {
-  transform: scale(1.05);
-  background-color: #fffbe6;
+  transform: scale(1.03);
+}
+.card-tile img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.card-tile img {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
+.delete-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #f32013;
+  background: #ffffff; /* white background */
+  color: #f32013;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 5;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.manage-visible .delete-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon:hover {
+  transform: scale(1.2);
+}
+
+/* center everything inside each card-content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center child elements horizontally */
+  text-align: center; /* center any plain text */
+}
+
+.card-btn {
+  margin-bottom: 0.5rem;
+  display: inline-flex; /* keep your icon+text layout */
+  align-items: center;
+  gap: 0.2rem; /* smaller space between icon and text */
+  font-size: 0.75rem; /* smaller text */
+  padding: 0.25rem 0.5rem; /* less padding around each button */
+  border-radius: 4px; /* tighter corners */
+  line-height: 1;
 }
 
 .manage-visible .manage-hidden {
@@ -47,35 +172,43 @@ h1 {
   display: none;
 }
 
-.back-controls {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-}
-
-.back-button {
-  border: 1px solid #ddd;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
-  background-color: #2c3e50;
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2c3e50;
   color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 0.9rem;
 }
 
-/* adds to the HTML but dont want to clutter the HTML file with it */
-.back-button::before {
-  content: '⇦';
+.back-btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 .manage-controls {
   position: fixed;
   display: flex;
-  bottom: 1rem;
-  left: 1rem;
+  bottom: 2rem;
+  left: 2rem;
   gap: 1rem;
+  z-index: 1000;
+  margin: 0;
 }
 
-.manage-controls button {
+#create-card {
+  background: #b9d3f2;
+  color: #2c3e50;
+}
+.manage-controls .btn-secondary,
+.manage-controls #create-card {
   background-color: #2c3e50;
   color: white;
   cursor: pointer;
@@ -96,7 +229,7 @@ h1 {
 }
 
 #sort-cards {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   border: 1px solid #ddd;
   border-radius: 999px;
   font-size: 1rem;
@@ -114,4 +247,23 @@ h1 {
   border: 1px solid #ddd;
   margin-bottom: 0.5rem;
   margin-top: 0.25rem;
+}
+
+.btn-outline-danger {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 2px solid #f32013;
+  color: #f32013;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+  background: rgba(243, 32, 19, 0.1);
 }

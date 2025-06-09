@@ -12,16 +12,21 @@ class NavBar extends HTMLElement {
   constructor() {
     super();
 
+    const currentPath = window.location.pathname;
+    const isNested = currentPath.includes('/src/pages/');
+
+    // Relative root based on location
+    const relativeRoot = isNested ? '../../' : './';
     const wrapper = document.createElement('header');
     wrapper.classList.add('page-header');
 
     wrapper.innerHTML = `
       <h1 class="site-title">
-        <a href="/card-collector/index.html">Card Collector</a>
+        <a href="${relativeRoot}index.html">Card Collector</a>
       </h1>
       <nav class="navbar">
         <ul>
-          <li><a href="/card-collector/index.html">Deck View</a></li>
+          <li><a href="${relativeRoot}index.html">Deck View</a></li>
         </ul>
       </nav>
     `;
