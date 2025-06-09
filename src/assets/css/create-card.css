@@ -1,3 +1,23 @@
+* {
+  box-sizing: border-box;
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: hsl(210, 29%, 24%);
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -5,49 +25,91 @@ form {
 }
 
 label {
-  font-weight: bold;
+  font-weight: 600;
+  color: hsl(210, 29%, 24%);
 }
 
-input[type='text'],
-input[type='number'],
-input[type='file'] {
-  padding: 0.5rem;
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+  padding: 0.5rem 0.75rem;
   font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
   width: 100%;
-  box-sizing: border-box;
 }
 
-button {
-  padding: 0.6rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: #d9a441; /* brand gold */
+  box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.2);
 }
 
 img#image-preview {
-  border: 1px solid #ccc;
-  max-width: 100%;
-  height: auto;
   display: block;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 0.5rem;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  text-decoration: none;
+}
+
+button[type="submit"] {
+  background: #d9a441;
+  color: #2c3e50;
+  border: none;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, #d9a441 80%, black);
+}
+
+button[type="button"]#back-button {
+  background: transparent;
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
+}
+
+button[type="button"]#back-button:hover {
+  background: #2c3e50;
+  color: white;
+  transform: translateY(-2px);
 }
 
 .feedback-message {
   margin-top: 1rem;
-  padding: 0.5rem;
-  font-weight: bold;
-  border-radius: 5px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
   display: none;
 }
 
 .feedback-success {
-  color: green;
-  background-color: #e6ffe6;
-  border: 1px solid green;
+  display: block;
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
 }
 
 .feedback-error {
-  color: red;
-  background-color: #ffe6e6;
-  border: 1px solid red;
+  display: block;
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
 }
