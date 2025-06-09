@@ -6,6 +6,8 @@ h2 {
   text-align: center;
   color: hsl(210, 29%, 24%);
 }
+
+
 .view-deck-header {
   position: relative;
   display: grid;
