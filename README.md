@@ -2,6 +2,47 @@
 
 Card Collector is a web app designed to bring physical card collecting to a digital interface.
 
+## How to Run the Project
+
+### Option 1: Use the Live Website (Recommended)
+
+You can try out the app (v.1.5) by visiting our GitHub Pages deployment:
+
+[https://cse110-sp25-group07.github.io/card-collector/](https://cse110-sp25-group07.github.io/card-collector/)
+
+### Option 2: Run Locally with Live Server
+
+If you want to run the project locally:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/cse110-sp25-group07/card-collector.git
+   cd card-collector
+   ```
+
+2. **Install Live Server** (if not already installed):
+
+   * VS Code users: Install the “Live Server” extension by **Ritwick Dey**.
+   * Or use the CLI globally:
+
+     ```bash
+     npm install -g live-server
+     ```
+
+3. **Start the server:**
+
+   * With VS Code: Right-click `index.html` and choose **“Open with Live Server.”**
+   * Or with the CLI:
+
+     ```bash
+     live-server
+     ```
+
+> ⚠️ Opening `index.html` directly will result in broken scripts due to browser restrictions on the `file://` protocol.
+
+---
+
 ## Sprint 1 Status Video
 
 [Video Link](https://youtu.be/6OmUEN1WJqk)
