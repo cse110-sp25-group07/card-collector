@@ -23,8 +23,8 @@ If you want to run the project locally:
 
 2. **Install Live Server** (if not already installed):
 
-   * VS Code users: Install the “Live Server” extension by **Ritwick Dey**.
-   * Or use the CLI globally:
+   - VS Code users: Install the “Live Server” extension by **Ritwick Dey**.
+   - Or use the CLI globally:
 
      ```bash
      npm install -g live-server
@@ -32,8 +32,8 @@ If you want to run the project locally:
 
 3. **Start the server:**
 
-   * With VS Code: Right-click `index.html` and choose **“Open with Live Server.”**
-   * Or with the CLI:
+   - With VS Code: Right-click `index.html` and choose **“Open with Live Server.”**
+   - Or with the CLI:
 
      ```bash
      live-server
