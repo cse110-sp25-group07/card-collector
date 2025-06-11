@@ -48,7 +48,7 @@ If you want to run the project locally:
 _Create a deck and use bulk image upload!_  
 ![create-deck-gif](https://github.com/user-attachments/assets/7f58545d-600c-4f76-b31a-7116f41ee092)
 
-_Create, view, and edit cards and their fields!_  
+_Create, view, and edit cards and their fields!!_  
 ![cards_demo_gif](https://github.com/user-attachments/assets/006d51a5-c5e4-411e-accf-c85a20c6064f)
 
 ## Sprint 1 Status Video
