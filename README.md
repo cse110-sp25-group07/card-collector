@@ -55,6 +55,10 @@ _Create, view, and edit cards and their fields!!_
 
 [Video Link](https://youtu.be/zj-8EhspEME)
 
+## Private Presentation Video
+
+[Video Link](https://www.youtube.com/watch?v=PxdqsNxbgbo&ab_channel=TannerBerman)
+
 ## Sprint 1 Status Video
 
 [Video Link](https://youtu.be/6OmUEN1WJqk)
