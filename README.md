@@ -51,6 +51,10 @@ _Create a deck and use bulk image upload!_
 _Create, view, and edit cards and their fields!!_  
 ![cards_demo_gif](https://github.com/user-attachments/assets/006d51a5-c5e4-411e-accf-c85a20c6064f)
 
+## Public Presentation Video
+
+[Video Link](https://youtu.be/zj-8EhspEME)
+
 ## Sprint 1 Status Video
 
 [Video Link](https://youtu.be/6OmUEN1WJqk)
