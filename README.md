@@ -43,6 +43,11 @@ If you want to run the project locally:
 
 ---
 
+## Quick Use Gifs
+
+*Create a deck and use bulk image upload!*  
+![create-deck-gif](https://github.com/user-attachments/assets/7f58545d-600c-4f76-b31a-7116f41ee092)
+
 ## Sprint 1 Status Video
 
 [Video Link](https://youtu.be/6OmUEN1WJqk)
